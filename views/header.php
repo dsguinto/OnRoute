@@ -11,6 +11,7 @@ $headerMenu = [
 
 <!DOCTYPE html>
 <html lang="en">
+<div class="page">
     <head>
         <meta charset="utf-8" />
         <title>onRoute - Travel Better</title>
