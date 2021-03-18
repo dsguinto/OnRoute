@@ -1,6 +1,8 @@
 <?php
 
     require_once 'library/functions.php';
+    //Add unqiue css files here
+    $css = array('styles/index.css');
     require_once 'views/header.php';
 ?>
 

@@ -2,6 +2,7 @@
 
     require_once 'library/functions.php';
 
+    //Add unqiue css files here
     $css = array('styles/accommodations.css');
     require_once('views/header.php');
 
