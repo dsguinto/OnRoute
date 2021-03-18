@@ -1,39 +1,11 @@
 <?php
 
-require_once 'library/functions.php';
-//require_once 'views/header.php'; comment out because I need to call another css file in header. paste header and $headerMenu below.
+    require_once 'library/functions.php';
 
-$headerMenu = [
-    'Home' => 'index.php',
-    'Flights' => 'flights.php',
-    'Accommodations' => 'accommodations.php',
-    'Vehicle Rental' => 'vehicles.php',
-    'Customer Service' => 'services.php'
-];
+    $css = array('styles/accommodations.css');
+    require_once('views/header.php');
 
 ?>
-
-<!--copied from header.php-->
-
-<!DOCTYPE html>
-<html lang="en">
-<div class="page">
-    <head>
-        <meta charset="utf-8" />
-        <title>onRoute - Travel Better</title>
-        <link type="text/css" rel="stylesheet"  href="styles/global.css" />
-        <link type="text/css" rel="stylesheet"  href="styles/accommodations.css" />
-        <script src="https://kit.fontawesome.com/2956115494.js" crossorigin="anonymous"></script>
-        <script src="library/mainForm.js"></script> 
-    </head>
-    <body>
-        <header>
-            <h1><a href="index.php" class="homeLink">onRoute <i class="fas fa-route"></i></a></h1>
-        <nav>
-            <?php echo displayNavigation($headerMenu); ?>
-        </nav>
-        </header>
-
 
 <!--copied from content.php and modified-->
 <!-- Content -->
@@ -42,14 +14,6 @@ $headerMenu = [
     <h2>Accommodations</h2>
     <!--FORM TO BE FIXED IN ORDER TO FUNCTION (names, paths, etc.)-->
     <form>
-        <!--don't need form nav for now
-        <nav class="formNav">
-            <ul>
-                <li class="formNav__link">Flights</li>
-                <li class="formNav__link">Accomodations</li>
-                <li class="formNav__link">Vehicles</li>
-            </ul>
-        </nav>-->
         <div class="initialForm">
             <h2>Your Dream Vacation Awaits</h2>
         </div>
@@ -153,9 +117,6 @@ $headerMenu = [
 </main>
 
 
-
-
-
 <?php
-require_once 'views/footer.php';
+    require_once 'views/footer.php';
 ?>

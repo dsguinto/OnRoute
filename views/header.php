@@ -16,6 +16,11 @@ $headerMenu = [
         <meta charset="utf-8" />
         <title>onRoute - Travel Better</title>
         <link type="text/css" rel="stylesheet"  href="styles/global.css" />
+        <?php
+            if (isset($css) && is_array($css))
+            foreach ($css as $path)
+                printf('<link rel="stylesheet" type="text/css" href="%s" />', $path);
+        ?>
         <script src="https://kit.fontawesome.com/2956115494.js" crossorigin="anonymous"></script>
         <script src="library/mainForm.js"></script> 
     </head>
