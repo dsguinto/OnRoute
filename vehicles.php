@@ -40,49 +40,49 @@ require_once 'views/header.php';
             <div class="deals__popular_opt">
                 <a href="#">
                     <p>Maserati Levante</p><p>CA $63.00/Day - (Company)</p>
-                    <img src="images/vehicles/4-Maserati-Levante.jpg" height="200" alt="Image of a car model">
+                    <img src="images/vehicles/2-Citroen.png" height="200" alt="Image of a car model">
                 </a>
             </div>
             <div class="deals__popular_opt">
                 <a href="#">
                     <p>Audi Q8</p><p>CA $80.00/Day - (Company)</p>
-                    <img src="images/vehicles/5-Audi-Q8.jpg" height="200" alt="Image of a car model">
+                    <img src="images/vehicles/3-Hyundai-Santa-Fe.png" height="200" alt="Image of a car model">
                 </a>
             </div>
             <div class="deals__popular_opt">
                 <a href="#">
                     <p>Maserati Levante</p><p>CA $63.00/Day - (Company)</p>
-                    <img src="images/vehicles/4-Maserati-Levante.jpg" height="200" alt="Image of a car model">
+                    <img src="images/vehicles/4-Audi-Q7png.png" height="200" alt="Image of a car model">
                 </a>
             </div>
             <div class="deals__popular_opt">
                 <a href="#">
                     <p>Maserati Levante</p><p>CA $63.00/Day - (Company)</p>
-                    <img src="images/vehicles/4-Maserati-Levante.jpg" height="200" alt="Image of a car model">
+                    <img src="images/vehicles/5-Tesla-Model-S.png" height="200" alt="Image of a car model">
                 </a>
             </div>
             <div class="deals__popular_opt">
                 <a href="#">
                     <p>Maserati Levante</p><p>CA $63.00/Day - (Company)</p>
-                    <img src="images/vehicles/4-Maserati-Levante.jpg" height="200" alt="Image of a car model">
+                    <img src="images/vehicles/6-Mazda-3.png" height="200" alt="Image of a car model">
                 </a>
             </div>
             <div class="deals__popular_opt">
                 <a href="#">
                     <p>Audi Q8</p><p>CA $80.00/Day - (Company)</p>
-                    <img src="images/vehicles/5-Audi-Q8.jpg" height="200" alt="Image of a car model">
+                    <img src="images/vehicles/7-Bmw-3.png" height="200" alt="Image of a car model">
                 </a>
             </div>
             <div class="deals__popular_opt">
                 <a href="#">
                     <p>Maserati Levante</p><p>CA $63.00/Day - (Company)</p>
-                    <img src="images/vehicles/4-Maserati-Levante.jpg" height="200" alt="Image of a car model">
+                    <img src="images/vehicles/8-Suzuki-Celerio.png" height="200" alt="Image of a car model">
                 </a>
             </div>
             <div class="deals__popular_opt">
                 <a href="#">
                     <p>Maserati Levante</p><p>CA $63.00/Day - (Company)</p>
-                    <img src="images/vehicles/4-Maserati-Levante.jpg" height="200" alt="Image of a car model">
+                    <img src="images/vehicles/10-Mitsubishi-Lancer.png" height="200" alt="Image of a car model">
                 </a>
             </div>
         </div>

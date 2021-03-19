@@ -80,7 +80,8 @@ input{
 }
 .deals__popular_opt img{
     height: 200px;
-    width: 270px;
+    width: 200px;
+    object-fit: cover;
 }
 .deals__popular_opt a{
     color: black;
