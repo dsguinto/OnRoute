@@ -1,0 +1,93 @@
+/* Font Imports */
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+/* 1.1 Global Variables */
+:root {
+    --regularFont: "Poppins", sans-serif;
+    --secondaryFont: "Josefin Sans", sans-serif;
+    /*Color Pallet*/
+    --navyBlue: #002248;
+    --darkSienna: #370617;
+    --darkRed: #9D0208;
+    --persimmon: #E85D04;
+    --mustardYellow: #D9A21B;
+    --greenIvory: #2B9348;
+}
+/* Content Styling */
+main {
+    padding: 3em 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-evenly;
+}
+/* Form Styling */
+form{
+    background: linear-gradient(var(--mustardYellow), var(--darkSienna));
+    color: white;
+    display: flex;
+    flex-flow: wrap row;
+    align-items: center;
+    justify-content: center;
+    padding: 2em 1em 2em 1em;
+    width: 75%;
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 2px solid grey;
+    border-left: 2px solid grey;
+}
+.form__input{
+    padding: 0 7px 0 7px;
+}
+#puLocation:focus,#puDate:focus,#rDate:focus,#form__submit_btn:focus{outline: none;}
+input{
+    font-family: var(--regularFont);
+}
+.form__submit_btn{
+    border-radius: 5px;
+    font-family: var(--regularFont);
+    border-style: none;
+    padding: 0 2em 0 2em;
+}
+.form__submit_btn:hover{
+    background-color: var(--greenIvory);
+    color: white;
+}
+/* Car Rental Deals */
+.deals{
+    padding: 2em 0;
+  }
+.deals h2{
+    border-bottom: 1px solid lightgrey;
+}
+.deals__popular h3,
+.deals__budget h3{
+    width: 100%;
+}
+.deals__popular{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 2em 3em 3em 3em;
+    justify-content: space-evenly;
+}
+.deals__popular_opt{
+    padding: 2em;
+    margin-bottom: 1em;
+    border: 1px solid black;
+}
+.deals__popular_opt img{
+    height: 200px;
+    width: 270px;
+}
+.deals__popular_opt a{
+    color: black;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.deals__popular_opt a:hover {
+    color: dimgray;
+}
+  

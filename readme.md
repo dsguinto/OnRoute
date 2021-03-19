@@ -2,4 +2,4 @@
 ## By: The WebDevs
 
 ### Our Database Design
-![Database Design](https://github.com/HTTP5202-TheWebDevs/PHP_Project/blob/main/images/database_design/Database_Deign.PNG)
+<!-- ![Database Design](https://github.com/HTTP5202-TheWebDevs/PHP_Project/blob/main/images/database_design/database_design.png) -->
