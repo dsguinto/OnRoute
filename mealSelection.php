@@ -1,3 +1,4 @@
+
 <!-- A user can see the meals available and select the meal they want-->
 <?php 
     require_once 'library/functions.php';
@@ -44,4 +45,3 @@
 <?php 
     require_once 'views/footer.php';
 ?>
- 

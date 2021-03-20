@@ -1,56 +1,39 @@
 main{
-    margin: 0px, auto;
+    margin: 0 auto;
     padding: 50px;
     text-align: center;
-    background-color: red;
-}
-
-/* .flightTrack{
-    padding:40px 100px 40px 100px;
-    margin:50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    border-radius: 20px;
-    background-color: #d9a21b;
-    border-bottom: 2px solid grey;
-    border-left: 2px solid grey;
-}
-
-.flightInfo{
-    padding:40px 100px 40px 100px;
-    margin:50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    border-radius: 20px;
-    background-color: #d9a21b;
-    border-bottom: 2px solid grey;
-    border-left: 2px solid grey;
-}
-
-.flightInfo div{
-    flex: 1 1 30%;
-    text-align: center;
-    position: relative;
-}
- */
-/* .mealSelection_flex div:last-child{
-    flex: 1 0 100%;
+    height:70vh;
     display:flex;
-    justify-content: center;
-    margin-bottom: 20px;
+    align-items: center;
 }
 
-.mealSelection_flex_div input{
-    position: absolute;
-    left:0;
-    width:100%;
-    height:100%;
-    opacity: 0;
+.flightTrack, .flightInfo{
+    flex:1 1 100%;
+    padding:40px 100px 40px 100px;
+    margin:50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap:nowrap;
+    justify-content: space-around;
+    border-radius: 20px;
+    background-color: #d9a21b;
+    border-bottom: 2px solid grey;
+    border-left: 2px solid grey;
+    height: 300px;
 }
 
-.mealSelection_btn{
+.flightInfo_row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.row_item{
+    align-self: center;
+}
+
+.flightTrack__form button{
     font-family: "Poppins", sans-serif;
     background-color: #fff8f0;
     color: black;
@@ -58,14 +41,15 @@ main{
     border-radius: 10px;
     padding: 0.5em 1.5em;
     transition: 0.2s;
-    position: absolute;
+    position: relative;
+    margin: 30px;
 }
 
-.mealSelection_btn:hover {
+.flightTrack__form button:hover {
     background-color: #6cbeb5;
     border: 1px solid grey;
-  }
+}
 
-.mealConfirmation{
+.flightInfo{
     display:none;
-} */
+}

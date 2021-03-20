@@ -1,3 +1,4 @@
+
 <!-- A user can see the seats available and select the seat they want -->
 <?php 
     require_once 'library/functions.php';
@@ -25,4 +26,3 @@
 <?php 
     require_once 'views/footer.php';
 ?>
- 

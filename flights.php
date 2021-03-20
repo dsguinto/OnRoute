@@ -6,11 +6,14 @@ require_once 'library/functions.php';
 $css = array('styles/flights.css');
 require_once 'views/header.php';
 
+//flight navigation 
+$flightNav = array('Track Flight' => "flightTracking.php", 'In Flight Meal' => "mealSelection.php", 'Seat Selection' => "seatSelection.php" )
 ?>
 
 <main>
     <h2>Search Flight Options</h2>
     <form  method="POST" action="#">
+        <?php echo displayNavigation($flightNav);?>
         <div class="tripFrom">
             <div class="tripFrom__input">
                 <label>Leaving From</label>
