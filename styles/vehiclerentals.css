@@ -16,7 +16,7 @@
     --greenIvory: #2B9348;
 }
 /* Content Styling */
-main {
+main{
     padding: 3em 0;
     display: flex;
     flex-direction: column;
@@ -24,6 +24,13 @@ main {
     justify-content: space-evenly;
 }
 /* Form Styling */
+#vehicle__image{
+    width: 92.3%;
+    margin: 0 auto;
+    height: 600px;
+    object-fit: cover;
+    object-position: 70% 20%;;
+}
 form{
     background: linear-gradient(var(--mustardYellow), var(--darkSienna));
     color: white;
@@ -31,15 +38,15 @@ form{
     flex-flow: wrap row;
     align-items: center;
     justify-content: center;
-    padding: 2em 1em 2em 1em;
-    width: 75%;
+    padding: 2em 1em 1.4em 1em;
+    width: 90%;
     margin: 0 auto;
     text-align: center;
-    border-bottom: 2px solid grey;
-    border-left: 2px solid grey;
 }
 .form__input{
     padding: 0 7px 0 7px;
+    flex-wrap: wrap;
+    padding-bottom: 1em;
 }
 #puLocation:focus,#puDate:focus,#rDate:focus,#form__submit_btn:focus{outline: none;}
 input{
@@ -56,39 +63,43 @@ input{
     color: white;
 }
 /* Car Rental Deals */
-.deals{
+.products{
     padding: 2em 0;
   }
-.deals h2{
+.products h2{
     border-bottom: 1px solid lightgrey;
 }
-.deals__popular h3,
-.deals__budget h3{
+.products__popular h3{
     width: 100%;
 }
-.deals__popular{
+.products__popular p:nth-child(1){
+    margin: 0;
+}
+.products__popular p:nth-child(2){
+    margin: 0 0 20px 0;
+}
+.products__popular{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 2em 3em 3em 3em;
     justify-content: space-evenly;
 }
-.deals__popular_opt{
+.products__popular_opt{
     padding: 2em;
     margin-bottom: 1em;
     border: 1px solid black;
+    border-radius: 5px;
 }
-.deals__popular_opt img{
-    height: 200px;
-    width: 200px;
-    object-fit: cover;
+.products__popular_opt img{
+    height: 170px;
+    width: 250px;
 }
-.deals__popular_opt a{
+.products__popular_opt a{
     color: black;
     text-decoration: none;
     transition: 0.3s;
 }
-.deals__popular_opt a:hover {
-    color: dimgray;
+.products__popular_opt a:hover {
+    color: rgb(138, 138, 138);
 }
-  
