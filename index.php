@@ -8,7 +8,6 @@
 
 <!-- Content -->
 <main>
-    <!-- <div class="background"></div> -->
     <h2>All your vacations needs in one place.</h2>
     <!--FORM TO BE FIXED IN ORDER TO FUNCTION (names, paths, etc.)-->
     <form>
@@ -49,11 +48,11 @@
                 <input type=text />
             </div>
                 <div class="tripFrom__input">
-                <label>Departing</label>
+                <label>Check In</label>
             <input type=date />
             </div>
             <div class="tripFrom__input">
-                <label>Returning</label>
+                <label>Check Out</label>
                 <input type=date />
             </div>
             <div class="tripFrom__input">
@@ -78,38 +77,24 @@
             </div>
         </div>
     </form>
+    <div class="banner">
+        <h2>Explore, Save, Enjoy</h2>
+    </div>
     <div class="deals">
-        <h2>Explore & Save More, Worry Less!</h2>
         <div class="deals__popular">
-            <h3>Popular Destinations</h3>
+            <h2>Popular Destinations</h2>
             <div class="deals__popular_opt">
-                <p><a href="#">Cuba (Img?)</a></p>
-            </div>
-            <div class="deals__popular_opt">
-                <p><a href="#">Japan (Img?)</a></p>
+                <a href="#"><img src="images/index/benjamin-bindewald-NewYork.jpg" alt="Image of the Statue of Liberty from unsplash.com"/></a>
             </div>
             <div class="deals__popular_opt">
-                <p><a href="#">Paris (Img?)</a></p>
+                <a href="#"><img src="images/index/grillot-edouard-Paris.jpg" alt="Image of the Eiffel Tower from unsplash.com" /></a>
             </div>
             <div class="deals__popular_opt">
-                <p><a href="#">New York(Img?)</a></p>
+                <a href="#"><img src="images/index/martijn-baudoin-Japan.jpg" alt="Image of red Japanese gates from unsplash.com"/></a>
             </div>
-        </div>
-        <div class="deals__budget">
-            <h3>Lowest Prices</h3>
-            <div class="deals__budget_opt">
-                <p><a href="#">Deal 1 (Img?)</a></p>
+            <div class="deals__popular_opt">
+                <a href="#"><img src="images/index/roman-lopez-Mexico.jpg" alt="Image of a city in Mexico from unsplash.com"/></a>
             </div>
-            <div class="deals__budget_opt">
-                <p><a href="#">Deal 2 (Img?)</a></p>
-            </div>
-            <div class="deals__budget_opt">
-                <p><a href="#">Deal 3 (Img?)</a></p>
-            </div>
-            <div class="deals__budget_opt">
-                <p><a href="#">Deal 4 (Img?)</a></p>
-            </div>
-        </div>
         </div>
     </div>
 </main>

@@ -1,0 +1,54 @@
+main {
+  padding: 3em 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* background-color: #fff8f0; */
+}
+
+form {
+  width: 75%;
+  margin: 3em auto;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #d9a21b;
+  border-bottom: 2px solid grey;
+  border-left: 2px solid grey;
+  padding: 4em 3em;
+}
+
+.tripFrom__input {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 1em;
+}
+
+.tripFrom__input_btn {
+  font-family: "Poppins", sans-serif;
+  background-color: #fff8f0;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5em 1.5em;
+  transition: 0.2s;
+  position: absolute;
+}
+
+.tripFrom__input_btn:hover {
+  background-color: #6cbeb5;
+  border: 1px solid grey;
+}
+
+label {
+  display: inline-block;
+  text-align: right;
+  margin-right: 0.5em;
+  vertical-align: top;
+}
+
+input {
+  display: inline-block;
+  margin-bottom: 1em;
+  font-family: "Poppins", sans-serif;
+}

@@ -20,53 +20,15 @@
         </div>
         <div class="tripFrom">
             <div class="tripFrom__input">
-                <label>Leaving From</label>
-                <input type=text />
-            </div>
-            <div class="tripFrom__input">
-                <label>Going To</label>
-                <input type=text />
-            </div>
-            <div class="tripFrom__input">
-                <label>Departing</label>
-                <input type=date />
-            </div>
-            <div class="tripFrom__input">
-                <label>Returning</label>
-                <input type=date />
-            </div>
-            <div class="tripFrom__input">
-                <input class="tripFrom__input_btn" type=button value="Search" />
-            </div>
-        </div>   
-        <div class="tripFrom">
-            <div class="tripFrom__input">
                 <label>Going To</label>
                 <input type=text />
             </div>
                 <div class="tripFrom__input">
-                <label>Departing</label>
+                <label>Check In</label>
             <input type=date />
             </div>
             <div class="tripFrom__input">
-                <label>Returning</label>
-                <input type=date />
-            </div>
-            <div class="tripFrom__input">
-                <input class="tripFrom__input_btn" type=button value="Search" />
-            </div>
-        </div>
-        <div class="tripFrom">
-            <div class="tripFrom__input">
-                <label>Pick Up Location</label>
-                <input type=text />
-            </div>
-            <div class="tripFrom__input">
-                <label>Pick Up Date</label>
-                <input type=date />
-            </div>
-            <div class="tripFrom__input">
-                <label>Drop Off Date</label>
+                <label>Check Out</label>
                 <input type=date />
             </div>
             <div class="tripFrom__input">

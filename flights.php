@@ -3,14 +3,36 @@
 require_once 'library/functions.php';
 
 //Add unqiue css files here
-// $css = array('path to css file', 'oath to another css file', etc.);
+$css = array('styles/flights.css');
 require_once 'views/header.php';
 
 ?>
 
-
 <main>
-    <h2>Flights</h2>
+    <h2>Search Flight Options</h2>
+    <form  method="POST" action="#">
+        <div class="tripFrom">
+            <div class="tripFrom__input">
+                <label>Leaving From</label>
+                <input type=text />
+            </div>
+            <div class="tripFrom__input">
+                <label>Going To</label>
+                <input type=text />
+            </div>
+            <div class="tripFrom__input">
+                <label>Departing</label>
+                <input type=date />
+            </div>
+            <div class="tripFrom__input">
+                <label>Returning</label>
+                <input type=date />
+            </div>
+            <div class="tripFrom__input">
+                <input class="tripFrom__input_btn" type=button value="Search" />
+            </div>
+        </div>   
+    </form>
 </main>
 
 <?php
