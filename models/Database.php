@@ -2,9 +2,9 @@
 namespace OnRoute\models;
 use PDO;
 class Database{
-    private static $user ="daniiwkh_thewebdevs";
-    private static $pass = "VXaTDeydZ%KO";
-    private static $dsn = "mysql:host=162.0.215.27;dbname=daniiwkh_onroute";
+    private static $user ="moeasakr_the_webdevs";
+    private static $pass = "rk,O#Nuwn]wJ";
+    private static $dsn = "mysql:host=198.50.215.64;dbname=moeasakr_onroute";
     private static $dbcon;
 
     private function __construct() {
