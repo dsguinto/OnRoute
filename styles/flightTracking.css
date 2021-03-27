@@ -19,7 +19,7 @@ main{
     background-color: #d9a21b;
     border-bottom: 2px solid grey;
     border-left: 2px solid grey;
-    height: 300px;
+    height: 60%;
 }
 
 .flightInfo_row{
@@ -48,8 +48,4 @@ main{
 .flightTrack__form button:hover {
     background-color: #6cbeb5;
     border: 1px solid grey;
-}
-
-.flightInfo{
-    display:none;
 }

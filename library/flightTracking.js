@@ -1,4 +1,4 @@
-window.onload = function(){
+/* window.onload = function(){
     //get button by id 
     var flightInfoForm = document.forms.flightTrack__form;
     var flightTrack = document.getElementsByClassName("flightTrack")[0];
@@ -11,3 +11,4 @@ window.onload = function(){
         return false;
     }
 }
+ */

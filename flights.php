@@ -7,9 +7,8 @@ $css = array('styles/flights.css');
 require_once 'views/header.php';
 
 //flight navigation 
-$flightNav = array('Track Flight' => "flightTracking.php", 'In Flight Meal' => "mealSelection.php", 'Seat Selection' => "seatSelection.php" )
+$flightNav = array('Track Flight' => "flightNumberSearch.php", 'In Flight Meal' => "mealSelection.php", 'Seat Selection' => "seatSelection.php" )
 ?>
-
 <main>
     <h2>Search Flight Options</h2>
     <form  method="POST" action="#">
@@ -17,7 +16,7 @@ $flightNav = array('Track Flight' => "flightTracking.php", 'In Flight Meal' => "
         <div class="tripFrom">
             <div class="tripFrom__input">
                 <label>Leaving From</label>
-                <input type=text />
+                <input type=text/>
             </div>
             <div class="tripFrom__input">
                 <label>Going To</label>
