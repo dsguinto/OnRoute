@@ -34,6 +34,9 @@ class Hotel {
         return $hotels;
     }
     
-
-
+/* connection string
+    private static $user ="root";
+    private static $pass = "root";
+    private static $dsn = "mysql:host=localhost;dbname=onroute";
+*/
 }
