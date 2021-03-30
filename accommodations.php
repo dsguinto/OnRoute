@@ -12,19 +12,21 @@
     
     //test database conneciton
     $dbcon = Database::getDB();
+    
+    //test is function is working
     $h = new Hotel();
     $hotels = $h->getAllHotels($dbcon);
     //echo $hotels;
+    
+    //test is function is working
     $hotel = $h->getHotelById($dbcon);
     //var_dump($hotel);
+
+    //test is function is working: work in progress
     $city = 'Lagos';
     $c = $h->getHotelsByCity($city, $dbcon);
     var_dump($c);
-
-    
-    
-    
-    
+   
     
     /*
     foreach ($hotels as $hotel){
