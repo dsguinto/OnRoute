@@ -2,29 +2,35 @@
     require_once 'library/functions.php';
     $css = array("styles/flightTracking.css");
     require_once 'views/header.php';
+    //start session and access session var 
+    session_start(); //Why do I have to restart the session here? - Ask Nithya
+    $flightInfo = $_SESSION['flightInfo'];
+    $airlineLogoLink = $_SESSION['airlineLogoLink'];
 ?>
 <main>
     <div class = "flightInfo">
-        <h2>Flight Information for Flight <?php echo "######" ?></h2>
+        <h2>Flight Information for Flight <?php echo $flightInfo->id ?></h2>
          <!-- Import airline image-->
-         <?php echo "Dynamically Rendered Airline Logo"?>
-        <div class = flightInfo_row>
-            <ul class = "row_item">
+        
+
+        <div class = "flightInfoRow">
+            <ul class = "flightInfoRow_item">
                 <h3>Departure</h3>
-                <li>Airport: <?php echo "YYZ" ?></li>
-                <li>Terminal: <?php echo "2" ?></li>
-                <li>Date: <?php echo "May 5, 2020" ?></li>
-                <li>Time: <?php echo "21:00" ?></li>
+                <li>Airport: <?php echo $flightInfo->departureairport?></li>
+                <li>Terminal: <?php echo $flightInfo->departureterminal?></li>
+                <li>Date: <?php echo date('Y-m-d', strtotime($flightInfo->departuredate))?></li>
+                <li>Time: <?php echo date('H:i', strtotime($flightInfo->departuredate))?></li>
             </ul>
-            <div class = "row_item">
-            <i class="fas fa-plane fa-3x"></i>
+            <div class = "flightInfoRow_item">
+                <img src = <?php echo $airlineLogoLink?> alt = "airlineLogo"></img>
+                <i class="fas fa-plane fa-3x"></i>
             </div>
-            <ul class = "row_item">
+            <ul class = "flightInfoRow_item">
                 <h3>Arrival</h3>
-                <li>Airport: <?php echo "YVR" ?></li>
-                <li>Terminal: <?php echo "1" ?></li>
-                <li>Date: <?php echo "May 6, 2020" ?></li>
-                <li>Time: <?php echo "22:00" ?></li>
+                <li>Airport: <?php echo $flightInfo->arrivalairport?></li>
+                <li>Terminal: <?php echo $flightInfo->arrivalterminal?></li>
+                <li>Date: <?php echo date('Y-m-d', strtotime($flightInfo->arrivaldate))?></li>
+                <li>Time: <?php echo date('H:i', strtotime($flightInfo->arrivaldate))?></li>
             </ul>
         </div>
     </div>

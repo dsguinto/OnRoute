@@ -7,40 +7,67 @@
     require_once 'models/database.php';
     $css = array("styles/flightTracking.css");
 
-    var_dump($_POST);
-
     //WHEN FORM IS SUBMITTED
     if(isset($_POST['flightSubmit'])){
         /* header('location: flightInfo.php'); */
         //Was there a flight number submitted?
         if($_POST['flightId'] == ""){
-            echo 'Please enter a flight number';
-            return false;
+            $errMsg = 'Please enter a flight number';
         }
-        $flightId = $_POST['flightId'];
-        //instantiate database connection
-        $db = Database::getDb();
 
-        //When flight number submitted, instantiate db connection, utilize getFlightById
-        $flightController = new Flight($db);
+        else{
+            //get the flight id submitted and store as variable
+            $flightId = $_POST['flightId'];
 
-        //send flightnumber to controller 
-        $response = $flightController->getFlightById($flightId);
+            //instantiate database connection
+            $db = Database::getDb();
+    
+            //When flight number submitted, instantiate db connection, utilize getFlightById
+            $flightController = new Flight($db);
+    
+            //send flightId to controller 
+            $response = $flightController->getFlightById($flightId);
+    
+            
 
-        //response from database 
-        var_dump($response);
+            if($response == false){
+                $errMsg = "We couldn't find that flight. Did you double check your flight number?";
+            } 
+            else{
+                switch($response->airline){
+                    case 'aircanada':
+                        $airlineLogoLink = 'images/logos/airCanada.jpg';
+                        break;
+                    case 'deltaAirlines';
+                        $airlineLogoLink = 'images/logos/deltaAirlines.jpg';
+                        break;
+                    case 'americanAirlines';
+                        $airlineLogoLink = 'images/logos/americanAirlines.jpg';
+                        break;
+                } 
+                //start session andstore the $response as a session var
+                session_start(); 
+                $_SESSION['flightInfo'] = $response;
+                $_SESSION['airlineLogoLink'] = $airlineLogoLink;
+                //redirect user to the flightInfo pages
+                header ('Location:flightInfo.php');   
+            }
+        }
     }
 
     require_once 'views/header.php';
 ?>
-<main>
+<!-- <script src='library/flightTracking.js'></script>
+ --><main>
     <div class = "flightTrack">
         <h2>Track Your Flight</h2>
         <p>Here you can track the latest information on your flight. Just enter your flight number below.</p>
         <form class ="flightTrack__form" action="" method="POST" name = "flightTrack__form">
             <div>
-                <label for="flightNumber">Flight Number</label>
-                <input type="text" id="flightNumber" name="flightId" placeholder="######"/>
+                <label for="flightId">Flight Number (id)</label>
+                <input type="text" id="flightId" name="flightId" placeholder="######"/>
+                </br></br>
+                <span><?= isset($errMsg)? " " . $errMsg : '';?></span>
             </div>
             <button type="submit" name="flightSubmit" value="submitted">GO!</button>
         </form>

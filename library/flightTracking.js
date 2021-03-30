@@ -1,13 +1,12 @@
 /* window.onload = function(){
     //get button by id 
     var flightInfoForm = document.forms.flightTrack__form;
-    var flightTrack = document.getElementsByClassName("flightTrack")[0];
-    var flightInfo = document.getElementsByClassName("flightInfo")[0];
 
-    //functions
+    //on button click
     flightInfoForm.onsubmit = function flightInfoAppear(){
-        flightTrack.style.display = "none";
-        flightInfo.style.display = "block";
+        //if no flight Id null or empty string 
+
+        //if 
         return false;
     }
 }
