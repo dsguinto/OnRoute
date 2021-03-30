@@ -1,28 +1,12 @@
-
-<!-- Once a user has booked their flight, they can enter their flight number to see the flight details this does not require a login. It is a quicker way for customers to view their flight details, rather than logging in and checking their bookings-->
-<?php 
+<?php
     require_once 'library/functions.php';
     $css = array("styles/flightTracking.css");
     require_once 'views/header.php';
 ?>
 <main>
-    <!-- Flight track form appears on page load -->
-    
-    <div class = "flightTrack">
-        <h2>Track Your Flight</h2>
-        <p>Here you can track the latest information on your flight. Just enter your flight number below.</p>
-        <form class ="flightTrack__form" action="" method="POST" name = "flightTrack__form">
-            <div>
-                <label for="flightNumber">Flight Number</label>
-                <input type="text" id="flightNumber" name="flightNumber" placeholder="######"/>
-            </div>
-            <button type="submit" name="flightTrackSubmit">GO!</button>
-        </form>
-    </div>
-    <!-- On form submission, flightInfo displays and flightTrack is set to display:none -->
     <div class = "flightInfo">
         <h2>Flight Information for Flight <?php echo "######" ?></h2>
-         <!-- Import airline image from database -->
+         <!-- Import airline image-->
          <?php echo "Dynamically Rendered Airline Logo"?>
         <div class = flightInfo_row>
             <ul class = "row_item">
@@ -45,7 +29,6 @@
         </div>
     </div>
 </main>
-<script src="library/flightTracking.js"></script>
 <?php 
     require_once 'views/footer.php';
 ?>
