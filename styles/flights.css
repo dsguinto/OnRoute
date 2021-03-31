@@ -6,6 +6,15 @@ main {
   /* background-color: #fff8f0; */
 }
 
+header .menu a:hover {
+  color: #d9a21b;
+}
+
+header .menu a:hover::after {
+  background-color: #d9a21b;
+  width: 100%;
+}
+
 /* Use '.menu a' transition from global.css, apply new color on hover */
 .menu a:hover {
   color: #002248;
@@ -16,7 +25,7 @@ main {
   width: 100%;
 }
 
-form {
+.secondSearch {
   width: 75%;
   margin: 3em auto;
   text-align: center;
@@ -61,4 +70,89 @@ input {
   display: inline-block;
   margin-bottom: 1em;
   font-family: "Poppins", sans-serif;
+}
+
+/* MAIN SEARCH BAR DIV STYLING */
+.searchDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchDiv__field input {
+  width: 500px;
+  border-radius: 15px;
+  border: none;
+  padding-left: 1em;
+  margin: 0;
+}
+
+.searchDiv__field input:focus {
+  outline: none;
+}
+
+.searchDiv__field_bar {
+  border-radius: 20px;
+  border: 2px solid #d9a21b;
+  margin: 0 auto;
+}
+
+.searchDiv__field {
+  display: flex;
+  align-items: baseline;
+}
+
+.searchBtn {
+  background-color: white;
+  color: #d9a21b;
+  border-radius: 50px;
+  padding: 0.5em;
+  border: none;
+  transition: 300ms;
+}
+
+.searchBtn:hover {
+  background-color: #d9a21b;
+  color: white;
+}
+
+.searchBtn:hover .searchDiv__field_bar {
+  border-color: #002248;
+}
+
+/* Search Result table styling */
+table {
+  margin: 0 auto;
+  text-align: left;
+  border-collapse: collapse;
+  background-color: #def2f1;
+  box-shadow: 0 0 5px #888888;
+}
+
+h3 {
+  margin: 1em auto;
+}
+
+thead {
+  background-color: #002248;
+  color: #feffff;
+}
+
+tr {
+  border-bottom: 1px solid black;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #b0cecb;
+}
+
+th,
+td {
+  padding: 1em;
+}
+
+/* Error Message Styling */
+.errMsg {
+  color: red;
+  margin: 1em auto;
 }
