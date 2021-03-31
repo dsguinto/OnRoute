@@ -95,7 +95,7 @@
                 <td><?=  $flight->airline; ?></td>
                 <td>
                     <!-- Hides Book button if depature data is already passed -->
-                    <form action="./mealSelection.php" method="POST">
+                    <form action="./flightBooking.php" method="POST">
                         <input type="hidden" name="id" value="<?= $flight->id; ?>"/>
                         <button type="submit" class="bookBtn" name="bookFlight" <?php if ($flight->departuredate < $date){echo "style='display:none'";} else{echo "style='display:block'";} ?>>Book</button>
                     </form>
@@ -105,31 +105,18 @@
          ?>
         </tbody>
     </table>
-    <form  method="POST" action="#" class="secondSearch">
-        <h2>Other Flight Options</h2>
-        <?php echo displayNavigation($flightNav);?>
-        <div class="tripFrom">
-            <div class="tripFrom__input">
-                <label>Leaving From</label>
-                <input type=text/>
+    <div class="otherOptions">
+        <h2>See What We Have to Offer</h2>
+            <div class="otherOptions__opt">
+                <a href="flightNumberSearch.php"><img src="images/flights/difa-naufal-airplane-unsplash.jpg" alt="Image of Plane flying"/></a>
             </div>
-            <div class="tripFrom__input">
-                <label>Going To</label>
-                <input type=text />
+            <div class="otherOptions__opt">
+                <a href="mealSelection.php"><img src="images/flights/meal5.jpeg" alt="Image of on-flight meal from Air France" /></a>
             </div>
-            <div class="tripFrom__input">
-                <label>Departing</label>
-                <input type=date />
+            <div class="otherOptions__opt">
+                <a href="seatSelection.php"><img src="images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window"/></a>
             </div>
-            <div class="tripFrom__input">
-                <label>Returning</label>
-                <input type=date />
-            </div>
-            <div class="tripFrom__input">
-                <input class="tripFrom__input_btn" type=button value="Search" />
-            </div>
-        </div>   
-    </form>
+    </div>
 </main>
 
 <?php

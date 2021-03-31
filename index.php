@@ -18,7 +18,7 @@
             </ul>
         </nav>
         <div class="initialForm">
-            <h2>Your Dream Vacation Awaits</h2>
+            <h2>Your Dream Vacation Awaits </br> Replace with Image Slideshow?</h2>
         </div>
         <div class="tripFrom">
             <div class="tripFrom__input">

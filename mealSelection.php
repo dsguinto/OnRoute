@@ -10,54 +10,10 @@
     $css = array("styles/mealSelection.css");
     require_once 'views/header.php';
 
-    // //Checks if $_POST value ex
-    // if (empty($_POST)) {
-    //     $flightId = $_SESSION['post-data']['id'];
-    // }
-    // else{
-        $flightId = $_POST['id'];
-    // }
-
-    //instantiate database connection
-    $db = Database::getDb();
-    
-    //When flight number submitted, instantiate db connection, utilize getFlightById
-    $flightController = new Flight($db);
-
-    //send flightId to controller 
-    $response = $flightController->getFlightById($flightId);
 ?>
 <main>
     <!-- Flight track form appears on page load -->
     <div class = "mealSelection">
-        <div class = "flightSelected">
-            <h3>Flight Selected </h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Depature Airport</th>
-                        <th>Arrival Airport</th>
-                        <th>Depature Date</th>
-                        <th>Depature Date</th>
-                        <th>Airlines</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php 
-                    if (isset($response)){
-                ?>
-                    <tr>
-                        <td><?=  $response->departureairport; ?></td>
-                        <td><?=  $response->arrivalairport; ?></td>
-                        <td><?=  $response->departuredate; ?></td>
-                        <td><?=  $response->arrivaldate; ?></td>
-                        <td><?=  $response->airline; ?></td>
-                <?php 
-                    } 
-                ?>
-                </tbody>
-            </table>
-        </div>
         <form class = "mealSelection_form" action="" method="POST" name="mealSelection_form">
             <div class = "mealSelection_flex">
             <h2>Your Flight Includes an In-Flight Meal</h2>

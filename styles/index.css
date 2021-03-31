@@ -156,7 +156,7 @@ input {
 }
 
 .deals__popular_opt img {
-  height: 30vh;
+  height: 250px;
 }
 
 .deals__popular_opt::after {

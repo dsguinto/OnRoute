@@ -176,3 +176,75 @@ td {
   color: red;
   margin: 1em auto;
 }
+
+/*Extra Options Styling*/
+
+.otherOptions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 2em 3em 3em 3em;
+  justify-content: space-evenly;
+}
+
+.otherOptions h2 {
+  width: 100%;
+  color: #002248;
+  border-bottom: 2px solid #002248;
+  text-align: left;
+}
+
+.otherOptions__opt {
+  margin: 2em auto;
+  position: relative;
+  transition: 300ms;
+}
+
+.otherOptions__opt:hover {
+  background-color: #aaaaaa;
+  box-shadow: -10px 10px 5px #aaaaaa;
+}
+
+.otherOptions__opt img {
+  height: 250px;
+  border: 1px solid lightgray;
+}
+
+.otherOptions__opt::after {
+  text-align: center;
+  background-color: #b0c1f4;
+  position: absolute;
+  padding: 0.5em 1em;
+  width: 60%;
+  border-radius: 15px;
+  bottom: 0;
+  right: -20px;
+  transition: 300ms;
+}
+
+.otherOptions__opt:hover::after {
+  color: white;
+  background-color: #002248;
+  cursor: pointer;
+  box-shadow: 0px 5px 5px #aaaaaa;
+}
+
+.otherOptions__opt:nth-child(2)::after {
+  content: "Flight Tracking";
+}
+.otherOptions__opt:nth-child(3)::after {
+  content: "Meal Selection";
+}
+.otherOptions__opt:nth-child(4)::after {
+  content: "Seat Selection";
+}
+
+.otherOptions__opt a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.otherOptions__opta:hover {
+  color: dimgray;
+}
