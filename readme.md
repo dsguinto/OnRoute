@@ -14,3 +14,9 @@
 - Validation on flightNumberSearch.php tells user if they have not entered a flight number, or if the database could not find a flight from the flight number they entered
 - If the database can find a flight with the entered flight number, it stores it as a session variable and redirects the user to the flightInfo.php page
 
+#### Alexis Arevalo: vehicles.php and vehicleSelection.php
+- Displaying all the available vehicles in the database, and the user can select a vehicle by selecting it.
+- When the user selects a vehicle, they are redirected to the info page of the selected vehicle that is retrieved by an 'id'.
+- Validating inputs made to vehicle search form. - working on retrieveing the information to display.
+
+
