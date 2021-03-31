@@ -39,6 +39,7 @@ main{
     border-bottom: 5px solid black;
     background:skyblue;
     box-shadow: -2px 2px 5px;
+    border-radius: 10px;
 }
 
 .flightInfoRow_item{
