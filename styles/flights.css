@@ -114,10 +114,7 @@ input {
 .searchBtn:hover {
   background-color: #d9a21b;
   color: white;
-}
-
-.searchBtn:hover .searchDiv__field_bar {
-  border-color: #002248;
+  cursor: pointer;
 }
 
 /* Search Result table styling */
@@ -125,7 +122,7 @@ table {
   margin: 0 auto;
   text-align: left;
   border-collapse: collapse;
-  background-color: #def2f1;
+  background-color: #e5f0ff;
   box-shadow: 0 0 5px #888888;
 }
 
@@ -143,12 +140,35 @@ tr {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #b0cecb;
+  background-color: #e5f0ff;
 }
 
 th,
 td {
   padding: 1em;
+}
+
+.bookBtn {
+  border: none;
+  border-radius: 10px;
+  background-color: #002248;
+  color: white;
+  padding: 0.5em 1em;
+  margin: 0;
+  transition: 200ms;
+}
+
+.bookBtn:hover {
+  background-color: #25558b;
+  cursor: pointer;
+}
+
+.hiddenMsg {
+  display: none;
+  font-size: 0.5em;
+  background-color: lightgrey;
+  padding: 0.5em 1em;
+  border-radius: 15px;
 }
 
 /* Error Message Styling */

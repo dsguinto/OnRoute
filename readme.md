@@ -30,5 +30,5 @@
 - Main search feature that allows users to search the flights table based off of airports, dates, airlines, etc.
 - Validation checks if user left field empty, or if search input does not have any results
 - Successful results will display a table with all the values matching the search result
-- Currently, sql query is not sanitized. As such, search will only find exact values at the moment
-  - Unsure how to bind values while using LIKE queries (e.g LIKE '%:input%' does not seem to work, but LIKE '$input' does)
+- Flights that have passed will display a "Book Unavailable" notice
+- Flights that are in the future will display a "Book" button. If the user clicks the button, the data from the flight they selected will be saved and they will be carried over to the mealSelection.php page. Their selected flight will appear on this page, and they will be prompted to select a meal for their flight.

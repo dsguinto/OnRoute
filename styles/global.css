@@ -32,7 +32,6 @@ header {
   flex-wrap: wrap;
   justify-content: space-around;
   background-color: #002248;
-  border-bottom: 1px solid black;
   padding: 0.5em;
   align-items: center;
 }

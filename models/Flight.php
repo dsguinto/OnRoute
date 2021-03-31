@@ -56,14 +56,14 @@ class Flight{
     }
 
     public function searchFlight($input){
+        $input = "%" . $input . "%";
 
-        //NOT SANTIZED
-        $query = "SELECT * FROM Flights WHERE ((departureairport LIKE '$input') OR (arrivalairport LIKE '$input')OR (departuredate LIKE '$input')OR (arrivaldate LIKE '$input')OR (airline LIKE '$input') OR (plane_id LIKE '$input'))";
+        $query = "SELECT * FROM Flights WHERE ((departureairport LIKE :input) OR (arrivalairport LIKE :input)OR (departuredate LIKE :input)OR (arrivaldate LIKE :input)OR (airline LIKE :input) OR (plane_id LIKE :input))";
 
         $request = $this->db->prepare($query);
 
-        // //sanitize
-        // $request->bindParam(':input', $input);
+        //sanitize
+        $request->bindParam(':input', $input);
         
         //execute
         $request->execute();

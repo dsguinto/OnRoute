@@ -8,7 +8,6 @@
 
 <!-- Content -->
 <main>
-    <h2>All your vacations needs in one place.</h2>
     <!--FORM TO BE FIXED IN ORDER TO FUNCTION (names, paths, etc.)-->
     <form>
         <nav class="formNav">

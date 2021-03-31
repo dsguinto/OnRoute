@@ -12,26 +12,30 @@
     $errMsg = "";
     $hide = "style='display:none;'";
 
+    $pastDate = "";
+    $dateNow = new DateTime("NOW", new DateTimeZone('America/Toronto'));
+
+    $date = date_format($dateNow, 'Y-m-d,  H:i:s');
+
     //WHEN FORM IS SUBMITTED
     if(isset($_POST['searchFlightDB'])){
         /* header('location: flightInfo.php'); */
         //Checks for empty field input
-        if(empty($_POST['searchFlight'])){
+        if(empty($_POST['searchInput'])){
             $errMsg = 'Please enter an airport code, airline name, location, etc.';
         }
 
         else{
             //get the search input submitted and store as variable
-            $searchInput = $_POST['searchFlight'];
+            $searchInput = $_POST['searchInput'];
 
             //instantiate database connection
             $db = Database::getDb();
     
-            //When flight search query is submitted, instantiate db connection, utilize searchFlight
+            //When flight search query is submitted, instantiate db connection, utilize searchInput
             $flightController = new Flight($db);
     
             //send flight search input to controller 
-            //searchFlight NOT SANTIZED YET 
             $result = $flightController->searchFlight($searchInput);
     
             if($result == false){
@@ -48,7 +52,6 @@
         }
     }
 
-
     //flight navigation 
     $flightNav = array('Track Flight' => "flightNumberSearch.php", 'In Flight Meal' => "mealSelection.php", 'Seat Selection' => "seatSelection.php" );
 
@@ -58,9 +61,9 @@
     <div class="searchDiv">
         <form method="POST" action="">
             <div class="searchDiv__field">
-                <label for="searchFlight">Search for a flight: </label>
+                <label for="searchInput">Search for a flight: </label>
                 <div class="searchDiv__field_bar">
-                    <input type="text" name="searchFlight" id="searchFlight" placeholder="Search Flights..." results="0"/>
+                    <input type="text" name="searchInput" id="searchInput" placeholder="Search Flights..." results="0"/>
                     <button type="submit" class="searchBtn" name="searchFlightDB"><i class="fas fa-search"></i></button>
                 </div>
             </div>
@@ -76,18 +79,28 @@
                 <th>Depature Date</th>
                 <th>Depature Date</th>
                 <th>Airlines</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         <?php 
-        if (isset($result)){
-        foreach($result as $flight) { ?>
+            if (isset($result)){
+                foreach($result as $flight) { 
+        ?>
             <tr>
                 <td><?=  $flight->departureairport; ?></td>
                 <td><?=  $flight->arrivalairport; ?></td>
                 <td><?=  $flight->departuredate; ?></td>
                 <td><?=  $flight->arrivaldate; ?></td>
                 <td><?=  $flight->airline; ?></td>
+                <td>
+                    <!-- Hides Book button if depature data is already passed -->
+                    <form action="./mealSelection.php" method="POST">
+                        <input type="hidden" name="id" value="<?= $flight->id; ?>"/>
+                        <button type="submit" class="bookBtn" name="bookFlight" <?php if ($flight->departuredate < $date){echo "style='display:none'";} else{echo "style='display:block'";} ?>>Book</button>
+                    </form>
+                    <p class="hiddenMsg" <?php if ($flight->departuredate < $date){echo "style='display:block'";} else{echo "style='display:none'";} ?> >Book Unavailable</p>
+                </td>
         <?php }}
          ?>
         </tbody>
