@@ -30,6 +30,7 @@ main{
     height: 600px;
     object-fit: cover;
     object-position: 70% 20%;;
+    border-radius: 13px 13px 0 0;
 }
 form{
     background: linear-gradient(var(--mustardYellow), var(--darkSienna));
@@ -42,6 +43,7 @@ form{
     width: 90%;
     margin: 0 auto;
     text-align: center;
+    border-radius: 0 0 13px 13px;
 }
 .form__input{
     padding: 0 7px 0 7px;
@@ -85,21 +87,52 @@ input{
     padding: 2em 3em 3em 3em;
     justify-content: space-evenly;
 }
-.products__popular_opt{
+.products__popular_opt, 
+.products__sytem_opt{
     padding: 2em;
     margin-bottom: 1em;
     border: 1px solid black;
     border-radius: 5px;
 }
-.products__popular_opt img{
-    height: 170px;
+.products__popular_opt:hover, 
+.products__sytem_opt:hover{
+    box-shadow: 0 5px 5px 5px lightgray;
+}
+.products__popular_opt img, 
+.products__sytem_opt img{
+    height: 160px;
     width: 250px;
 }
-.products__popular_opt a{
+.products__popular_opt a, 
+.products__sytem_opt a{
     color: black;
     text-decoration: none;
     transition: 0.3s;
 }
-.products__popular_opt a:hover {
+.products__popular_opt a:hover, 
+.products__sytem_opt a:hover {
     color: rgb(138, 138, 138);
+}
+.selected{
+    align-items: center;
+    text-align: center;
+}
+#return-button{
+    background: linear-gradient(45deg, var(--persimmon), var(--mustardYellow));
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 6%;
+    text-align: center;
+    padding: 1%;
+    border-radius: 5px;
+    position: absolute;
+    right: 50px;
+    top: 150px;
+}
+#return-button:hover{
+    background: linear-gradient(45deg, var(--mustardYellow), var(--persimmon));
+}
+.text-span{
+    color: var(--mustardYellow);
 }

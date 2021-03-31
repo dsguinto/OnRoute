@@ -1,91 +1,103 @@
 <?php
 
+use OnRoute\models\{Database, Vehicle};
+require_once 'vendor/autoload.php';
 require_once 'library/functions.php';
-//Add unqiue css files here
-// $css = array('path to css file', 'oath to another css file', etc.);
-$css = array('styles/vehiclerentals.css');
+
+require_once 'models/Database.php';
+require_once 'models/Vehicle.php';
+
+$css = array('styles/vehicles.css');
 require_once 'views/header.php';
 
-?>
+/////////////////////////////////////
+ 
+// var_dump($_POST);
+session_start();
 
+//Checking on form submission
+if(isset($_POST['vehicleSubmit'])){
+    //collect all form input elements
+    $pickupLoc = $_POST['puLocation'];
+    $pickupDate = $_POST['puDate'];
+    $returnDate = $_POST['rDate'];
+
+    if(empty($pickupLoc)){
+        $ErrorMsg = 'Pick up location must be filled';
+    }
+    else if(empty($pickupDate)){
+        $ErrorMsg = 'Pick up date must be filled';
+    }
+    else if(empty($returnDate)){
+        $ErrorMsg = 'Return date must be filled';
+    } else {
+        header('Location: vehicles.php');//place '#form' to lead the user back to the form
+    }
+}
+
+///////////////////////////////////////
+
+//database
+$dbcon = Database::getDb();
+$vh = new Vehicle();
+$vehicles = $vh->getAllVehicles(Database::getDb());
+//var_dump($vehicles);
+
+$_SESSION['vehicleData'] = $vehicles;
+
+?>
 
 <main>
     <h2>Rent A Vehicle</h2>
     <!-- FORM -->
     <img src="images/vehicles/13-pexels-photo-4090350.jpeg" height="600" id="vehicle__image">
-    <form method="POST" action="#">
+    <form action="vehicles.php" method="POST" name="form" id="form">
         <div class="form__input">
-          <label for="puLocation">Pick Up Location</label>
-          <input type="text" id="puLocation" placeholder="City, Airport or Address">
-          <span></span>
+          <label>Pick Up Location</label>
+          <input type="text" name="puLocation" id="puLocation" placeholder="City, Airport or Address" value="<?= isset($pickupLoc)? $pickupLoc: '';?>">
         </div>
         <div class="form__input">
-           <label for="puDate">Pick Up Date</label>
-           <input type="date" id="puDate">
-           <span></span>
+           <label>Pick Up Date</label>
+           <input type="date" name="puDate" id="puDate" value="<?= isset($pickupDate)? $pickupDate: '';?>"/>
         </div>
         <div class="form__input">
-            <label for="rDate">Return Date</label>
-            <input type="date" id="rDate">
-            <span></span>
+            <label>Return Date</label>
+            <input type="date" name="rDate" id="rDate" value="<?= isset($returnDate)? $returnDate: '';?>"/>
         </div>
         <div class="form__input">
-            <input class="form__submit_btn" id="form__submit_btn" type=button value="Search" />
+            <input class="form__submit_btn" name="vehicleSubmit" type=submit value="Search"/>
         </div>
+        <span style="color:red;"><?= isset($ErrorMsg)? $ErrorMsg: '';?></span>
     </form>
-    <!-- Car Rental Deals -->
+    <!-- Vehicle Rental Products-->
     <div class="products">
         <h2>Choose Your Vehicle</h2>
         <div class="products__popular">
-            <h3>Top Car Deals</h3>
-            <div class="products__popular_opt">
-                <a href="#">
-                    <p>Citreon</p><p>CA $63.00/Day</p>
-                    <img src="images/vehicles/2-Citroen.png" height="200" alt="Image of a car model">
-                </a>
-            </div>
-            <div class="products__popular_opt">
-                <a href="#">
-                    <p>Hyundai Santa Fe</p><p>CA $80.00/Day</p>
-                    <img src="images/vehicles/3-Hyundai-Santa-Fe.png" height="200" alt="Image of a car model">
-                </a>
-            </div>
-            <div class="products__popular_opt">
-                <a href="#">
-                    <p>Audi Q7</p><p>CA $68.88/Day</p>
-                    <img src="images/vehicles/4-Audi-Q7png.png" height="200" alt="Image of a car model">
-                </a>
-            </div>
-            <div class="products__popular_opt">
-                <a href="#">
-                    <p>Tesla Model S</p><p>CA $63.50/Day</p>
-                    <img src="images/vehicles/8-Suzuki-Celerio.png" height="200" alt="Image of a car model">
-                </a>
-            </div>
-            <div class="products__popular_opt">
-                <a href="#">
-                    <p>Maserati Levante</p><p>CA $63.00/Day</p>
-                    <img src="images/vehicles/6-Mazda-3.png" height="200" alt="Image of a car model">
-                </a>
-            </div>
-            <div class="products__popular_opt">
-                <a href="#">
-                    <p>Audi Q8</p><p>CA $70.00/Day</p>
-                    <img src="images/vehicles/7-Bmw-3.png" height="200" alt="Image of a car model">
-                </a>
-            </div>
-            <div class="products__popular_opt">
-                <a href="#">
-                    <p>Maserati Levante</p><p>CA $70.20/Day</p>
-                    <img src="images/vehicles/9-Honda-Clarity.png" height="200" alt="Image of a car model">
-                </a>
-            </div>
-            <div class="products__popular_opt">
-                <a href="#">
-                    <p>Maserati Levante</p><p>CA $57.70/Day</p>
-                    <img src="images/vehicles/10-Mitsubishi-Lancer.png" height="200" alt="Image of a car model">
-                </a>
-            </div>
+            <?php if(!isset($_POST['vehicleSubmit'])){ echo '<h3>Top Car Deals</h3>'; 
+                foreach($vehicles as $vehicle){ if($vehicle->vehicleprice <= '65.00'){ ?>
+                <div class="products__popular_opt">
+                    <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><!-- extra inforamtion (=?= $vehicle->vehiclemodel?>)-->
+                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
+                        <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
+                    </a>
+                </div>
+            <?php }/*xif submit statement*/}/*xforeach*/}/*xif statement*/ ?>
+            <?php if(!isset($_POST['vehicleSubmit'])){ echo '<h3>Vehicles Listed</h3>'; foreach($vehicles as $vehicle){ ?>
+                <div class="products__sytem_opt">
+                    <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><!-- extra inforamtion (=?= $vehicle->vehiclemodel?>)-->
+                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
+                        <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
+                    </a>
+                </div>
+            <?php }/*xforeach*/}/*xif statement*/ ?>
+            <?php if(isset($_POST['vehicleSubmit'])){ echo '<h3>Selected Cars</h3>'; foreach($vehicles as $vehicle){ ?>
+                <div class="products__sytem_opt">
+                    <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><!-- extra inforamtion (=?= $vehicle->vehiclemodel?>)-->
+                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
+                        <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
+                    </a>
+                </div>
+            <?php }/*xforeach*/}/*xif statement*/ ?>
         </div>
     </div>
 </main>
