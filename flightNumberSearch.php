@@ -64,8 +64,8 @@
         <p>Here you can track the latest information on your flight. Just enter your flight number below.</p>
         <form class ="flightTrack__form" action="" method="POST" name = "flightTrack__form">
             <div>
-                <label for="flightId">Flight Number (id)</label>
-                <input type="text" id="flightId" name="flightId" placeholder="######"/>
+                <label for="flightId">Flight ID Number</label>
+                <input type="text" id="flightId" name="flightId"/>
                 </br></br>
                 <span><?= isset($errMsg)? " " . $errMsg : '';?></span>
             </div>

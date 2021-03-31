@@ -8,7 +8,7 @@ class Database{
     // private static $dsn = "mysql:host=198.50.215.64;dbname=moeasakr_onroute";
     
     private static $user ="root";
-    private static $pass = "";
+    private static $pass = "root";
     private static $dsn = "mysql:host=localhost;dbname=onroute";
 
     private static $dbcon;
