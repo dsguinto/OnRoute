@@ -6,6 +6,16 @@ main {
   /* background-color: #fff8f0; */
 }
 
+/* Use '.menu a' transition from global.css, apply new color on hover */
+.menu a:hover {
+  color: #002248;
+}
+
+.menu a:hover::after {
+  background-color: #002248;
+  width: 100%;
+}
+
 form {
   width: 75%;
   margin: 3em auto;
