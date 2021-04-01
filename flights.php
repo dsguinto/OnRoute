@@ -96,7 +96,7 @@
                 <td>
                     <!-- Hides Book button if depature data is already passed -->
                     <form action="./flightBooking.php" method="POST">
-                        <input type="hidden" name="id" value="<?= $flight->id; ?>"/>
+                        <input type="hidden" name="flightId" value="<?= $flight->id; ?>"/>
                         <button type="submit" class="bookBtn" name="bookFlight" <?php if ($flight->departuredate < $date){echo "style='display:none'";} else{echo "style='display:block'";} ?>>Book</button>
                     </form>
                     <p class="hiddenMsg" <?php if ($flight->departuredate < $date){echo "style='display:block'";} else{echo "style='display:none'";} ?> >Book Unavailable</p>

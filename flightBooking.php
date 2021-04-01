@@ -10,16 +10,15 @@
 $hide = "";
 $show = "";
     
-    //Checks if $_POST value ex
+    //Checks if $_POST value exist
     if (empty($_POST)) {
         $hide = "style='display:none;'";
         $show = "style='display:block;'";
     }
     else{
         $show = "style='display:none;'";
-        $flightId = $_POST['id'];
-
-        
+        $flightId = $_POST['flightId'];
+  
     //instantiate database connection
     $db = Database::getDb();
     
@@ -28,6 +27,26 @@ $show = "";
 
     //send flightId to controller 
     $response = $flightController->getFlightById($flightId);
+    }
+
+$hide2 = "";
+$confirmationMessage = "";
+
+    if (isset($_POST['confirmFlight'])){
+
+    $finalFlightId = $_POST['flightId'];
+
+    //instantiate database connection
+    $db = Database::getDb();
+    
+    //When flight number submitted, instantiate db connection, utilize getFlightById
+    $flightController = new Flight($db);
+
+    $addBooking = $flightController->addFlightBooking($finalFlightId);
+    $response = $flightController->getFlightById($finalFlightId);
+    $hide2 = "style='display:none;'";
+    $confirmationMessage = "<h2>Your flight has successfully been booked! Thank you for choosing OnRoute!</h2>";
+
     }
 ?>
 
@@ -45,12 +64,12 @@ $show = "";
                 <li><span class="listTitle">Depature Date: </span><?=  $response->arrivaldate; ?></li>
                 <li><span class="listTitle">Airlines:</span> <?=  $response->airline; ?></li>
         </ul>
-
-        <h3>Please verify the flight details are correct before completing booking confirmation.</h3>
-        <div class="flightSelected__details_btns">
+        <?= $confirmationMessage ?>
+        <h3 <?= $hide2 ?>>Please verify the flight details are correct before completing booking confirmation.</h3>
+        <div class="flightSelected__details_btns" <?= $hide2 ?>>
             <a href="./flights.php" class="bookBtn">Cancel<a>
             <form action="" method="POST">
-                    <input type="hidden" name="id" value=" <?= $response->id; ?>"/>
+                    <input type="hidden" name="flightId" value=" <?= $response->id; ?>"/>
                     <button type="submit" class="bookBtn" name="confirmFlight">Book Flight</button>
             </form>
         </div>

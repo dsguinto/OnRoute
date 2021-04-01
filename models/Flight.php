@@ -75,5 +75,23 @@ class Flight{
         return $result;
     }
 
+    public function addFlightBooking($flightId){
+
+        $query = "INSERT INTO flightbookings (flight_id) VALUES (:flightId)";
+
+        $request = $this->db->prepare($query);
+
+        //sanitize
+        $request->bindParam(':flightId', $flightId);
+        
+        //execute
+        $request->execute();
+
+        //fetch result
+        $result = $request->fetchAll(\PDO::FETCH_OBJ);
+
+        //return object
+        return $result;
+    }
 }
 ?>

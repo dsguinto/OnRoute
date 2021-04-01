@@ -207,7 +207,6 @@ td {
 
 .otherOptions__opt img {
   height: 250px;
-  border: 1px solid lightgray;
 }
 
 .otherOptions__opt::after {
@@ -234,6 +233,11 @@ td {
 }
 .otherOptions__opt:nth-child(3)::after {
   content: "Meal Selection";
+}
+
+.otherOptions__opt:nth-child(4) {
+  border-top: 1px solid lightgray;
+  border-right: 1px solid lightgray;
 }
 .otherOptions__opt:nth-child(4)::after {
   content: "Seat Selection";
