@@ -71,6 +71,12 @@ svg {
   transition: all ease-in-out 600ms;
 }
 
+@supports (-moz-appearance: none) {
+  .mainQuote h2::after {
+    top: -8.5px;
+  }
+}
+
 .mainQuote h2:hover::after {
   background-color: white;
   width: 0%;
