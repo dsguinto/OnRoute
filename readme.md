@@ -26,8 +26,7 @@
 - All inputs made to vehicle search form are validated against empty fields. - Working on Sanitizing input fields against malicious code injections.
 - User is able to search the database for vehicles based off of pick-up locations, pick-up dates, and return dates.
 
-
-#### Daniel Guinto: flights.php and models/Flights.php
+#### Daniel Guinto: index.php, flights.php, flightBooking.php and models/Flights.php
 
 - Main search feature that allows users to search the flights table based off of airports, dates, airlines, etc.
 - Validation checks if user left field empty, or if search input does not have any results

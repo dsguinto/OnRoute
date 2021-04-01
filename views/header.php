@@ -15,6 +15,7 @@ $headerMenu = [
     <head>
         <meta charset="utf-8" />
         <title>onRoute - Travel Better</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link type="text/css" rel="stylesheet"  href="styles/global.css" />
         <?php
             if (isset($css) && is_array($css))

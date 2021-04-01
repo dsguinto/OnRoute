@@ -45,7 +45,7 @@ $confirmationMessage = "";
     $addBooking = $flightController->addFlightBooking($finalFlightId);
     $response = $flightController->getFlightById($finalFlightId);
     $hide2 = "style='display:none;'";
-    $confirmationMessage = "<h2>Your flight has successfully been booked! Thank you for choosing OnRoute!</h2>";
+    $confirmationMessage = "<h3>Your flight has successfully been booked! Thank you for choosing OnRoute!</h3>";
 
     }
 ?>

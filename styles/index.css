@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+
 /* ---------- Content Styling ----------- */
 main {
-  padding: 3em 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -8,8 +10,78 @@ main {
   /* background-color: #fff8f0; */
 }
 
+.mainQuote {
+  display: flex;
+  margin: -2px 0;
+  background-color: #d9a21b;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2em;
+  opacity: 0;
+  animation-name: textReveal;
+  animation-duration: 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: forwards;
+}
+
+.mainQuote h2 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  width: 80%;
+  margin: 0 -2px;
+}
+.mainQuote h2,
+.mainQuote i {
+  opacity: 0;
+  animation-name: textReveal;
+  animation-duration: 2s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+}
+
+svg {
+  opacity: 0;
+  animation-name: textReveal;
+  animation-duration: 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes textReveal {
+  0% {
+    margin: 0;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.mainQuote h2::after {
+  content: "";
+  background-color: white;
+  display: block;
+  position: relative;
+  left: -1px;
+  top: -3.5px;
+  width: 101%;
+  height: 6px;
+  transition: all ease-in-out 600ms;
+}
+
+.mainQuote h2:hover::after {
+  background-color: white;
+  width: 0%;
+}
+
+.mainQuote i {
+  font-size: 50px;
+}
+
 /* Main Form Styling 8*/
-form {
+/* form {
   width: 75%;
   margin: 3em auto;
   text-align: center;
@@ -101,18 +173,17 @@ input {
   display: inline-block;
   margin-bottom: 1em;
   font-family: "Poppins", sans-serif;
-}
+} */
 
 /* Banner Section Styling */
 .banner {
-  margin: 5em 0;
+  margin: 2em 0;
   background-image: url("../images/index/simon-migaj-Banner-unsplash.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: left;
-  background-size: 100%;
-  height: 400px;
-  margin: 5em 0;
+  background-position: center;
+  background-size: 150%;
+  height: 35vw;
   color: white;
   display: flex;
   justify-content: center;
@@ -145,7 +216,7 @@ input {
 }
 
 .deals__popular_opt {
-  margin: 2em auto;
+  margin: 2em 3em;
   position: relative;
   transition: 300ms;
 }
@@ -199,4 +270,27 @@ input {
 
 .deals__popular_opt a:hover {
   color: dimgray;
+}
+
+@media all and (max-width: 1000px) {
+  .mainQuote {
+    margin: -3px 0;
+  }
+  .mainQuote h2 {
+    margin: 0 1em;
+  }
+
+  .mainQuote h2::after {
+    display: none;
+  }
+
+  .mainQuote h2:hover::after {
+    display: none;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .mainQuote i {
+    display: none;
+  }
 }

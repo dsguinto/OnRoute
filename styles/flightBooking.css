@@ -1,12 +1,16 @@
 /* Selected Flight section/table styling */
 .flightSelected {
   width: 70%;
-  padding: 1em;
+  padding: 2em 1em 3em 1em;
   margin: 3em auto;
   /* background-color: #b0c1f4; */
   border-radius: 20px;
   background-color: #e5f0ff;
   box-shadow: 0px 0px 10px 2px lightgray;
+}
+
+.flightSelected__details ul {
+  padding: 0 3em;
 }
 
 .flightSelected li {
