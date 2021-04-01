@@ -4,7 +4,7 @@
 
 ### Our Database Design
 
-![Database Design](https://github.com/2021-Winter-HTTP-5202-A/OnRoute/blob/main/images/database_design/database_design.png)
+![Database Design]()<!--https://github.com/2021-Winter-HTTP-5202-A/OnRoute/blob/main/images/database_design/database_design.png-->
 
 ### Feature 1 submission
 
@@ -21,9 +21,11 @@
 
 #### Alexis Arevalo: vehicles.php and vehicleSelection.php
 
-- Displaying all the available vehicles in the database, and the user can select a vehicle by selecting it.
-- When the user selects a vehicle, they are redirected to the info page of the selected vehicle that is retrieved by an 'id'.
-- Validating inputs made to vehicle search form. - working on retrieveing the information to display.
+- Displaying all the available vehicles in the database, and the user can select a vehicle by clciking on it.
+- When the user selects a vehicle, they are redirected to (vehicleSlection.php) a vehicle information page which is retrieved by the stored vehicle 'id'.
+- All inputs made to vehicle search form are validated against empty fields. - Working on Sanitizing input fields against malicious code injections.
+- User is able to search the database for vehicles based off of pick-up locations, pick-up dates, and return dates.
+
 
 #### Daniel Guinto: flights.php and models/Flights.php
 
