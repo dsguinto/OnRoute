@@ -9,15 +9,18 @@ require_once 'models/Vehicle.php';
 
 $css = array('styles/vehicles.css');
 require_once 'views/header.php';
-
-/////////////////////////////////////
  
 // var_dump($_POST);
 session_start();
 
+//variables 
+$displayVehicles;
+$appear = 'style="display: block;';
+$disappear = 'style="display: none;"';
+
 //Checking on form submission
 if(isset($_POST['vehicleSubmit'])){
-    //collect all form input elements
+    //collect all form input elements and validate
     $pickupLoc = $_POST['puLocation'];
     $pickupDate = $_POST['puDate'];
     $returnDate = $_POST['rDate'];
@@ -30,19 +33,27 @@ if(isset($_POST['vehicleSubmit'])){
     }
     else if(empty($returnDate)){
         $ErrorMsg = 'Return date must be filled';
-    } else {
-        header('Location: vehicles.php');//place '#form' to lead the user back to the form
+    } 
+    else {
+        //getting the information from the database
+        $dbcon = Database::getDb();
+        $vr = new Vehicle();
+        $vrentals = $vr->SpecificRentals($pickupLoc, $pickupDate, $returnDate, $dbcon);
+        //var_dump($vrentals);
+        //Sending information outside of parameters
+        $displayVehicles = $vrentals;
+        //invert the display when user searches for vehicles
+        $appear = 'style="display: none';
+        $disappear = 'style="display: block;"';
     }
 }
-
-///////////////////////////////////////
-
-//database
+//getting the information from the database
 $dbcon = Database::getDb();
 $vh = new Vehicle();
-$vehicles = $vh->getAllVehicles(Database::getDb());
+$vehicles = $vh->getAllVehicles($dbcon);
 //var_dump($vehicles);
 
+//sending vehicle data to vehicleSelection.php
 $_SESSION['vehicleData'] = $vehicles;
 
 ?>
@@ -67,13 +78,12 @@ $_SESSION['vehicleData'] = $vehicles;
         <div class="form__input">
             <input class="form__submit_btn" name="vehicleSubmit" type=submit value="Search"/>
         </div>
-        <span style="color:red;"><?= isset($ErrorMsg)? $ErrorMsg: '';?></span>
+        <span id="error-msg"><?= isset($ErrorMsg)? $ErrorMsg: '';?></span>
     </form>
     <!-- Vehicle Rental Products-->
     <div class="products">
         <h2>Choose Your Vehicle</h2>
-        <div class="products__popular">
-            <?php if(!isset($_POST['vehicleSubmit'])){ echo '<h3>Top Car Deals</h3>'; 
+            <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Top Car Deals</h3>'; 
                 foreach($vehicles as $vehicle){ if($vehicle->vehicleprice <= '65.00'){ ?>
                 <div class="products__popular_opt">
                     <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><!-- extra inforamtion (=?= $vehicle->vehiclemodel?>)-->
@@ -81,23 +91,25 @@ $_SESSION['vehicleData'] = $vehicles;
                         <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
-            <?php }/*xif submit statement*/}/*xforeach*/}/*xif statement*/ ?>
-            <?php if(!isset($_POST['vehicleSubmit'])){ echo '<h3>Vehicles Listed</h3>'; foreach($vehicles as $vehicle){ ?>
+            <?php }/*xif price deal statement*/}/*xforeach*/echo '</div></div>'?>
+            <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Vehicles Listed</h3>'; 
+                foreach($vehicles as $vehicle){ ?>
                 <div class="products__sytem_opt">
                     <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><!-- extra inforamtion (=?= $vehicle->vehiclemodel?>)-->
                         <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
                         <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
-            <?php }/*xforeach*/}/*xif statement*/ ?>
-            <?php if(isset($_POST['vehicleSubmit'])){ echo '<h3>Selected Cars</h3>'; foreach($vehicles as $vehicle){ ?>
+            <?php }/*xforeach*/echo '</div></div>'?>
+            <?php echo '<div '.$disappear.'"><div class="products__popular"><h3>Vehicles Searched</h3>'; 
+                foreach($displayVehicles as $vehicle){ ?>
                 <div class="products__sytem_opt">
                     <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><!-- extra inforamtion (=?= $vehicle->vehiclemodel?>)-->
                         <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
                         <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
-            <?php }/*xforeach*/}/*xif statement*/ ?>
+            <?php }/*xforeach*/echo '</div></div>'?>
         </div>
     </div>
 </main>

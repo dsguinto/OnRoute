@@ -10,22 +10,21 @@ require_once 'models/Vehicle.php';
 $css = array('styles/vehicles.css');
 require_once 'views/header.php';
 
-///////////////////////////////////
-
 session_start();
 
+//vehicle data sent from vehicles.php
 if(isset($_SESSION['vehicleData'])){
-
+    //vehicle data picked by id
     $id = $_GET['id'];
-
+    //getting the information from the database
     $dbcon = Database::getDb();
     $vh = new Vehicle();
     $vehicles = $vh->getVehiclesById($id, $dbcon);
 
     foreach($vehicles as $vehicleInfo){
-
+        //putting the rental compnay id into a variable
         $rcid = $vehicleInfo->rentalcompany_id;
-
+        //getting the information from the database
         $dbcon = Database::getDb();
         $rc = new Vehicle();
         $rcompanies = $rc->getRentalCompanies($rcid, $dbcon);
