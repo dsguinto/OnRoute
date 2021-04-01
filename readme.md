@@ -21,7 +21,7 @@
 
 #### Alexis Arevalo: vehicles.php and vehicleSelection.php
 
-- Displaying all the available vehicles in the database, and the user can select a vehicle by clciking on it.
+- Displaying all the available vehicles in the database, and the user can select a vehicle by clicking on it.
 - When the user selects a vehicle, they are redirected to (vehicleSlection.php) a vehicle information page which is retrieved by the stored vehicle 'id'.
 - All inputs made to vehicle search form are validated against empty fields. - Working on Sanitizing input fields against malicious code injections.
 - User is able to search the database for vehicles based off of pick-up locations, pick-up dates, and return dates.
