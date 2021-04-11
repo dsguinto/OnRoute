@@ -11,7 +11,6 @@ $css = array('styles/vehicles.css');
 require_once 'views/header.php';
  
 // var_dump($_POST);
-session_start();
 
 //variables 
 $displayVehicles;

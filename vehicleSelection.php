@@ -10,8 +10,6 @@ require_once 'models/Vehicle.php';
 $css = array('styles/vehicles.css');
 require_once 'views/header.php';
 
-session_start();
-
 //vehicle data sent from vehicles.php
 if(isset($_SESSION['vehicleData'])){
     //vehicle data picked by id

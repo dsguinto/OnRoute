@@ -1,5 +1,7 @@
 <!--Header-->
 <?php
+session_start();
+
 $headerMenu = [
     'Home' => 'index.php',
     'Flights' => 'flights.php',

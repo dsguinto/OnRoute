@@ -2,8 +2,7 @@
     require_once 'library/functions.php';
     $css = array("styles/flightTracking.css");
     require_once 'views/header.php';
-    //start session and access session var 
-    session_start(); //Why do I have to restart the session here? - Ask Nithya
+    //access session var 
     $flightInfo = $_SESSION['flightInfo'];
     $airlineLogoLink = $_SESSION['airlineLogoLink'];
 ?>

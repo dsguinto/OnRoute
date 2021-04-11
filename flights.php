@@ -43,8 +43,7 @@
             } 
             else{
                 $hide = "style='display:block;'";
-                //start session andstore the $result as a session var
-                session_start(); 
+                //store the $result as a session var
                 $_SESSION['flightInfo'] = $result;
                 //redirect user to the flightInfo pages
                 // header( "Location: {$_SERVER['REQUEST_URI']}", true, 303 ); 

@@ -45,8 +45,7 @@
                         $airlineLogoLink = 'images/logos/americanAirlines.jpg';
                         break;
                 } 
-                //start session andstore the $response as a session var
-                session_start(); 
+                //store the $response as a session var
                 $_SESSION['flightInfo'] = $response;
                 $_SESSION['airlineLogoLink'] = $airlineLogoLink;
                 //redirect user to the flightInfo pages
