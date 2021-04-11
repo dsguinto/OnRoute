@@ -106,15 +106,16 @@
     </table>
     <div class="otherOptions">
         <h2>See What We Have to Offer</h2>
-            <div class="otherOptions__opt">
-                <a href="flightNumberSearch.php"><img src="images/flights/difa-naufal-airplane-unsplash.jpg" alt="Image of Plane flying"/></a>
-            </div>
-            <div class="otherOptions__opt">
-                <a href="mealSelection.php"><img src="images/flights/meal5.jpeg" alt="Image of on-flight meal from Air France" /></a>
-            </div>
-            <div class="otherOptions__opt">
-                <a href="seatSelection.php"><img src="images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window"/></a>
-            </div>
+        <?= isset($_SESSION['userID']) ? '<a href="flightOptions.php">Your Flight</a>' : '<a href="login.php">Login</a>'; ?>
+        <!-- <div class="otherOptions__opt">
+            <a href="flightNumberSearch.php"><img src="images/flights/difa-naufal-airplane-unsplash.jpg" alt="Image of Plane flying"/></a>
+        </div>
+        <div class="otherOptions__opt">
+            <a href="mealSelection.php"><img src="images/flights/meal5.jpeg" alt="Image of on-flight meal from Air France" /></a>
+        </div>
+        <div class="otherOptions__opt">
+            <a href="seatSelection.php"><img src="images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window"/></a>
+        </div> -->
     </div>
 </main>
 

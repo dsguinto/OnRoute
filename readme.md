@@ -33,3 +33,11 @@
 - Successful results will display a table with all the values matching the search result
 - Flights that have passed will display a "Book Unavailable" notice
 - Flights that are in the future will display a "Book" button. If the user clicks the button, the data from the flight they selected will be saved and they will be carried over to the flightBooking.php page. Their selected flight will appear on this page, and they will be prompted review their flight details before confirming. Once they click the button, a flightBooking row will be added to the flightBooking table in the dB. Meals and seat selections will be able to be added later.
+
+#### Mohamed Sakr: login.php, flightOptions.php and models/User.php
+
+-Login for the users mostly finished
+-User model will handle all the user related data
+-Working on integrating the login with the flight details in the flightOptions.php page alongside Will
+-Next steps: Integrate the user feature with all the other features and make a registration feature
+-Implement phpmailer into the services page and to a forgot password page
