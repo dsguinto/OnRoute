@@ -14,27 +14,35 @@
 <main>
     <!-- Flight track form appears on page load -->
     <div class = "mealSelection">
-        <form class = "mealSelection_form" action="" method="POST" name="mealSelection_form">
-            <div class = "mealSelection_flex">
-            <h2>Your Flight Includes an In-Flight Meal</h2>
-        <p>Please make a selection from the options below.</p>
-                <div class = "mealSelection_flex_div">
-                    <img alt="meal 1 image" src="images/flights/meal2.jpg"/>
-                    <input type="radio" id="meal1" name="meal"/>
+        <form action="" method="POST" name="mealSelection_form">
+            <div class = "selections">
+                <h2>Please Make a Meal Choice From the Options Below</h2>
+                <div class = "selection_row">
+                    <p class = mealDescription><strong>Meal 1</strong></br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel risus commodo viverra maecenas accumsan lacus vel. Eget mi proin sed libero enim sed.</p>
+                    <div class = "mealImage" style = "background-image: url('images/flights/meal1.jpg')">
+                        <input type="radio" id="meal1" name="meal"/>
+                    </div>
                 </div>
-                <div class = "mealSelection_flex_div"> 
-                    <img alt="meal 2 image" src="images/flights/meal4.jpg"/>
-                    <input type="radio" id="meal2" name="meal"/>
+                <div class = "selection_row">
+                    <p class = mealDescription><strong>Meal 2</strong></br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel risus commodo viverra maecenas accumsan lacus vel. Eget mi proin sed libero enim sed.</p>
+                    <div class = "mealImage" style = "background-image: url('images/flights/meal2.jpg')">
+                        <input type="radio" id="meal2" name="meal"/>
+                    </div>
                 </div>
-                <div class = "mealSelection_flex_div">
-                    <img alt="meal 3 image" src="images/flights/meal1.jpg"/>
-                    <input type="radio" id="meal3" name="meal"/>
+                <div class = "selection_row">
+                    <p class = mealDescription><strong>Meal 3</strong></br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel risus commodo viverra maecenas accumsan lacus vel. Eget mi proin sed libero enim sed.</p>
+                    <div class = "mealImage" style = "background-image: url('images/flights/meal3.jpg')">
+                        <input type="radio" id="meal3" name="meal"/>
+                    </div>
                 </div>
-                <div class = "mealSelection_flex_div">
-                    <img alt="meal 4 image" src="images/flights/meal3.jpg"/>
-                    <input type="radio" id="meal4" name="meal"/>
+                <div class = "selection_row">
+                    <p class = mealDescription><strong>Meal 4</strong></br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel risus commodo viverra maecenas accumsan lacus vel. Eget mi proin sed libero enim sed.</p>
+                    <div class = "mealImage" style = "background-image: url('images/flights/meal4.jpg')">
+                        <input type="radio" id="meal4" name="meal"/>
+                    </div>
                 </div>
-                <div class = "mealSelection_flex_div">
+               
+                <div class = "selection_row">
                     <button class = "mealSelection_btn" type="submit" name="mealSubmit">Select</button>
                 </div>
             </div>
