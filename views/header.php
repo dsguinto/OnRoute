@@ -9,6 +9,13 @@ $headerMenu = [
     'Vehicle Rental' => 'vehicles.php',
     'Customer Service' => 'services.php'
 ];
+
+//Sample for later
+// if (isset($_SESSION['userID'])) {
+//     $headerMenu['Logout'] = 'logout.php';
+// } else {
+//     $headerMenu['Login'] = 'login.php';
+// }
 ?>
 
 <!DOCTYPE html>
