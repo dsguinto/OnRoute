@@ -1,15 +1,12 @@
 window.onload = function(){
 
-    var mealSelection_form = document.forms.mealSelection_form;
+    var radioButtons = document.getElementsByClassName("radioButton");
+    var selectionRows = document.getElementsByClassName("selection_row");
     var mealSelection = document.getElementsByClassName("mealSelection")[0];
     var mealConfirmation = document.getElementsByClassName("mealConfirmation")[0];
-    var mealSelection_Flex = document.getElementsByClassName("mealSelection_Flex")[0];
-    var mealSelection_flex_div = document.getElementsByClassName("mealSelection_flex_div");
+    var formHandle = document.forms.mealSelection_form;
 
-    //functions
-    mealSelection_form.onsubmit = function(){
-        mealSelection.style.display = "none";
-        mealConfirmation.style.display = "block";
-        return false;
-    }
+
+    //On radio button click change styling 
+
 }

@@ -93,5 +93,23 @@ class Flight{
         //return object
         return $result;
     }
+
+    public function getFlightBookingsById($flightBookingId){
+        $query = "SELECT * FROM flightbookings INNER JOIN flightmeals ON flightbookings.meal_id = flightmeals.id WHERE flightbookings.id = :flightBookingId";
+
+        $request = $this->db->prepare($query);
+
+        $request->bindParam(':flightBookingId', $flightBookingId);
+
+        $request->execute();
+
+        $result = $request->fetch(\PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+    public function getMealsForFlightBooking($flightBookingId){
+        
+    }
 }
 ?>
