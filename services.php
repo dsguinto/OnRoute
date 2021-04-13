@@ -1,9 +1,17 @@
 <?php
-
 require_once 'library/functions.php';
+require_once './Models/Mailer.php';
 //Add unqiue css files here
 $css = array('styles/services.css');
 require_once 'views/header.php';
+
+if (isset($_POST['contact'])) {
+    $email = $_POST['email'];
+    $name = $_POST['name'];
+    $subject = 'Thank you for contacting customer support';
+    $body = 'Your enquiry was: '. $_POST['message'];
+    send_email($email, $name, $subject, $body);
+}
 
 ?>
 
@@ -32,7 +40,7 @@ require_once 'views/header.php';
     </div>
         <div class="form">
               <h4>Send us a message.</h4>
-              <form class="contactform" action="mailto@danielguinto@yahoo.ca" method="post" enctype="multipart/form-data">
+              <form class="contactform" action="services.php" method="post" enctype="multipart/form-data">
                   <div class="contactform__nameemail">
                       <label id="name-label" for="name-input"></label>
                       <input type="text" id="name-input" name="name" placeholder="Name">
@@ -44,7 +52,7 @@ require_once 'views/header.php';
                       <textarea id="message-input" name="message" placeholder="Message"></textarea>
                   </div>
                   <div class="contactform__submit">
-                      <button id="submit-button" type="submit">Send</button>
+                      <button id="submit-button" type="submit" name="contact">Send</button>
                   </div>
               </form>
           </div>
