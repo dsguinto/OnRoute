@@ -6,7 +6,6 @@ $footerMenu = [
     'Accommodations' => 'accommodations.php',
     'Vehicle Rental' => 'vehicles.php',
     'Customer Service' => 'services.php',
-    'Privacy' => 'privacy.php'
 ];
 ?>
 

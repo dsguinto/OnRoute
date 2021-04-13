@@ -1,0 +1,52 @@
+form {
+  width: 25%;
+  margin: 3em auto;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #d9a21b;
+  border-bottom: 2px solid grey;
+  border-left: 2px solid grey;
+  padding: 3em;
+}
+
+.tripFrom {
+  width: 100%;
+  text-align: center;
+}
+
+.tripFrom__input {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 1em;
+}
+
+label {
+  display: inline-block;
+  text-align: right;
+  margin-right: 0.75em;
+  vertical-align: top;
+  width: 25%;
+}
+
+input {
+  display: inline-block;
+  margin-bottom: 1em;
+  font-family: "Poppins", sans-serif;
+}
+
+.loginBtn {
+  border-radius: 25px;
+  padding: 0.5em 1em;
+  transition: 100ms;
+}
+
+.loginBtn:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+.tripFrom p {
+  margin-top: 0;
+  color: #d01100;
+}

@@ -41,6 +41,10 @@ main {
   animation-fill-mode: forwards;
 }
 
+.mainQuote h2:hover {
+  cursor: default;
+}
+
 svg {
   opacity: 0;
   animation-name: textReveal;
@@ -233,7 +237,7 @@ input {
 }
 
 .deals__popular_opt img {
-  height: 250px;
+  height: 175px;
 }
 
 .deals__popular_opt::after {

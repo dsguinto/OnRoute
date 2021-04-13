@@ -1,9 +1,7 @@
 <?php
-    use OnRoute\models\{Database,Flight};
+    use ONROUTE\models\{Database,Flight};
     require_once 'vendor/autoload.php';
     require_once 'library/functions.php';
-    require_once 'models/flight.php';
-    require_once 'models/database.php';
     $css = array("styles/flightBooking.css");
     require_once 'views/header.php';
 

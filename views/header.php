@@ -10,12 +10,16 @@ $headerMenu = [
     'Customer Service' => 'services.php'
 ];
 
+$loginMenu = [];
+$welcome_msg = "";
+
 //Sample for later
-// if (isset($_SESSION['userID'])) {
-//     $headerMenu['Logout'] = 'logout.php';
-// } else {
-//     $headerMenu['Login'] = 'login.php';
-// }
+if (isset($_SESSION['userID'])) {
+    $loginMenu[$_SESSION['userFirstName'] . " " .  $_SESSION['userLastName']] = "";
+    $loginMenu['Logout'] = 'logout.php';
+} else {
+    $loginMenu['Login'] = 'login.php';
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +42,7 @@ $headerMenu = [
         <header>
             <h1><a href="index.php" class="homeLink">onRoute <i class="fas fa-route"></i></a></h1>
         <nav>
-            <?php echo displayNavigation($headerMenu); ?>
+            <?php echo displayNavigation($headerMenu) . displayNavigation($loginMenu); ?>
         </nav>
+        <?php echo $welcome_msg ?>
         </header>
