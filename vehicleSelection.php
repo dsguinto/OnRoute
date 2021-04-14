@@ -48,6 +48,7 @@ if(isset($_SESSION['vehicleData'])){
             <p>Price: <span class="text-span">CA $<?= $vehicle->vehicleprice; ?>/Day</span></p>
         </div>
     </div>
+    <button><a>Confirm this vehicle</button>
     <?php } ?>
 </main>
 
