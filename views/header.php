@@ -36,7 +36,6 @@ if (isset($_SESSION['userID'])) {
                 printf('<link rel="stylesheet" type="text/css" href="%s" />', $path);
         ?>
         <script src="https://kit.fontawesome.com/2956115494.js" crossorigin="anonymous"></script>
-        <script src="library/mainForm.js"></script> 
     </head>
     <body>
         <header>

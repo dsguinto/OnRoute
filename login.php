@@ -2,6 +2,7 @@
     use OnRoute\models\{Database, User};
     require_once 'vendor/autoload.php';
     require_once 'library/functions.php';
+    require_once './Models/Mailer.php';
 
     //Add unqiue css files here
     $css = array('styles/login.css');
@@ -14,7 +15,42 @@
     $user = new User();
 
     $invalid = "";
+
+     //Checks to see if a user is logged in
+     if (isset($_SESSION['userID'])) {
+        Header('Location: index.php');
+    }
+
+    //Registration
+    if (isset($_POST['submit'])) {
+        //Gets a list of registered user emails
+        $email = $_POST['email'];
+
+        //Checks to see if posted email is unique
+        $emailExists = $user->checkIfEmailIsUnique($dbcon, $email);
+
+        if ($emailExists) {
+            //Change this to something useful
+            echo 'Email already exists';
+        } else {
+            $hashedPass = md5($_POST['pass']);
+            $fname = $_POST['fname'];
+            $lname = $_POST['lname'];
+            $pnumber = $_POST['pnumber'];
+            $subject = "Registration successful";
+            $body = "You are now registered bla bla bla yeah have fun";
+            $u = $user->addUser($dbcon, $email, $hashedPass, $fname, $lname, $pnumber);
+            send_email($email, $fname.' '.$lname, $subject, $body);
+            $newID = $user->getUserIdByEmail($dbcon, $email);
+            $_SESSION['userID'] = $newID->id;
+            $_SESSION['userEmail'] = $email;
+            $_SESSION['userFirstName'] = $fname;
+            $_SESSION['userLastName'] = $lname;
+            header('Location: index.php');
+        }
+    }
     
+    //Login
     if (isset($_POST['login'])) {
         //Add validation here
         $email = $_POST['in_email'];
@@ -34,24 +70,50 @@
         }
     }
 ?>
-
-<form action="login.php" method="post" id="login-form">
-    <h2>Login</h2>
-    <div class="tripFrom">
-        <div class="tripFrom__input">
-            <label for="in_email">Email: </label>
-            <input type="text" name="in_email" required/>
-        </div>
-        <div class="tripFrom__input">
-            <label for="in_pass">Password: </label>
-            <input type="password" name="in_pass" required/>
-        </div>
-        <?= $invalid ?>
-        <input class="loginBtn" type="submit" value="Login" name="login">
+<script type="text/javascript" src="library/userValidation.js"></script>
+<main>
+    <div>
+        <form action="login.php" method="post" id="login-form">
+            <h2>Login</h2>
+            <div class="tripFrom">
+                <div class="tripFrom__input">
+                    <label for="in_email">Email: </label>
+                    <input type="text" name="in_email" required/>
+                </div>
+                <div class="tripFrom__input">
+                    <label for="in_pass">Password: </label>
+                    <input type="password" name="in_pass" required/>
+                </div>
+                <?= $invalid ?>
+                <input class="loginBtn" type="submit" value="Login" name="login">
+            </div>
+        </form>
     </div>
-</form>
-
-
+    <div>
+        <form action="login.php" method="post" id="registerForm">
+            <h2>Register</h2>
+            <div>
+                Email: <input type="text" name="email" id="inEmail" required/>
+            </div>
+            <div>
+                Password: <input type="password" name="pass" id="inPass" required/>
+            </div>
+            <div>
+                Confirm Password: <input type="password" name="passConfirm" id="inPassConfirm" required/>
+            </div>
+            <div>
+                First Name: <input type="text" name="fname" id="inFName" required/>
+            </div>
+            <div>
+                Last Name: <input type="text" name="lname" id="inLName" required/>
+            </div>
+            <div>
+                Phone Number: <input type="text" name="pnumber" id="inPNumber" required/>
+            </div>
+            <input type="submit" name="submit" value="Register">
+        </form>
+    </div>
+</main>
 
 <?php
     require_once 'views/footer.php';

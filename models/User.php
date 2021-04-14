@@ -24,5 +24,17 @@ class User{
             return 'Registration failed';
         }
     }
+    public function checkIfEmailIsUnique($dbcon, $email){
+        $sql = "select * from users where email = ?";
+        $pdostm = $dbcon->prepare($sql);
+        $pdostm->execute([$email]);
+        return $pdostm->fetch(PDO::FETCH_OBJ);
+    }
+    public function getUserIdByEmail($dbcon, $email){
+        $sql = "select id from users where email = ?";
+        $pdostm = $dbcon->prepare($sql);
+        $pdostm->execute([$email]);
+        return $pdostm->fetch(PDO::FETCH_OBJ);
+    }
 }
 ?>
