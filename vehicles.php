@@ -58,6 +58,38 @@ $_SESSION['vehicleData'] = $vehicles;
 ?>
 
 <main>
+<?php if(isset($_SESSION['userID'])){?>
+    <!--Set for users (not logged in)-->
+    <h2>Vehicle List</h2>
+    <table>
+        <thead>
+            <tr>
+            <th>Vehicle Id</th>
+            <th>Vehicle Make</th>
+            <th>Vehicle Model</th>
+            <th>Vehicle Image</th>
+            <th>Vehicle Price</th>
+            <th>Vehicle RC</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(isset($vehicles)){ 
+                foreach($vehicles as $vehicle){ ?>
+                    <tr>
+                        <td><?= $vehicle->id ?></td>
+                        <td><?= $vehicle->vehiclemake ?></td>
+                        <td><?= $vehicle->vehiclemodel ?></td>
+                        <td><img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="100" alt="Image of a car model"></td>
+                        <td><?= $vehicle->vehicleprice ?></td>
+                        <td><?= $vehicle->rentalcompany_id ?></td>
+                        <td>UPDATE</td>
+                        <td>DELETE</td>
+                    </tr>
+            <?php }} ?>
+        </tbody>
+    </table>
+<?php }else{ ?>
+    <!--Set for users (not logged in)-->
     <h2>Rent A Vehicle</h2>
     <!-- FORM -->
     <img src="images/vehicles/13-pexels-photo-4090350.jpeg" height="600" id="vehicle__image">
@@ -111,6 +143,7 @@ $_SESSION['vehicleData'] = $vehicles;
             <?php }/*xforeach*/echo '</div></div>'?>
         </div>
     </div>
+<?php } ?>
 </main>
 
 <?php

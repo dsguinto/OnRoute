@@ -26,13 +26,14 @@
 - All inputs made to vehicle search form are validated against empty fields. - Working on Sanitizing input fields against malicious code injections.
 - User is able to search the database for vehicles based off of pick-up locations, pick-up dates, and return dates.
 
-#### Daniel Guinto: index.php, flights.php, flightBooking.php and models/Flights.php
+#### Daniel Guinto: index.php, flights.php, flightBooking.php, myaccount.php, models/Flights.php, models/Trips.php
 
 - Main search feature that allows users to search the flights table based off of airports, dates, airlines, etc.
 - Validation checks if user left field empty, or if search input does not have any results
 - Successful results will display a table with all the values matching the search result
 - Flights that have passed will display a "Book Unavailable" notice
 - Flights that are in the future will display a "Book" button. If the user clicks the button, the data from the flight they selected will be saved and they will be carried over to the flightBooking.php page. Their selected flight will appear on this page, and they will be prompted review their flight details before confirming. Once they click the button, a flightBooking row will be added to the flightBooking table in the dB. Meals and seat selections will be able to be added later.
+- When user is logged in, they can view their account information as well as any trip details associated with their account on their MyAccount page
 
 #### Mohamed Sakr: login.php, flightOptions.php and models/User.php
 
