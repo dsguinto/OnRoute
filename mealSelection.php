@@ -14,9 +14,9 @@
     
 
     //IF USER IS NOT LOGGED IN SEND THEM BACK TO FLIGHTS PAGE 
- /*    if(!isset($_SESSION['userID']) || !isset($_GET['flightBookingId'])){
+    if(/* !isset($_SESSION['userID']) || */ !isset($_POST['postFlightBookingID'])){
         header('location:flights.php');
-    } */
+    }
 
     $hide1 = "style = 'display:none'";
     $hide2 = "";
@@ -48,7 +48,7 @@
     }
 
     //Otherwise get the database entry for the flightBookingId provided
-    $flightBookingId = $_GET['flightBookingId'];
+    $flightBookingId = $_POST['postFlightBookingID'];
     $db = Database::getDB();
     $flightController = new Flight($db);
     $flightBooking = $flightController->getFlightBookingsById($flightBookingId);

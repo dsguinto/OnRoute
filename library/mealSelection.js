@@ -8,7 +8,7 @@ window.onload = function(){
 
     //On radio button click change styling 
 
-    /* var Row = [];
+    var Row = [];
      for(var i = 0; i<radioButtons.length; i++){
         Row.push(selectionRows[i]);
         console.log(Row);
@@ -19,6 +19,6 @@ window.onload = function(){
         function myFunction(Row){
             console.log(Row);
             Row.classList.add("selected")
-     } 
-    }  */
+    } 
+    } 
 }

@@ -6,6 +6,7 @@
     require_once 'models/flight.php';
     require_once 'models/database.php';
     $css = array("styles/flightTracking.css");
+    require_once 'views/header.php';
 
     //WHEN FORM IS SUBMITTED
     if(isset($_POST['flightSubmit'])){
@@ -27,7 +28,7 @@
     
             //send flightId to controller 
             $response = $flightController->getFlightById($flightId);
-    
+            var_dump($response);
             
 
             if($response == false){
@@ -54,7 +55,7 @@
         }
     }
 
-    require_once 'views/header.php';
+
 ?>
 <!-- <script src='library/flightTracking.js'></script>
  --><main>
