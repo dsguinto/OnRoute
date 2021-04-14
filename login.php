@@ -27,6 +27,7 @@
             $_SESSION['userEmail'] = $u->email;
             $_SESSION['userFirstName'] = $u->firstname;
             $_SESSION['userLastName'] = $u->lastname;
+            $_SESSION['userPhone'] = $u->phonenumber;
             header('Location: Flights.php');
         } else {
             //Change this to something useful

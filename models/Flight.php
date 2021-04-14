@@ -26,7 +26,7 @@ class Flight{
         $request->execute();
 
         //fetch result
-        $result = $request->fetch(\PDO::FETCH_OBJ);
+        $result = $request->fetchAll(\PDO::FETCH_OBJ);
 
         //return object
         return $result;
@@ -95,7 +95,7 @@ class Flight{
     }
 
     public function getFlightBookingsById($flightBookingId){
-        $query = "SELECT * FROM flightbookings INNER JOIN flightmeals ON flightbookings.meal_id = flightmeals.id WHERE flightbookings.id = :flightBookingId";
+        $query = "SELECT * FROM flightbookings WHERE flightbookings.id = :flightBookingId";
 
         $request = $this->db->prepare($query);
 
