@@ -14,5 +14,15 @@ class User{
             return null;
         }
     }
+    public function addUser($dbcon, $email, $pass, $fname, $lname, $pnumber){
+        $sql = "insert into users (password, firstname, lastname, email, phonenumber) values (?,?,?,?,?)";
+
+        $count = $pdostm = $dbcon->prepare($sql)->execute([$pass, $fname, $lname, $email, $pnumber]);
+        if ($count) {
+            return 'Registration successful';
+        } else {
+            return 'Registration failed';
+        }
+    }
 }
 ?>
