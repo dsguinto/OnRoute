@@ -22,7 +22,7 @@ class Trips{
         $request->execute();
 
         //fetch result
-        $result = $request->fetch(\PDO::FETCH_OBJ);
+        $result = $request->fetchAll(\PDO::FETCH_OBJ);
 
         //return object
         return $result;

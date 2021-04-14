@@ -1,5 +1,5 @@
 <?php
-    use ONROUTE\models\{Database,Flight};
+    use ONROUTE\models\{Database,Flight, Trips};
     require_once 'vendor/autoload.php';
     require_once 'library/functions.php';
 
@@ -14,6 +14,9 @@
 
     $date = date_format($dateNow, 'Y-m-d,  H:i:s');
 
+    //instantiate database connection
+    $db = Database::getDb();
+
     //WHEN FORM IS SUBMITTED
     if(isset($_POST['searchFlightDB'])){
         /* header('location: flightInfo.php'); */
@@ -25,9 +28,6 @@
         else{
             //get the search input submitted and store as variable
             $searchInput = $_POST['searchInput'];
-
-            //instantiate database connection
-            $db = Database::getDb();
     
             //When flight search query is submitted, instantiate db connection, utilize searchInput
             $flightController = new Flight($db);
@@ -103,7 +103,30 @@
     </table>
     <div class="otherOptions">
         <h2>See What We Have to Offer</h2>
-        <?= isset($_SESSION['userID']) ? '<a href="flightOptions.php">Your Flight</a>' : '<a href="login.php">Login</a>'; ?>
+        <?= isset($_SESSION['userID']) ? '' : '<a href="login.php">Login</a>'; ?>
+        <?php
+        if (isset($_SESSION['userID'])) {
+            $trip = new Trips($db);
+            $t = $trip->getFlightBookings($_SESSION['userID']);
+            echo '<table><thead><tr><td>Departure</td><td>Arrival</td><td>Departure Date</td><td>Arrival Date</td><td></td></tr></thead><tbody>';
+            $flight = new Flight($db);
+            foreach ($t as $value) {
+                $f = $flight->getFlightBookingsById($value->flightbooking_id);
+                $fInfo = $flight->getFlightById($f->flight_id);
+                echo '<tr>';
+                echo '<td>'.$fInfo->departureairport.'</td>';
+                echo '<td>'.$fInfo->arrivalairport.'</td>';
+                echo '<td>'.$fInfo->departuredate.'</td>';
+                echo '<td>'.$fInfo->arrivaldate.'</td>';
+                echo '<td><form action="./flightOptions.php" method="post">';
+                echo '<input type="hidden" name="flightBookingID" value="'.$value->flightbooking_id.'" />';
+                echo '<input type="submit" name="postFlightBookingID" value="View flight"/>';
+                echo '</form></td>';
+                echo '</tr>';
+            }
+            echo '</tbody></table>';
+        }
+        ?>
         <!-- <div class="otherOptions__opt">
             <a href="flightNumberSearch.php"><img src="images/flights/difa-naufal-airplane-unsplash.jpg" alt="Image of Plane flying"/></a>
         </div>

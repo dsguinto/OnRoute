@@ -10,7 +10,7 @@ class User{
 
         if ($count) {
             return $pdostm->fetch(PDO::FETCH_OBJ);
-        }else {
+        } else {
             return null;
         }
     }
