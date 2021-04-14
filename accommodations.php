@@ -22,10 +22,7 @@
     $hotel = $h->getHotelById($dbcon);
     //var_dump($hotel);
 
-    //test is function is working: work in progress
-    $city = 'Lagos';
-    $c = $h->getHotelsByCity($city, $dbcon);
-    var_dump($c);
+    
    
     
     /*
@@ -45,9 +42,6 @@
         echo $hotels->hotelname;
     }
 */
-
-
-
 ?>
 
 <!--copied from content.php and modified-->
@@ -80,13 +74,25 @@
         </div>
     </form>
     <?php
-    /*
+    //test is function is working: work in progress
+    
+    $city = "";
+    $c = $h->getHotelsByCity($city, $dbcon);
+    //var_dump($c);
+    
+
     if(isset($_POST['tripFrom__input_btn'])){
         $city = $_POST['city'];
-        echo $city;
-        
-        $dbcon = Database::getDB();
-        $h = new Hotel();
+        //var_dump($city);
+        $c = $h->getHotelsByCity($city, $dbcon);
+        //var_dump($c);
+        /*
+        foreach ($c as $hotel){
+            echo $hotel['hotelname'];
+        }*/
+    }
+        //$dbcon = Database::getDB();
+        //$h = new Hotel();
         //$hotels = $h->getHotelsByCity($city, $dbcon);
         /*echo $hotels;
         echo $hotels->hotelname;*/
@@ -94,63 +100,61 @@
         //var_dump($dbcon);
     ?>
     <div class="searchResult">
-        <h2><? /*show city*/ ?></h2>
-        <h3><? /*show hotel name*/ ?></h3>
+        <h2><?= $city ?></h2>
+    <?php
+    foreach ($c as $hotel){
+            //echo $hotel['hotelname'];
+            $hotelname = $hotel['hotelname'];//in arrays we retrieve properties with [] not =>
+    ?>    
+        <h3><?= $hotelname ?></h3>
         <div class="searchResult__container">
             <div class="searchResult__image">
                 <?/*show image*/ ?>
+                <img src="./images/accommodations/a<?=$hotel['id'] ?>.jpg" />
             </div>
             <div class="searchResult__desc">
                 <? /* */ ?>
             </div>
         </div>
-        <!--
-        <table class="searchResult__table">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-            </tr>
-            </thead>
-        </table>
-        -->
     </div>
+    <?php } ?>
     <div class="deals">
         <h2>Popular Choices</h2>
         <div class="deals__popular">
             <div class="deals__popular_opt">
                 <p>
-                <a href="images/accommodations/a0001.jpg"><img src="images/accommodations/a0001.jpg" alt="" width="" /></a>
+                <a href="images/accommodations/a1.jpg"><img src="images/accommodations/a1.jpg" alt="" width="" /></a>
                 </p>
             </div>
             <div class="deals__popular_opt">
                 <p>
-                <a href="images/accommodations/a0002.jpg"><img src="images/accommodations/a0002.jpg" alt="" width="" /></a>
+                <a href="images/accommodations/a2.jpg"><img src="images/accommodations/a2.jpg" alt="" width="" /></a>
                 </p>
             </div>
             <div class="deals__popular_opt">
                 <p>
-                <a href="images/accommodations/a0005.jpg"><img src="images/accommodations/a0005.jpg" alt="" width="" /></a>
+                <a href="images/accommodations/a5.jpg"><img src="images/accommodations/a5.jpg" alt="" width="" /></a>
                 </p>
             </div>
             <div class="deals__popular_opt">
                 <p>
-                <a href="images/accommodations/a0006.jpg"><img src="images/accommodations/a0006.jpg" alt="" width="" /></a>
+                <a href="images/accommodations/a6.jpg"><img src="images/accommodations/a6.jpg" alt="" width="" /></a>
                 </p>
             </div>
         </div>
         <h2>Lowest Prices</h2>
         <div class="deals__budget">
             <div class="deals__budget_opt">
-                <p><a href="images/accommodations/a0003.jpg"><img src="images/accommodations/a0003.jpg" alt="" width="" /></a></p>
+                <p><a href="images/accommodations/a3.jpg"><img src="images/accommodations/a3.jpg" alt="" width="" /></a></p>
             </div>
             <div class="deals__budget_opt">
-                <p><a href="images/accommodations/a0004.jpg"><img src="images/accommodations/a0004.jpg" alt="" width="" /></a></p>
+                <p><a href="images/accommodations/a4.jpg"><img src="images/accommodations/a4.jpg" alt="" width="" /></a></p>
             </div>
             <div class="deals__budget_opt">
-                <p><a href="images/accommodations/a0006.jpg"><img src="images/accommodations/a0008.jpg" alt="" width="" /></a></p>
+                <p><a href="images/accommodations/a8.jpg"><img src="images/accommodations/a8.jpg" alt="" width="" /></a></p>
             </div>
             <div class="deals__budget_opt">
-                <p><a href="images/accommodations/a0006.jpg"><img src="images/accommodations/a0013.jpg" alt="" width="" /></a></p>
+                <p><a href="images/accommodations/a13.jpg"><img src="images/accommodations/a13.jpg" alt="" width="" /></a></p>
             </div>
         </div>
         </div>
