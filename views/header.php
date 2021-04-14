@@ -15,7 +15,7 @@ $welcome_msg = "";
 
 //Sample for later
 if (isset($_SESSION['userID'])) {
-    $loginMenu[$_SESSION['userFirstName'] . " " .  $_SESSION['userLastName']] = "";
+    $loginMenu[$_SESSION['userFirstName'] . " " .  $_SESSION['userLastName']] = "myaccount.php";
     $loginMenu['Logout'] = 'logout.php';
 } else {
     $loginMenu['Login'] = 'login.php';
