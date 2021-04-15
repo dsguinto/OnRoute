@@ -34,6 +34,7 @@
 
 ?>
 
+
 <main>
     <div class="page">
         <h2>Welcome <?= $_SESSION['userFirstName'] . " " . $_SESSION['userLastName'] . "!"?></h2>

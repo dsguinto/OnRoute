@@ -73,15 +73,15 @@
 ?>
 <script type="text/javascript" src="library/userValidation.js"></script>
 <main>
-    <div>
-        <form action="login.php" method="post" id="login-form">
+    <div class="formContainer">
+        <form action="login.php" method="post" id="loginForm">
             <h2>Login</h2>
-            <div class="tripFrom">
-                <div class="tripFrom__input">
+            <div class="formContainer__form">
+                <div class="formContainer__form_input">
                     <label for="in_email">Email: </label>
                     <input type="text" name="in_email" required/>
                 </div>
-                <div class="tripFrom__input">
+                <div class="formContainer__form_input">
                     <label for="in_pass">Password: </label>
                     <input type="password" name="in_pass" required/>
                 </div>
@@ -90,28 +90,35 @@
             </div>
         </form>
     </div>
-    <div>
+    <div class="formContainer">
         <form action="login.php" method="post" id="registerForm">
-            <h2>Register</h2>
-            <div>
-                Email: <input type="text" name="email" id="inEmail" required/>
+            <h2>Don't Have An Account?<br>Register Here</h2>
+            <div class="formContainer__form">
+                <div class="formContainer__form_input">
+                    <label for="email">Email:</label> 
+                    <input type="text" name="email" id="inEmail" required/>
+                </div>
+                <div class="formContainer__form_input">
+                    <label for="pass">Password:</label>
+                    <input type="password" name="pass" id="inPass" required/>
+                </div>
+                <div class="formContainer__form_input">
+                <label for="passConfirm">Confirm Password:</label><input type="password" name="passConfirm" id="inPassConfirm" required/>
+                </div>
+                <div class="formContainer__form_input">
+                    <label for="fname">First Name:</label>  
+                    <input type="text" name="fname" id="inFName" required/>
+                </div>
+                <div class="formContainer__form_input">
+                    <label for="lname">Last Name:</label> 
+                    <input type="text" name="lname" id="inLName" required/>
+                </div>
+                <div class="formContainer__form_input">
+                    <label for="pnumber">Phone Number: </label> 
+                    <input type="text" name="pnumber" id="inPNumber" required/>
+                </div>
+                <input class="loginBtn" type="submit" name="submit" value="Register">
             </div>
-            <div>
-                Password: <input type="password" name="pass" id="inPass" required/>
-            </div>
-            <div>
-                Confirm Password: <input type="password" name="passConfirm" id="inPassConfirm" required/>
-            </div>
-            <div>
-                First Name: <input type="text" name="fname" id="inFName" required/>
-            </div>
-            <div>
-                Last Name: <input type="text" name="lname" id="inLName" required/>
-            </div>
-            <div>
-                Phone Number: <input type="text" name="pnumber" id="inPNumber" required/>
-            </div>
-            <input type="submit" name="submit" value="Register">
         </form>
     </div>
 </main>
