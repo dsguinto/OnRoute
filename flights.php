@@ -2,40 +2,38 @@
     use ONROUTE\models\{Database,Flight, Trips};
     require_once 'vendor/autoload.php';
     require_once 'library/functions.php';
-
-    //Add unqiue css files here
-    $css = array('styles/flights.css');
-
+    $css = array('styles/flights.css'); //Add unqiue css files here
     require_once 'views/header.php';
 
+    //Initialize variables for toggling display information
     $errMsg = "";
     $userHide = "";
     $userDisplay = "style='display:none;'";
     $hide = "style='display:none;'";
 
+    //Checks if user is logged in, displays respective interface
     if (isset($_SESSION['userID'])) {
         $userHide = "style='display:none;'";
         $userDisplay = "style='display:block;'";
     }
 
+    //Gets current date to compare to flight dates, to avoid booking capabilities for past flights
     $pastDate = "";
     $dateNow = new DateTime("NOW", new DateTimeZone('America/Toronto'));
-
     $date = date_format($dateNow, 'Y-m-d,  H:i:s');
 
     //instantiate database connection
     $db = Database::getDb();
 
-    //WHEN FORM IS SUBMITTED
+    //Checks when form is submitted
     if(isset($_POST['searchFlightDB'])){
-        /* header('location: flightInfo.php'); */
         //Checks for empty field input
         if(empty($_POST['searchInput'])){
             $errMsg = 'Please enter an airport code, airline name, location, etc.';
         }
 
         else{
-            //get the search input submitted and store as variable
+            //Gets the search input submitted and store as variable
             $searchInput = $_POST['searchInput'];
     
             //When flight search query is submitted, instantiate db connection, utilize searchInput
@@ -44,15 +42,13 @@
             //send flight search input to controller 
             $result = $flightController->searchFlight($searchInput);
     
+            //Checks results of search
             if($result == false){
                 $errMsg = "No flights found with those search results.";
             } 
             else{
                 $hide = "style='display:block;'";
-                //store the $result as a session var
-                $_SESSION['flightInfo'] = $result;
-                //redirect user to the flightInfo pages
-                // header( "Location: {$_SERVER['REQUEST_URI']}", true, 303 ); 
+                $_SESSION['flightInfo'] = $result; //Store the $result as a session var
             }
         }
     }
@@ -99,8 +95,8 @@
                 <td><?=  $flight->arrivaldate; ?></td>
                 <td><?=  $flight->airline; ?></td>
                 <td>
-                    <!-- Hides Book button if depature data is already passed -->
-                    <form action="./flightBooking.php" method="POST">
+                    <form action="
+                    <?php if (isset($_SESSION['userID'])){ echo "./flightBooking.php"; } else {echo "./login.php";} ?>" method="POST">
                         <input type="hidden" name="flightId" value="<?= $flight->id; ?>"/>
                         <button type="submit" class="bookBtn" name="bookFlight" <?php if ($flight->departuredate < $date){echo "style='display:none'";} else{echo "style='display:block'";} ?>>Book</button>
                     </form>
@@ -110,7 +106,6 @@
          ?>
         </tbody>
     </table>
-
     <div class="otherOptions" <?= $userHide ?>>
         <h2>See What We Have To Offer</h2>
         <div class="otherOptions__opt">

@@ -53,4 +53,31 @@ class Vehicle{
         return $vrentals;
 
     }//Still working on the search feature
+
+    private $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
+    public function getVehicleRentalByUser($userId){
+        $query = "SELECT * FROM vehicles LEFT JOIN vehiclerentals ON vehicles.id = vehiclerentals.vehicle_id LEFT JOIN rentalcompanies ON rentalcompanies.id = vehicles.rentalcompany_id Where user_id = :userId";
+
+        $request = $this->db->prepare($query);
+
+        //sanitize
+        $request->bindParam(':userId', $userId);
+        
+        //execute
+        $request->execute();
+
+        //fetch result
+        $result = $request->fetchAll(\PDO::FETCH_OBJ);
+
+        //return object
+        return $result;
+    }
+
+
 }
