@@ -6,8 +6,17 @@
     //Add unqiue css files here
     $css = array('styles/flights.css');
 
+    require_once 'views/header.php';
+
     $errMsg = "";
+    $userHide = "";
+    $userDisplay = "style='display:none;'";
     $hide = "style='display:none;'";
+
+    if (isset($_SESSION['userID'])) {
+        $userHide = "style='display:none;'";
+        $userDisplay = "style='display:block;'";
+    }
 
     $pastDate = "";
     $dateNow = new DateTime("NOW", new DateTimeZone('America/Toronto'));
@@ -51,9 +60,9 @@
     //flight navigation 
     $flightNav = array('Track Flight' => "flightNumberSearch.php", 'In Flight Meal' => "mealSelection.php", 'Seat Selection' => "seatSelection.php" );
 
-    require_once 'views/header.php';
 ?>
 <main>
+    <!-- Daniel Guinto's Section-->
     <div class="searchDiv">
         <form method="POST" action="">
             <div class="searchDiv__field">
@@ -101,13 +110,33 @@
          ?>
         </tbody>
     </table>
-    <div class="otherOptions">
-        <h2>See What We Have to Offer</h2>
+
+    <div class="otherOptions" <?= $userHide ?>>
+        <h2>See What We Have To Offer</h2>
+        <div class="otherOptions__opt">
+            <a href="login.php"><img src="images/flights/difa-naufal-airplane-unsplash.jpg" alt="Image of Plane flying"/></a>
+        </div>
+        <div class="otherOptions__opt">
+            <a href="login.php"><img src="images/flights/meal5.jpeg" alt="Image of on-flight meal from Air France" /></a>
+        </div>
+        <div class="otherOptions__opt">
+            <a href="login.php"><img src="images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window"/></a>
+        </div> 
+        <p class="otherOptions__msg"><a href="login.php">Log in</a> to view these options for your flights!</p>
+    </div>
+
+    <!-- Mohamed Sakr's Section-->
+    <div class="otherOptions" <?= $userDisplay ?>>
+        <h2>Your Flights</h2>
         <?= isset($_SESSION['userID']) ? '' : '<a href="login.php">Login</a>'; ?>
         <?php
         if (isset($_SESSION['userID'])) {
             $trip = new Trips($db);
             $t = $trip->getFlightBookings($_SESSION['userID']);
+            if (empty($t)){
+                echo '<h3> You have no flights booked. </h3>';
+            }
+            else{
             echo '<table><thead><tr><td>Departure</td><td>Arrival</td><td>Departure Date</td><td>Arrival Date</td><td></td></tr></thead><tbody>';
             $flight = new Flight($db);
             foreach ($t as $value) {
@@ -126,16 +155,8 @@
             }
             echo '</tbody></table>';
         }
+        }
         ?>
-        <!-- <div class="otherOptions__opt">
-            <a href="flightNumberSearch.php"><img src="images/flights/difa-naufal-airplane-unsplash.jpg" alt="Image of Plane flying"/></a>
-        </div>
-        <div class="otherOptions__opt">
-            <a href="mealSelection.php"><img src="images/flights/meal5.jpeg" alt="Image of on-flight meal from Air France" /></a>
-        </div>
-        <div class="otherOptions__opt">
-            <a href="seatSelection.php"><img src="images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window"/></a>
-        </div> -->
     </div>
 </main>
 
