@@ -42,15 +42,11 @@ class Vehicle{
         
     }
     //function to get specific columns from the 'vehicalrentals' table
-    public function SpecificRentals($pulocation, $pudate, $rdate, $dbcon)
+    public function SpecificCity($vehiclecity, $dbcon)
     {
-        $sql = "SELECT * FROM vehiclerentals vr JOIN vehicles v ON vr.vehicle_id = v.id
-        WHERE pickuplocation LIKE '%$pulocation%' AND :pudate <= pickupdate AND :rdate >= returndate";
+        $sql = "SELECT * FROM vehicles WHERE vehiclecity LIKE '%$vehiclecity%'";
 
         $pdo = $dbcon->prepare($sql);
-        //$pdo->bindValue(':pulocation', $pulocation);
-        $pdo->bindValue(':pudate', $pudate);
-        $pdo->bindValue(':rdate', $rdate);
         $pdo->execute();
         $vrentals = $pdo->fetchAll(\PDO::FETCH_OBJ);
 

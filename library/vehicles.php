@@ -5,3 +5,7 @@
         $data = htmlspecialchars($data);
         return $data;
     }
+    function addPrice($value, $amount){
+        $price = $value*$amount;
+        return $price;
+    }

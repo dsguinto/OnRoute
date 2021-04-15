@@ -48,6 +48,21 @@ if(isset($_SESSION['vehicleData'])){
             <p>Price: <span class="text-span">CA $<?= $vehicle->vehicleprice; ?>/Day</span></p>
         </div>
     </div>
+    <p>Rent this vehicle for how long?</p>
+    <form action="vehicles.php" method="POST" name="form" id="form">
+        <div class="form__input">
+           <label>Pick Up Date</label>
+           <input type="date" name="puDate" id="puDate" value="<?= isset($pickupDate)? $pickupDate: '';?>"/>
+        </div>
+        <div class="form__input">
+            <label>Return Date</label>
+            <input type="date" name="rDate" id="rDate" value="<?= isset($returnDate)? $returnDate: '';?>"/>
+        </div>
+        <div class="form__input">
+            <input class="form__submit_btn" name="vehicleSubmit" type=submit value="Submit"/>
+        </div>
+        <span id="error-msg"><?= isset($ErrorMsg)? $ErrorMsg: '';?></span>
+    </form>
     <button><a>Confirm this vehicle</button>
     <?php } ?>
 </main>
