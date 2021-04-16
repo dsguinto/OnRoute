@@ -192,7 +192,7 @@
                     <thead>
                         <tr>
                             <th>Make/Model</th>
-                            <th>Price</th>
+                            <th>Price (per Day)</th>
                             <th>Rental Company</th>
                             <th>Pick-Up Date</th>
                             <th>Return Date</th>
