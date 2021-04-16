@@ -54,21 +54,14 @@ class Vehicle{
 
     }//Still working on the search feature
 
-    private $db;
-
-    public function __construct($db)
-    {
-        $this->db = $db;
-    }
-
-    public function getVehicleRentalByUser($userId){
+    public function getVehicleRentalByUser($userId, $dbcon){
         $query = "SELECT vehiclemodel, vehiclemake, vehicleimage, vehicleprice, user_id, pickupdate, pickuplocation, pickupdate, returndate, rentalcompanyname, rentalcompanyaddress, vehiclerentals.id 
         FROM vehicles
         LEFT JOIN vehiclerentals ON vehicles.id = vehiclerentals.vehicle_id 
         LEFT JOIN rentalcompanies ON rentalcompanies.id = vehicles.rentalcompany_id 
         WHERE user_id = :userId";
 
-        $request = $this->db->prepare($query);
+        $request = $dbcon->prepare($query);
 
         //sanitize
         $request->bindParam(':userId', $userId);

@@ -17,19 +17,19 @@
     $date = date_format($dateNow, 'Y-m-d,  H:i:s');
 
     //Instantiate database
-    $db = Database::getDb();
+    $dbcon = Database::getDb();
 
     //Gets flight details
-    $flightController = new Flight($db);
+    $flightController = new Flight($dbcon);
     $flights = $flightController->getFlightBookingByUser($_SESSION['userID']);
 
     //Get hotel details
-    $hotelController = new Hotel($db);
+    $hotelController = new Hotel($dbcon);
     $hotels = $hotelController->getHotelBookingByUser($_SESSION['userID']);
 
     // //Get vehicle details
-    $vehicleController = new Vehicle($db);
-    $vehicles = $vehicleController->getVehicleRentalByUser($_SESSION['userID']);
+    $vehicleController = new Vehicle($dbcon);
+    $vehicles = $vehicleController->getVehicleRentalByUser($_SESSION['userID'], $dbcon);
 
 ?>
 
