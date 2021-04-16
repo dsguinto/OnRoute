@@ -3,19 +3,22 @@
 use OnRoute\models\{Database, Vehicle};
 require_once 'vendor/autoload.php';
 require_once 'library/functions.php';
+require_once 'library/vehicles.php';
 
 require_once 'models/Database.php';
 require_once 'models/Vehicle.php';
 
 $css = array('styles/vehicles.css');
+//$css = array('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
 require_once 'views/header.php';
  
-// var_dump($_POST);
+//var_dump($_POST);
 
 //variables 
 $displayVehicles;
 $appear = 'style="display: block;';
 $disappear = 'style="display: none;"';
+$timed  = '';
 
 //Checking on form submission
 if(isset($_POST['vehicleSubmit'])){
@@ -34,30 +37,84 @@ if(isset($_POST['vehicleSubmit'])){
         $ErrorMsg = 'Return date must be filled';
     } 
     else {
-        //getting the information from the database
+        //getting all vehicle information where location matches user input.
         $dbcon = Database::getDb();
         $vr = new Vehicle();
-        $vrentals = $vr->SpecificRentals($pickupLoc, $pickupDate, $returnDate, $dbcon);
+        $vrentals = $vr->SpecificCity($pickupLoc, $dbcon);
         //var_dump($vrentals);
         //Sending information outside of parameters
         $displayVehicles = $vrentals;
         //invert the display when user searches for vehicles
         $appear = 'style="display: none';
         $disappear = 'style="display: block;"';
+        if(isset($pickupDate) && isset($returnDate)){
+            $origin = new DateTime($returnDate);
+            $target = new DateTime($pickupDate);
+            $interval = $origin->diff($target);
+            $timed = $interval->format('%a');
+        }
+
     }
 }
-//getting the information from the database
+//getting all vehicles from the database.
 $dbcon = Database::getDb();
 $vh = new Vehicle();
 $vehicles = $vh->getAllVehicles($dbcon);
 //var_dump($vehicles);
-
 //sending vehicle data to vehicleSelection.php
 $_SESSION['vehicleData'] = $vehicles;
 
 ?>
 
 <main>
+<?php if(isset($_SESSION['userID'])){?>
+    <!--Set for users (not logged in)-->
+    <h2>Vehicle List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+            <th>Vehicle Id</th>
+            <th>Vehicle Make</th>
+            <th>Vehicle Model</th>
+            <th>Vehicle Image</th>
+            <th>Vehicle Price</th>
+            <th>Vehicle RC</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(isset($vehicles)){ 
+                foreach($vehicles as $vehicle){ ?>
+                    <tr>
+                        <td><?= $vehicle->id ?></td>
+                        <td><?= $vehicle->vehiclemake ?></td>
+                        <td><?= $vehicle->vehiclemodel ?></td>
+                        <td><img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="100" alt="Image of a car model"></td>
+                        <td><?= $vehicle->vehicleprice ?></td>
+                        <td><?= $vehicle->rentalcompany_id ?></td>
+                        <td>
+                            <!--Update-->
+                            <form action="#" method="post">
+                                <input type="hidden" name="id" value="<?= $vehicle->id; ?>"/>
+                                <input type="submit" class="button btn btn-primary" name="updateVehicle" value="Update">
+                            </form>
+                        </td>
+                        <td>
+                            <!--Delete-->
+                            <form action="#" method="post">
+                                <input type="hidden" name="id" value="<?= $car["id"]; ?>"/>
+                                <input type="submit" class="button btn btn-danger" name="deleteCars" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+            <?php }} ?>
+        </tbody>
+    </table>
+<?php }else{ ?>
+
+
+
+
+    <!--Set for users (not logged in)-->
     <h2>Rent A Vehicle</h2>
     <!-- FORM -->
     <img src="images/vehicles/13-pexels-photo-4090350.jpeg" height="600" id="vehicle__image">
@@ -85,8 +142,8 @@ $_SESSION['vehicleData'] = $vehicles;
             <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Top Car Deals</h3>'; 
                 foreach($vehicles as $vehicle){ if($vehicle->vehicleprice <= '65.00'){ ?>
                 <div class="products__popular_opt">
-                    <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><!-- extra inforamtion (=?= $vehicle->vehiclemodel?>)-->
-                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
+                    <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><span class="deallabel">DEAL</span>
+                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
                         <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
@@ -94,8 +151,8 @@ $_SESSION['vehicleData'] = $vehicles;
             <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Vehicles Listed</h3>'; 
                 foreach($vehicles as $vehicle){ ?>
                 <div class="products__sytem_opt">
-                    <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><!-- extra inforamtion (=?= $vehicle->vehiclemodel?>)-->
-                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
+                    <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
+                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
                         <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
@@ -103,14 +160,17 @@ $_SESSION['vehicleData'] = $vehicles;
             <?php echo '<div '.$disappear.'"><div class="products__popular"><h3>Vehicles Searched</h3>'; 
                 foreach($displayVehicles as $vehicle){ ?>
                 <div class="products__sytem_opt">
-                    <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><!-- extra inforamtion (=?= $vehicle->vehiclemodel?>)-->
-                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
+                    <a href="../onRoute/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
+                        <p class="short"><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p class="short"><?= $vehicle->vehiclecity; ?></p>
+                        <p class="short">From: <?= date("M.d, Y", strtotime($pickupDate)); ?></p><p class="short">To: <?= date("M.d, Y", strtotime($returnDate)) ?></p>
+                        <p class="short">Total: CA $<?= addPrice($vehicle->vehicleprice, $timed); ?></p>
                         <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
             <?php }/*xforeach*/echo '</div></div>'?>
         </div>
     </div>
+<?php } ?>
 </main>
 
 <?php

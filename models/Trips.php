@@ -9,6 +9,26 @@ class Trips{
         $this->db = $db;
     }
 
+
+    public function getTripsforUser($userId)
+    {
+        $query = "SELECT * FROM Trips WHERE user_id = :userId";
+
+        $request = $this->db->prepare($query);
+
+        //sanitize
+        $request->bindParam(':userId', $userId);
+
+        //execute
+        $request->execute();
+
+        //fetch result
+        $result = $request->fetch(\PDO::FETCH_OBJ);
+
+        //return object
+        return $result;
+    }
+
     public function getFlightBookings($userId)
     {
         $query = "SELECT flightbooking_id FROM Trips WHERE user_id = :userId";

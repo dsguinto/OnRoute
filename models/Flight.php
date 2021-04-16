@@ -75,13 +75,15 @@ class Flight{
         return $result;
     }
 
-    public function addFlightBooking($flightId){
+    public function addFlightBooking($userId, $flightId)
+    {
 
-        $query = "INSERT INTO flightbookings (flight_id) VALUES (:flightId)";
+        $query = "INSERT INTO flightbookings (user_id, flight_id) VALUES (:userId, :flightId)";
 
         $request = $this->db->prepare($query);
 
         //sanitize
+        $request->bindParam(':userId', $userId);
         $request->bindParam(':flightId', $flightId);
         
         //execute
@@ -94,8 +96,36 @@ class Flight{
         return $result;
     }
 
+    public function getFlightBookingByUser($userId)
+    {
+
+        $query = "SELECT 
+        departureairport, arrivalairport, departuredate, arrivaldate, airline,planes.model, flightbookings.id, flightmeals.meal, flightseats.seat, flightclasses.class
+        FROM flights 
+                LEFT JOIN planes ON planes.id = flights.plane_id
+                LEFT JOIN flightbookings ON flights.id = flightbookings.flight_id 
+                LEFT JOIN flightmeals ON flightmeals.id = flightbookings.meal_id 
+                LEFT JOIN flightseats ON flightseats.id = flightbookings.seat_id 
+                LEFT JOIN flightclasses ON flightclasses.id = flightbookings.class_id 
+                WHERE user_id = :userId";
+
+        $request = $this->db->prepare($query);
+
+        //sanitize
+        $request->bindParam(':userId', $userId);
+        
+        //execute
+        $request->execute();
+
+        //fetch result
+        $result = $request->fetchAll(\PDO::FETCH_OBJ);
+
+        //return object
+        return $result;
+    }
+
     public function getFlightBookingsById($flightBookingId){
-        $query = "SELECT * FROM flightbookings INNER JOIN flightmeals ON flightbookings.meal_id = flightmeals.id WHERE flightbookings.id = :flightBookingId";
+        $query = "SELECT * FROM flightbookings WHERE flightbookings.id = :flightBookingId";
 
         $request = $this->db->prepare($query);
 

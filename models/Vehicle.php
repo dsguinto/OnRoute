@@ -42,19 +42,42 @@ class Vehicle{
         
     }
     //function to get specific columns from the 'vehicalrentals' table
-    public function SpecificRentals($pulocation, $pudate, $rdate, $dbcon)
+    public function SpecificCity($vehiclecity, $dbcon)
     {
-        $sql = "SELECT * FROM vehiclerentals vr JOIN vehicles v ON vr.vehicle_id = v.id
-        WHERE pickuplocation LIKE '%$pulocation%' AND :pudate <= pickupdate AND :rdate >= returndate";
+        $sql = "SELECT * FROM vehicles WHERE vehiclecity LIKE '%$vehiclecity%'";
 
         $pdo = $dbcon->prepare($sql);
-        //$pdo->bindValue(':pulocation', $pulocation);
-        $pdo->bindValue(':pudate', $pudate);
-        $pdo->bindValue(':rdate', $rdate);
         $pdo->execute();
         $vrentals = $pdo->fetchAll(\PDO::FETCH_OBJ);
 
         return $vrentals;
 
     }//Still working on the search feature
+
+    private $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
+    public function getVehicleRentalByUser($userId){
+        $query = "SELECT * FROM vehicles LEFT JOIN vehiclerentals ON vehicles.id = vehiclerentals.vehicle_id LEFT JOIN rentalcompanies ON rentalcompanies.id = vehicles.rentalcompany_id Where user_id = :userId";
+
+        $request = $this->db->prepare($query);
+
+        //sanitize
+        $request->bindParam(':userId', $userId);
+        
+        //execute
+        $request->execute();
+
+        //fetch result
+        $result = $request->fetchAll(\PDO::FETCH_OBJ);
+
+        //return object
+        return $result;
+    }
+
+
 }

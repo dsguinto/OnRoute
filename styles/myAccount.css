@@ -1,0 +1,73 @@
+/* Search Result table styling */
+table {
+  margin: 0 auto;
+  text-align: left;
+  border-collapse: collapse;
+  background-color: #d2e1f7;
+  box-shadow: 0 0 5px #888888;
+}
+
+thead {
+  background-color: #002248;
+  color: #feffff;
+}
+
+tr {
+  border-bottom: 1px solid black;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafbfd;
+}
+
+th,
+td {
+  padding: 1em;
+}
+
+h2 {
+  border-bottom: 5px solid #d9a21b;
+  border-top: 5px solid #d9a21b;
+  margin: 1em auto;
+  width: 30%;
+}
+
+.tripDetails,
+.userDetails {
+  padding: 1em 3em;
+  margin: 1em auto;
+}
+
+h3 {
+  width: 100%;
+  color: #002248;
+  border-bottom: 2px solid #002248;
+  text-align: left;
+}
+
+li {
+  list-style: none;
+}
+
+.addBtn {
+  border: none;
+  border-radius: 5px;
+  background-color: #002248;
+  color: white;
+  padding: 0.5em 0.75em;
+  margin: 0;
+  text-decoration: none;
+  transition: 200ms;
+}
+
+.addBtn:hover {
+  background-color: #d9a21b;
+  cursor: pointer;
+}
+
+.unavailable {
+  font-size: 12px;
+  background-color: lightgrey;
+  border-radius: 15px;
+  padding: 0.25em 0.5em;
+}

@@ -32,8 +32,8 @@ main{
     object-position: 70% 20%;;
     border-radius: 13px 13px 0 0;
 }
-form{
-    background: linear-gradient(var(--mustardYellow), var(--darkSienna));
+#form{
+    background: var(--mustardYellow);
     color: white;
     display: flex;
     flex-flow: wrap row;
@@ -58,11 +58,12 @@ input{
     border-radius: 5px;
     font-family: var(--regularFont);
     border-style: none;
-    padding: 0 2em 0 2em;
+    padding: 0.5em 2em 0.5em 2em;
 }
 .form__submit_btn:hover{
     background-color: var(--greenIvory);
     color: white;
+    cursor: pointer;
 }
 /* Car Rental Deals */
 .products{
@@ -84,7 +85,7 @@ input{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 2em 3em 3em 3em;
+    padding: 2em 3em 2em 3em;
     justify-content: space-evenly;
 }
 .products__popular_opt, 
@@ -139,4 +140,15 @@ input{
 #error-msg{
     color: red;
     width: 40%;
+}.deallabel{
+    background: var(--greenIvory);
+    color: white;
+    float: right;
+    right: 0;
+    padding: 0 6px 0 6px;
+    border-radius: 5px;
+}.short{
+    margin: 0;
+}.short:nth-child(5){
+    padding-bottom: 10px;
 }
