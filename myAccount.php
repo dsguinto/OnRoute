@@ -5,9 +5,8 @@
     $css = array("styles/myAccount.css");
     require_once 'views/header.php';
 
-    if (isset($_SESSION['userID'])) {
-        //Placeholder for now
-    } else {
+    //Checks if user is logged in
+    if (empty($_SESSION['userID'])) {
         //Redirects to login page if user is not logged in
         Header('Location: login.php');
     }
@@ -130,9 +129,9 @@
                                 if ($f->departuredate < $date){
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
-                                echo "<form action='./deleteFlight.php' method='post'>
-                                            <input type='hidden' name='id' value='$f->id'/>
-                                            <input type='submit' class='deleteBtn' name='cancelFlight' value='Cancel'/>
+                                echo "<form action='./deleteFlightBooking.php' method='POST'>
+                                            <input type='hidden' name='flightBookingId' value='$f->id'/>
+                                            <input type='submit' class='deleteBtn' name='cancelFlightBooking' value='Cancel'/>
                                     </form>";
                                 }
                                 ?>
@@ -169,7 +168,7 @@
                                 if ($h->checkintime < $date){
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
-                                echo "<form action='./deleteHotel.php' method='post'>
+                                echo "<form action='./deleteHotelBooking.php' method='post'>
                                             <input type='hidden' name='id' value='$h->id'/>
                                             <input type='submit' class='deleteBtn' name='cancelHotel' value='Cancel'/>
                                     </form>";

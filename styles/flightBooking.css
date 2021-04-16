@@ -79,3 +79,27 @@
 .emptyMsg a:hover {
   color: #002248;
 }
+
+.warning {
+  color: red;
+}
+
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(189, 0, 0);
+  color: white;
+  padding: 0.5em 1em;
+  margin: 0 0.5em;
+  text-decoration: none;
+  transition: 200ms;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+}
+
+.deleteBtn:hover {
+  background-color: rgb(255, 93, 93);
+  cursor: pointer;
+}
