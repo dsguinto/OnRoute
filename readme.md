@@ -34,7 +34,7 @@
 
 ---
 
-#### Daniel Guinto: index.php, flights.php, flightBooking.php, myaccount.php, models/Flights.php
+#### Daniel Guinto: index.php, flights.php, flightBooking.php, myaccount.php
 
 - Main search feature that allows users to search the flights table based off of airports, dates, airlines, etc.
 - Validation checks if user left field empty, or if search input does not have any results

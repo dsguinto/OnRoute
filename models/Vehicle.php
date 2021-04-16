@@ -62,7 +62,11 @@ class Vehicle{
     }
 
     public function getVehicleRentalByUser($userId){
-        $query = "SELECT * FROM vehicles LEFT JOIN vehiclerentals ON vehicles.id = vehiclerentals.vehicle_id LEFT JOIN rentalcompanies ON rentalcompanies.id = vehicles.rentalcompany_id Where user_id = :userId";
+        $query = "SELECT vehiclemodel, vehiclemake, vehicleimage, vehicleprice, user_id, pickupdate, pickuplocation, pickupdate, returndate, rentalcompanyname, rentalcompanyaddress, vehiclerentals.id 
+        FROM vehicles
+        LEFT JOIN vehiclerentals ON vehicles.id = vehiclerentals.vehicle_id 
+        LEFT JOIN rentalcompanies ON rentalcompanies.id = vehicles.rentalcompany_id 
+        WHERE user_id = :userId";
 
         $request = $this->db->prepare($query);
 

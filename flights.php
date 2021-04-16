@@ -47,7 +47,7 @@
                 $errMsg = "No flights found with those search results.";
             } 
             else{
-                $hide = "style='display:block;'";
+                $hide = "style='display:table;'";
                 $_SESSION['flightInfo'] = $result; //Store the $result as a session var
             }
         }
@@ -71,41 +71,43 @@
         </form>
     </div>
     <div class="errMsg"><?= $errMsg?></div>
-    <table <?= $hide ?> >
-    <h3 <?= $hide ?>>Search Results</h3>
-        <thead>
-            <tr>
-                <th>Depature Airport</th>
-                <th>Arrival Airport</th>
-                <th>Depature Date</th>
-                <th>Depature Date</th>
-                <th>Airlines</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php 
-            if (isset($result)){
-                foreach($result as $flight) { 
-        ?>
-            <tr>
-                <td><?=  $flight->departureairport; ?></td>
-                <td><?=  $flight->arrivalairport; ?></td>
-                <td><?=  $flight->departuredate; ?></td>
-                <td><?=  $flight->arrivaldate; ?></td>
-                <td><?=  $flight->airline; ?></td>
-                <td>
-                    <form action="
-                    <?php if (isset($_SESSION['userID'])){ echo "./flightBooking.php"; } else {echo "./login.php";} ?>" method="POST">
-                        <input type="hidden" name="flightId" value="<?= $flight->id; ?>"/>
-                        <button type="submit" class="bookBtn" name="bookFlight" <?php if ($flight->departuredate < $date){echo "style='display:none'";} else{echo "style='display:block'";} ?>>Book</button>
-                    </form>
-                    <p class="hiddenMsg" <?php if ($flight->departuredate < $date){echo "style='display:block'";} else{echo "style='display:none'";} ?> >Book Unavailable</p>
-                </td>
-        <?php }}
-         ?>
-        </tbody>
-    </table>
+    <div class="tableWrapper">
+        <table <?= $hide ?> >
+        <h3 <?= $hide ?>>Search Results</h3>
+            <thead>
+                <tr>
+                    <th>Depature Airport</th>
+                    <th>Arrival Airport</th>
+                    <th>Depature Date</th>
+                    <th>Depature Date</th>
+                    <th>Airlines</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php 
+                if (isset($result)){
+                    foreach($result as $flight) { 
+            ?>
+                <tr>
+                    <td><?=  $flight->departureairport; ?></td>
+                    <td><?=  $flight->arrivalairport; ?></td>
+                    <td><?=  $flight->departuredate; ?></td>
+                    <td><?=  $flight->arrivaldate; ?></td>
+                    <td><?=  $flight->airline; ?></td>
+                    <td>
+                        <form action="
+                        <?php if (isset($_SESSION['userID'])){ echo "./flightBooking.php"; } else {echo "./login.php";} ?>" method="POST">
+                            <input type="hidden" name="flightId" value="<?= $flight->id; ?>"/>
+                            <button type="submit" class="bookBtn" name="bookFlight" <?php if ($flight->departuredate < $date){echo "style='display:none'";} else{echo "style='display:block'";} ?>>Book</button>
+                        </form>
+                        <p class="hiddenMsg" <?php if ($flight->departuredate < $date){echo "style='display:block'";} else{echo "style='display:none'";} ?> >Book Unavailable</p>
+                    </td>
+            <?php }}
+            ?>
+            </tbody>
+        </table>
+    </div>
     <div class="otherOptions" <?= $userHide ?>>
         <h2>See What We Have To Offer</h2>
         <div class="otherOptions__opt">
@@ -117,8 +119,8 @@
         <div class="otherOptions__opt">
             <a href="login.php"><img src="images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window"/></a>
         </div> 
-        <p class="otherOptions__msg"><a href="login.php">Log in</a> to view these options for your flights!</p>
     </div>
+    <p <?= $userHide ?> class="otherOptions__msg"><a href="login.php">Log in</a> to view these options for your flights!</p>
 
     <!-- Mohamed Sakr's Section-->
     <div class="otherOptions" <?= $userDisplay ?>>
@@ -132,7 +134,7 @@
                 echo '<h3> You have no flights booked. </h3>';
             }
             else{
-            echo '<table><thead><tr><td>Departure</td><td>Arrival</td><td>Departure Date</td><td>Arrival Date</td><td></td></tr></thead><tbody>';
+            echo '<div class="tableWrapper"><table><thead><tr><td>Departure</td><td>Arrival</td><td>Departure Date</td><td>Arrival Date</td><td></td></tr></thead><tbody>';
             $flight = new Flight($db);
             foreach ($t as $value) {
                 $f = $flight->getFlightBookingsById($value->flightbooking_id);
@@ -148,7 +150,7 @@
                 echo '</form></td>';
                 echo '</tr>';
             }
-            echo '</tbody></table>';
+            echo '</tbody></table></div>';
         }
         }
         ?>
