@@ -32,7 +32,7 @@
 
             //Assign post data to vars
             $mealId = $_POST['mealId'];
-            $flightBookingId = $_POST['flightBookingId'];
+            $flightBookingId = $_POST['postFlightBookingID'];
 
             /*Get the meal name corresponding to that ID*/
             $meal = new Meal($db);
@@ -79,7 +79,7 @@
     <!-- Flight track form appears on page load -->
     <div <?=$hide2?>>
         <form action="" method="POST" name="mealSelection_form">
-            <input type = hidden name = "flightBookingId" value = '<?=$flightBookingId?>'/>
+            <input type = hidden name = "postFlightBookingID" value = '<?=$flightBookingId?>'/>
             <div class = "selections">
                 <h2><?= isset($userMsg)? $userMsg : "Please Make a Meal Choice From the Options Below";?></h2>
                 <?= isset($errMsg)? $errMsg:"";?>

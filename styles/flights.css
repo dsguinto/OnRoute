@@ -204,6 +204,10 @@ td {
   transition: 300ms;
 }
 
+.otherOptions__opt button{
+  cursor: pointer;
+  border:none;
+}
 .otherOptions__opt:hover {
   background-color: #aaaaaa;
   box-shadow: -10px 10px 5px #aaaaaa;
