@@ -42,6 +42,7 @@ class Vehicle{
         
     }
     //function to get specific columns from the 'vehicalrentals' table
+    //function to get specific vehicles from vehicles table that match search
     public function SpecificCity($vehiclecity, $dbcon)
     {
         $sql = "SELECT * FROM vehicles WHERE vehiclecity LIKE '%$vehiclecity%'";
@@ -52,7 +53,36 @@ class Vehicle{
 
         return $vrentals;
 
-    }//Still working on the search feature
+    }
+    //Add Vehicle Information into vehiclerentals table
+    public function addVehiclesToRent($vehicleLoc, $puDate, $rDate, $vehicleid, $userid, $dbcon){
+
+        $sql = "INSERT INTO vehiclerentals (pickuplocation, pickupdate, returndate, vehicle_id, user_id)
+        VALUES (:vehicleloc, :puDate, :rDate, :vehicleid, :userid)";
+
+        $pdo = $dbcon->prepare($sql);
+        $pdo->bindParam(':vehicleloc', $vehicleLoc);
+        $pdo->bindParam(':puDate', $puDate);
+        $pdo->bindParam(':rDate', $rDate);
+        $pdo->bindParam(':vehicleid', $vehicleid);
+        $pdo->bindParam(':userid', $userid);
+        $pdo->execute();
+        $result =  $pdo->fetchAll(\PDO::FETCH_OBJ);
+
+        return $result;
+    }
+    //Delete Vehicle i=Information form the vehiclerentals table
+    public function deleteVehiclesToRent($id, $dbcon){
+
+        $sql = "DELETE FROM vehiclerentals WHERE id = :rentalId";
+
+        $pdo = $dbcon->prepare($sql);
+        $pdo->bindParam(':rentalId', $id);
+        $pdo->execute();
+        $result =  $pdo->fetchAll(\PDO::FETCH_OBJ);
+        
+        return $result;
+    }
 
     public function getVehicleRentalByUser($userId, $dbcon){
         $query = "SELECT vehiclemodel, vehiclemake, vehicleimage, vehicleprice, user_id, pickupdate, pickuplocation, pickupdate, returndate, rentalcompanyname, rentalcompanyaddress, vehiclerentals.id 
