@@ -84,10 +84,10 @@
                 <div class="formContainer__form_input">
                     <label for="in_pass">Password: </label>
                     <input type="password" name="in_pass" required/>
+                    <?= $invalid ?>
                 </div>
                 <div class="formContainer__form_input">
                 <a href="forgotPassword.php" class="forgotPassBtn">Forgot your password?</a>
-                <?= $invalid ?>
                 </div>
                 <input class="loginBtn" type="submit" value="Login" name="login">
             </div>

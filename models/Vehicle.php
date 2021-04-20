@@ -106,5 +106,27 @@ class Vehicle{
         return $result;
     }
 
+    public function getVehicleRentalByBookingId($vehicleRentalId, $dbcon)
+    {
+        $query = "SELECT vehiclemodel, vehiclemake, vehicleimage, vehicleprice, user_id, pickupdate, pickuplocation, pickupdate, returndate, rentalcompanyname, rentalcompanyaddress, vehiclerentals.id 
+        FROM vehicles
+        LEFT JOIN vehiclerentals ON vehicles.id = vehiclerentals.vehicle_id 
+        LEFT JOIN rentalcompanies ON rentalcompanies.id = vehicles.rentalcompany_id 
+        WHERE vehiclerentals.id = :vehicleRentalId";
 
+        $request = $dbcon->prepare($query);
+
+        //sanitize
+        $request->bindParam(':vehicleRentalId', $vehicleRentalId);
+        
+        //execute
+        $request->execute();
+
+        //fetch result
+        $result = $request->fetchAll(\PDO::FETCH_OBJ);
+
+        //return object
+        return $result;
+
+    }
 }

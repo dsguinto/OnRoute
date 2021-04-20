@@ -209,8 +209,8 @@
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
                                 echo "<form action='./deleteHotelBooking.php' method='POST'>
-                                            <input type='hidden' name='id' value='$h->id'/>
-                                            <input type='submit' class='deleteBtn' name='cancelHotel' value='Cancel'/>
+                                            <input type='hidden' name='hotelBookingId' value='$h->id'/>
+                                            <input type='submit' class='deleteBtn' name='cancelHotelBooking' value='Cancel'/>
                                     </form>";
                                 }
                                 ?>
@@ -254,8 +254,8 @@
                                 if ($v->pickupdate < $date){
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
-                                echo "<form action='./deleteVechileRental.php' method='POST'>
-                                            <input type='hidden' name='id' value='$v->id'/>
+                                echo "<form action='./deleteVehicleRental.php' method='POST'>
+                                            <input type='hidden' name='vehicleRentalId' value='$v->id'/>
                                             <input type='submit' class='deleteBtn' name='cancelVehicleRental' value='Cancel'/>
                                     </form>";
                                 }

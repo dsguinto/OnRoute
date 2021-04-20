@@ -75,4 +75,23 @@ class Hotel {
         //return object
         return $result;
     } 
+
+    // public function deleteHotelBooking($hotelBookingId, $dbcon)
+    // {
+    //     $query = "DELETE FROM hotelbookings WHERE id = :hotelBookingId";
+
+    //     $request = $dbcon->prepare($query);
+
+    //     //sanitize
+    //     $request->bindParam(':hotelBookingId', $hotelBookingId);
+        
+    //     //execute
+    //     $request->execute();
+
+    //     //fetch result
+    //     $result = $request->fetch(\PDO::FETCH_OBJ);
+
+    //     //return object
+    //     return $result;
+    // }
 }
