@@ -12,8 +12,10 @@
 
 #### Nai-Hsien: accommodations.php and models/Hotel.php
 
-- Still working on search functionality for hotels by city name
-- Database.php connection string changed to localhost. Didn't push to github to avoid merging conflict.
+- Search functionality for hotels by city name completed
+- Work in progress:
+  - book a hotel with a user id (logged in)
+  - Better CSS
 
 ---
 
