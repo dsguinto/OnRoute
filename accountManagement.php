@@ -5,6 +5,7 @@
     require_once './Models/Mailer.php';
 
     //Add unqiue css files here
+    $css = array('styles/login.css');
     
     require_once './views/header.php';
 
@@ -38,28 +39,36 @@
 ?>
 
 <main>
-    <form action="test.php" method="post">
-        <div>
-            <label for="in_email">New Email: </label>
-            <input type="text" name="in_email" required/>
-        </div>
-        <input type="submit" value="Change Email" name="changeEmail"/>
-    </form>
-    <form action="test.php" method="post">
-        <div>
-            <label for="in_pass">Current Password: </label>
-            <input type="password" name="in_pass" required/>
-        </div>
-        <div>
-            <label for="in_passNew">New Password: </label>
-            <input type="password" name="in_passNew" required/>
-        </div>
-        <div>
-            <label for="in_passNewConfirm">Confirm Password: </label>
-            <input type="password" name="in_passNewConfirm" required/>
-        </div>
-        <input type="submit" value="Change Password" name="changePassword"/>
-    </form>
+    <div class="formContainer">
+        <form action="test.php" method="post">
+            <div class="formContainer__form">
+                <div class="formContainer__form_input">
+                    <label for="in_email">New Email: </label>
+                    <input type="text" name="in_email" required/>
+                </div>
+                <input class="loginBtn" type="submit" value="Change Email" name="changeEmail"/>
+            </div>
+        </form>
+    </div>
+    <div class="formContainer">
+        <form action="test.php" method="post">
+            <div class="formContainer__form">
+                <div class="formContainer__form_input">
+                    <label for="in_pass">Current Password: </label>
+                    <input type="password" name="in_pass" required/>
+                </div>
+                <div class="formContainer__form_input">
+                    <label for="in_passNew">New Password: </label>
+                    <input type="password" name="in_passNew" required/>
+                </div>
+                <div class="formContainer__form_input">
+                    <label for="in_passNewConfirm">Confirm Password: </label>
+                    <input type="password" name="in_passNewConfirm" required/>
+                </div>
+                <input class="loginBtn" type="submit" value="Change Password" name="changePassword"/>
+            </div>
+        </form>
+    </div>
 </main>
 
 

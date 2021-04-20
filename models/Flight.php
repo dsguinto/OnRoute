@@ -99,7 +99,7 @@ class Flight{
     public function getFlightBookingByUser($userId)
     {
 
-        $query = "SELECT departureairport, arrivalairport, departuredate, arrivaldate, airline,planes.model, flightbookings.id, flightmeals.meal, flightseats.seat, flightclasses.class
+        $query = "SELECT flights.id AS flightid, departureairport, arrivalairport, departuredate, arrivaldate, airline,planes.model, flightbookings.id, flightmeals.meal, flightseats.seat, flightclasses.class
                 FROM flights 
                 LEFT JOIN planes ON planes.id = flights.plane_id
                 LEFT JOIN flightbookings ON flights.id = flightbookings.flight_id 

@@ -85,8 +85,10 @@
                     <label for="in_pass">Password: </label>
                     <input type="password" name="in_pass" required/>
                 </div>
-                <a href="forgotPassword.php">Forgot your password?</a>
+                <div class="formContainer__form_input">
+                <a href="forgotPassword.php" class="forgotPassBtn">Forgot your password?</a>
                 <?= $invalid ?>
+                </div>
                 <input class="loginBtn" type="submit" value="Login" name="login">
             </div>
         </form>
