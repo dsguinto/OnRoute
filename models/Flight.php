@@ -126,7 +126,7 @@ class Flight{
     public function getFlightDetailsByBookingId($flightBookingId)
     {
 
-        $query = "SELECT flightbookings.id, departureairport, arrivalairport, departuredate, arrivaldate, airline
+        $query = "SELECT flights.id AS flightId, plane_id, flightbookings.id, departureairport, arrivalairport, departuredate, arrivaldate, airline
                     FROM flightbookings 
                     LEFT JOIN flights ON flights.id = flightbookings.flight_id
                     WHERE flightbookings.id = :flightBookingId";
@@ -169,18 +169,60 @@ class Flight{
         $query = "SELECT * FROM flightbookings WHERE flightbookings.id = :flightBookingId";
 
         $request = $this->db->prepare($query);
-
+        //sanitize
         $request->bindParam(':flightBookingId', $flightBookingId);
-
+        //execute
         $request->execute();
-
+         //fetch result
         $result = $request->fetch(\PDO::FETCH_OBJ);
-
+         //return object
         return $result;
     }
 
-    public function getMealsForFlightBooking($flightBookingId){
+    public function getSeatsForFlight($flightId){
+        $query = "SELECT flightsxflightseats.id, flightsxflightseats.seat_id AS seat_id, bookingstatus FROM flightsxflightseats INNER JOIN flightseats ON flightseats.id = flightsxflightseats.seat_id WHERE flight_id = :flightId";
+
+        $request = $this->db->prepare($query);
+         //sanitize
+        $request->bindParam(':flightId', $flightId);
+        //execute
+        $request->execute();
+        //fetch result
+        $result = $request->fetchAll(\PDO::FETCH_OBJ);
+        //return object
+        return $result;
+    }
+
+    public function updateSeatForFlightBooking($flightBookingId, $seatSelected){
+        $query = "UPDATE flightbookings SET seat_id = :seatSelected WHERE flightbookings.id = :flightBookingId";
         
+        
+
+        $request = $this->db->prepare($query);
+        //sanitize
+        $request->bindParam(':flightBookingId', $flightBookingId);
+        $request->bindParam(':seatSelected', $seatSelected);
+        //execute
+        $request->execute();
+        //fetch result
+        $result = $request->fetch(\PDO::FETCH_OBJ);
+        //return object
+        return $result;
+    }
+
+    public function bookSeatForFlight($flightId, $seatId){
+        $query = "UPDATE flightsxflightseats SET bookingstatus = 'Unvailable' WHERE flightsxflightseats.flight_id = :flightId AND flightsxflightseats.seat_id = :seatId";
+    
+        $request = $this->db->prepare($query);
+        //sanitize
+        $request->bindParam(':flightId', $flightId);
+        $request->bindParam(':seatId', $seatId);
+        //execute
+        $request->execute();
+        //fetch result
+        $result = $request->fetch(\PDO::FETCH_OBJ);
+        //return object
+        return $result;
     }
 }
 ?>

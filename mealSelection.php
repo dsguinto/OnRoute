@@ -17,7 +17,7 @@
     if(/* !isset($_SESSION['userID']) || */ !isset($_POST['postFlightBookingID'])){
         header('location:flights.php');
     }
-
+    echo $_POST['postFlightBookingID'];
     $hide1 = "style = 'display:none'";
     $hide2 = "";
     /* IF USER HAS CLICKED SUBMIT BUTTON FROM THIS PAGE */
