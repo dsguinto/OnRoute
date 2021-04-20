@@ -42,6 +42,7 @@ class Vehicle{
         
     }
     //function to get specific columns from the 'vehicalrentals' table
+    //function to get specific vehicles from vehicles table that match search
     public function SpecificCity($vehiclecity, $dbcon)
     {
         $sql = "SELECT * FROM vehicles WHERE vehiclecity LIKE '%$vehiclecity%'";
@@ -52,19 +53,45 @@ class Vehicle{
 
         return $vrentals;
 
-    }//Still working on the search feature
+    }
+    //Add Vehicle Information into vehiclerentals table
+    public function addVehiclesToRent($vehicleLoc, $puDate, $rDate, $vehicleid, $userid, $dbcon){
 
-    private $db;
+        $sql = "INSERT INTO vehiclerentals (pickuplocation, pickupdate, returndate, vehicle_id, user_id)
+        VALUES (:vehicleloc, :puDate, :rDate, :vehicleid, :userid)";
 
-    public function __construct($db)
-    {
-        $this->db = $db;
+        $pdo = $dbcon->prepare($sql);
+        $pdo->bindParam(':vehicleloc', $vehicleLoc);
+        $pdo->bindParam(':puDate', $puDate);
+        $pdo->bindParam(':rDate', $rDate);
+        $pdo->bindParam(':vehicleid', $vehicleid);
+        $pdo->bindParam(':userid', $userid);
+        $pdo->execute();
+        $result =  $pdo->fetchAll(\PDO::FETCH_OBJ);
+
+        return $result;
+    }
+    //Delete Vehicle i=Information form the vehiclerentals table
+    public function deleteVehiclesToRent($id, $dbcon){
+
+        $sql = "DELETE FROM vehiclerentals WHERE id = :rentalId";
+
+        $pdo = $dbcon->prepare($sql);
+        $pdo->bindParam(':rentalId', $id);
+        $pdo->execute();
+        $result =  $pdo->fetchAll(\PDO::FETCH_OBJ);
+        
+        return $result;
     }
 
-    public function getVehicleRentalByUser($userId){
-        $query = "SELECT * FROM vehicles LEFT JOIN vehiclerentals ON vehicles.id = vehiclerentals.vehicle_id LEFT JOIN rentalcompanies ON rentalcompanies.id = vehicles.rentalcompany_id Where user_id = :userId";
+    public function getVehicleRentalByUser($userId, $dbcon){
+        $query = "SELECT vehiclemodel, vehiclemake, vehicleimage, vehicleprice, user_id, pickupdate, pickuplocation, pickupdate, returndate, rentalcompanyname, rentalcompanyaddress, vehiclerentals.id 
+        FROM vehicles
+        LEFT JOIN vehiclerentals ON vehicles.id = vehiclerentals.vehicle_id 
+        LEFT JOIN rentalcompanies ON rentalcompanies.id = vehicles.rentalcompany_id 
+        WHERE user_id = :userId";
 
-        $request = $this->db->prepare($query);
+        $request = $dbcon->prepare($query);
 
         //sanitize
         $request->bindParam(':userId', $userId);

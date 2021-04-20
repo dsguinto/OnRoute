@@ -5,6 +5,12 @@
     $css = array("styles/flightBooking.css");//Add unqiue css files here
     require_once 'views/header.php';
 
+    //Checks if user is logged in
+    if (empty($_SESSION['userID'])) {
+        //Redirects to login page if user is not logged in
+        Header('Location: login.php');
+    }
+
     //Initialize variables for toggling display information
     $redirect = "";
     $hideTable = "";

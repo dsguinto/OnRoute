@@ -112,6 +112,12 @@ table {
   box-shadow: 0 0 5px #888888;
 }
 
+.tableWrapper {
+  margin: 0 2em;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 h3 {
   margin: 1em auto;
 }
@@ -187,10 +193,6 @@ td {
   transition: 300ms;
 }
 
-.otherOptions__opt button{
-  cursor: pointer;
-  border:none;
-}
 .otherOptions__opt:hover {
   background-color: #aaaaaa;
   box-shadow: -10px 10px 5px #aaaaaa;
@@ -246,6 +248,7 @@ td {
 
 .otherOptions__msg {
   width: 50%;
+  margin: 0 auto;
   padding: 0.75em;
   text-align: center;
   border-top: 1px solid grey;

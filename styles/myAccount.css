@@ -7,6 +7,11 @@ table {
   box-shadow: 0 0 5px #888888;
 }
 
+.tableWrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 thead {
   background-color: #002248;
   color: #feffff;
@@ -29,7 +34,7 @@ h2 {
   border-bottom: 5px solid #d9a21b;
   border-top: 5px solid #d9a21b;
   margin: 1em auto;
-  width: 30%;
+  width: 35%;
 }
 
 .tripDetails,
@@ -58,11 +63,42 @@ li {
   margin: 0;
   text-decoration: none;
   transition: 200ms;
+  font-family: "Poppins", sans-serif;
 }
 
 .addBtn:hover {
-  background-color: #d9a21b;
+  background-color: #2a67ac;
   cursor: pointer;
+}
+
+.deleteBtn {
+  border: none;
+  border-radius: 5px;
+  background-color: #d9a21b;
+  color: white;
+  padding: 0.5em 0.75em;
+  margin: 0;
+  text-decoration: none;
+  transition: 200ms;
+  font-family: "Poppins", sans-serif;
+}
+.deleteBtn:hover {
+  background-color: #ffb700;
+  cursor: pointer;
+}
+
+.imageBtn {
+  background-color: #002248;
+  text-decoration: none;
+  color: white;
+  font-size: 10px;
+  padding: 0.25em 0.5em;
+  border-radius: 15px;
+  transition: 200ms;
+}
+
+.imageBtn:hover {
+  background-color: #2a67ac;
 }
 
 .unavailable {
@@ -70,4 +106,5 @@ li {
   background-color: lightgrey;
   border-radius: 15px;
   padding: 0.25em 0.5em;
+  text-align: center;
 }

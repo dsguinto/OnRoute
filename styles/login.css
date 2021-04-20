@@ -8,7 +8,7 @@ main {
 
 #loginForm,
 #registerForm {
-  margin: 0;
+  margin: 1em;
 }
 
 form {

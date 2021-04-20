@@ -99,9 +99,8 @@ class Flight{
     public function getFlightBookingByUser($userId)
     {
 
-        $query = "SELECT 
-        departureairport, arrivalairport, departuredate, arrivaldate, airline,planes.model, flightbookings.id, flightmeals.meal, flightseats.seat, flightclasses.class
-        FROM flights 
+        $query = "SELECT departureairport, arrivalairport, departuredate, arrivaldate, airline,planes.model, flightbookings.id, flightmeals.meal, flightseats.seat, flightclasses.class
+                FROM flights 
                 LEFT JOIN planes ON planes.id = flights.plane_id
                 LEFT JOIN flightbookings ON flights.id = flightbookings.flight_id 
                 LEFT JOIN flightmeals ON flightmeals.id = flightbookings.meal_id 
@@ -119,6 +118,48 @@ class Flight{
 
         //fetch result
         $result = $request->fetchAll(\PDO::FETCH_OBJ);
+
+        //return object
+        return $result;
+    }
+
+    public function getFlightDetailsByBookingId($flightBookingId)
+    {
+
+        $query = "SELECT flightbookings.id, departureairport, arrivalairport, departuredate, arrivaldate, airline
+                    FROM flightbookings 
+                    LEFT JOIN flights ON flights.id = flightbookings.flight_id
+                    WHERE flightbookings.id = :flightBookingId";
+
+        $request = $this->db->prepare($query);
+
+        //sanitize
+        $request->bindParam(':flightBookingId', $flightBookingId);
+        
+        //execute
+        $request->execute();
+
+        //fetch result
+        $result = $request->fetch(\PDO::FETCH_OBJ);
+
+        //return object
+        return $result;
+    }
+
+    public function deleteFlightBooking($flightBookingId)
+    {
+        $query = "DELETE FROM flightbookings WHERE id = :flightBookingId";
+
+        $request = $this->db->prepare($query);
+
+        //sanitize
+        $request->bindParam(':flightBookingId', $flightBookingId);
+        
+        //execute
+        $request->execute();
+
+        //fetch result
+        $result = $request->fetch(\PDO::FETCH_OBJ);
 
         //return object
         return $result;

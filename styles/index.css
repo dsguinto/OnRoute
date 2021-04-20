@@ -215,3 +215,9 @@ svg {
     background-attachment: initial;
   }
 }
+
+@media all and (max-width: 575px) {
+  .banner h2 {
+    font-size: 30px;
+  }
+}

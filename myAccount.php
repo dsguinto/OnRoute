@@ -5,9 +5,8 @@
     $css = array("styles/myAccount.css");
     require_once 'views/header.php';
 
-    if (isset($_SESSION['userID'])) {
-        //Placeholder for now
-    } else {
+    //Checks if user is logged in
+    if (empty($_SESSION['userID'])) {
         //Redirects to login page if user is not logged in
         Header('Location: login.php');
     }
@@ -18,19 +17,19 @@
     $date = date_format($dateNow, 'Y-m-d,  H:i:s');
 
     //Instantiate database
-    $db = Database::getDb();
+    $dbcon = Database::getDb();
 
     //Gets flight details
-    $flightController = new Flight($db);
+    $flightController = new Flight($dbcon);
     $flights = $flightController->getFlightBookingByUser($_SESSION['userID']);
 
     //Get hotel details
-    $hotelController = new Hotel($db);
+    $hotelController = new Hotel($dbcon);
     $hotels = $hotelController->getHotelBookingByUser($_SESSION['userID']);
 
     // //Get vehicle details
-    $vehicleController = new Vehicle($db);
-    $vehicles = $vehicleController->getVehicleRentalByUser($_SESSION['userID']);
+    $vehicleController = new Vehicle($dbcon);
+    $vehicles = $vehicleController->getVehicleRentalByUser($_SESSION['userID'], $dbcon);
 
 ?>
 
@@ -51,136 +50,183 @@
             <?php if (empty($flights)){
                 echo '<h3> You have no flights booked. </h3>';
             } else{ ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Depature Airport</th>
-                        <th>Arrival Airport</th>
-                        <th>Depature Date</th>
-                        <th>Arrival Date</th>
-                        <th>Airlines</th>
-                        <th>Plane</th>
-                        <th>Meal</th>
-                        <th>Seat</th>
-                        <th>Class</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php if (isset($flights)){ 
-                foreach($flights as $f) { ?>
-                    <tr>
-                        <td><?=  $f->departureairport; ?></td>
-                        <td><?=  $f->arrivalairport; ?></td>
-                        <td><?=  $f->departuredate; ?></td>
-                        <td><?=  $f->arrivaldate; ?></td>
-                        <td><?=  $f->airline; ?></td>
-                        <td><?=  $f->model; ?></td>
-                        <td>
-                            <?php   
-                            if (empty($f->meal)){
-                                if ($f->departuredate < $date){
-                                    echo "<p class='unavailable'>Unavailable</p>";
+            <div class="tableWrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Depature Airport</th>
+                            <th>Arrival Airport</th>
+                            <th>Depature Date</th>
+                            <th>Arrival Date</th>
+                            <th>Airlines</th>
+                            <th>Plane</th>
+                            <th>Meal</th>
+                            <th>Seat</th>
+                            <th>Class</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php if (isset($flights)){ 
+                    foreach($flights as $f) { ?>
+                        <tr>
+                            <td><?=  $f->departureairport; ?></td>
+                            <td><?=  $f->arrivalairport; ?></td>
+                            <td><?=  $f->departuredate; ?></td>
+                            <td><?=  $f->arrivaldate; ?></td>
+                            <td><?=  $f->airline; ?></td>
+                            <td><?=  $f->model; ?></td>
+                            <td>
+                                <?php   
+                                if (empty($f->meal)){
+                                    if ($f->departuredate < $date){
+                                        echo "<p class='unavailable'>Unavailable</p>";
+                                    } else{
+                                        echo "<form action='./mealSelection.php' method='post'>
+                                                <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
+                                                <input class='addBtn' type='submit' name='postFlightBookingID' value='Add Meal' />
+                                            </form>";
+                                    }
                                 } else{
-                                    echo "<form action='./mealSelection.php' method='post'>
+                                    echo $f->meal;
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php   
+                                if (empty($f->seat)){
+                                    if ($f->departuredate < $date){
+                                        echo "<p class='unavailable'>Unavailable</p>";
+                                    } else{
+                                    echo "<form action='./seatSelection.php' method='post'>
                                             <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
-                                            <input class='addBtn' type='submit' name='postFlightBookingID' value='Add Meal' />
-                                          </form>";
-                                }
-                            } else{
-                                echo $f->meal;
-                            }
-                            ?>
-                        </td>
-                        <td><?php   
-                            if (empty($f->seat)){
-                                if ($f->departuredate < $date){
-                                    echo "<p class='unavailable'>Unavailable</p>";
+                                            <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Seat' />
+                                        </form>";
+                                    }
                                 } else{
-                                echo "<form action='./seatSelection.php' method='post'>
-                                        <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
-                                        <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Seat' />
-                                      </form>";
+                                    echo $f->seat;
                                 }
-                            } else{
-                                echo $f->seat;
-                            }
-                            ?></td>
-                        <td><?php   
-                            if (empty($f->class)){
-                                if ($f->departuredate < $date){
-                                    echo "<p class='unavailable'>Unavailable</p>";
+                                ?>
+                            </td>
+                            <td>
+                                <?php   
+                                if (empty($f->class)){
+                                    if ($f->departuredate < $date){
+                                        echo "<p class='unavailable'>Unavailable</p>";
+                                    } else{
+                                    echo "<form action='./classSelection.php' method='post'>
+                                            <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
+                                            <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Class' />
+                                        </form>";
+                                    }
                                 } else{
-                                echo "<form action='./classSelection.php' method='post'>
-                                        <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
-                                        <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Class' />
-                                      </form>";
+                                    echo $f->class;
                                 }
-                            } else{
-                                echo $f->class;
-                            }
-                            ?></td>
-                <?php }}}
-                ?>
-                </tbody>
-            </table>
+                                ?>
+                            </td>
+                            <td>
+                            <?php   
+                                if ($f->departuredate < $date){
+                                    echo "<p class='unavailable'>Completed</p>";
+                                } else{
+                                echo "<form action='./deleteFlightBooking.php' method='POST'>
+                                            <input type='hidden' name='flightBookingId' value='$f->id'/>
+                                            <input type='submit' class='deleteBtn' name='cancelFlightBooking' value='Cancel'/>
+                                    </form>";
+                                }
+                                ?>
+                            </td>
+                    <?php }}}
+                    ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="tripDetails">
             <h3>Your Accomodations</h3>
             <?php if (empty($hotels)){
                 echo '<h4> You have no accomodations booked. </h4>';
             } else{ ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Check-In Date</th>
-                        <th>Check-Out Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php if (isset($hotels)){ 
-                foreach($hotels as $h) { ?>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <?php }}}
-                ?>
-                </tbody>
-            </table>
+            <div class="tableWrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Check-In Date</th>
+                            <th>Check-Out Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php if (isset($hotels)){ 
+                    foreach($hotels as $h) { ?>
+                        <tr>
+                            <td></td>
+                            <td>
+                            <?php   
+                                if ($h->checkintime < $date){
+                                    echo "<p class='unavailable'>Completed</p>";
+                                } else{
+                                echo "<form action='./deleteHotelBooking.php' method='post'>
+                                            <input type='hidden' name='id' value='$h->id'/>
+                                            <input type='submit' class='deleteBtn' name='cancelHotel' value='Cancel'/>
+                                    </form>";
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <?php }}}
+                    ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="tripDetails">
             <h3>Your Vehicle Rentals</h3>
             <?php if (empty($vehicles)){
                 echo '<h4> You have no vehicle rentals. </h4>';
             } else{ ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Model</th>
-                        <th>Make</th>
-                        <th>Price</th>
-                        <th>Rental Company</th>
-                        <th>Pick-Up Date</th>
-                        <th>Return Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php if (isset($vehicles)){ 
-                foreach($vehicles as $v) { ?>
-                    <tr>
-                        <td><?=  $v->vehiclemodel; ?></td>
-                        <td><?=  $v->vehiclemake; ?></td>
-                        <td>$<?=  $v->vehicleprice; ?></td>
-                        <td><?=  $v->rentalcompanyname; ?><br>
-                            <?=  $v->rentalcompanyaddress; ?></td>
-                        <td><?=  $v->pickupdate; ?></td>
-                        <td><?=  $v->returndate; ?></td>
-                    </tr>
-                    <?php }}}
-                ?>
-                </tbody>
-            </table>
+            <div class="tableWrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Make/Model</th>
+                            <th>Price (per Day)</th>
+                            <th>Rental Company</th>
+                            <th>Pick-Up Date</th>
+                            <th>Return Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php if (isset($vehicles)){ 
+                    foreach($vehicles as $v) { ?>
+                        <tr>
+                            <td><?=  $v->vehiclemake; ?> <?=  $v->vehiclemodel; ?><br><a class="imageBtn" target="_blank" href="./images/vehicles/<?= $v->vehicleimage?>">View Image</a></td>
+                            <td>$<?=  $v->vehicleprice; ?></td>
+                            <td><?=  $v->rentalcompanyname; ?><br>
+                                <?=  $v->rentalcompanyaddress; ?></td>
+                            <td><?=  $v->pickupdate; ?></td>
+                            <td><?=  $v->returndate; ?></td>
+                            <td>
+                            <?php   
+                                if ($v->pickupdate < $date){
+                                    echo "<p class='unavailable'>Completed</p>";
+                                } else{
+                                echo "<form action='./deleteVechileRental.php' method='post'>
+                                            <input type='hidden' name='id' value='$v->id'/>
+                                            <input type='submit' class='deleteBtn' name='cancelVehicleRental' value='Cancel'/>
+                                    </form>";
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <?php }}}
+                    ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </main>

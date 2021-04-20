@@ -35,9 +35,11 @@ if (isset($_POST['contact'])) {
     <div class="contact columns">
         <h3>Contact Us</h3>
         <div class="info">
-            <p>Email: test@test.ca</p>
-            <p>Phone: 416-123-4567</p>
-    </div>
+            <h4>Email</h4>
+            <p><a class="infoLink" href="mailto:support@OnRoute.ca" target="blank">support@OnRoute.ca</a></p>
+            <h4>Phone</h4>
+            <p><a class="infoLink" href="tel:416-123-4567" target="blank">416-123-4567</a></p>
+        </div>
         <div class="form">
               <h4>Send us a message.</h4>
               <form class="contactform" action="services.php" method="post" enctype="multipart/form-data">
