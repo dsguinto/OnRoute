@@ -1,5 +1,7 @@
 <?php
+    //=====hotel feature requirements=====//
     use OnRoute\models\Database;
+    use OnRoute\models\Hotel;
     
     require_once './vendor/autoload.php';//doesen't work
     require_once 'library/functions.php';
@@ -13,45 +15,18 @@
     //test database conneciton
     $dbcon = Database::getDB();
     
-    //test is function is working
-    $h = new Hotel();
-    $hotels = $h->getAllHotels($dbcon);
-    //echo $hotels;
-    
-    //test is function is working
-    $hotel = $h->getHotelById($dbcon);
-    //var_dump($hotel);
-
-    
-   
-    
-    /*
-    foreach ($hotels as $hotel){
-        echo $hotel->hotelname;
-    }
-
-
-    if(isset($_POST['tripFrom__input_btn'])){
-        $city = $_POST['city'];
-        echo $city;
-
-        $dbcon = Database::getDB();
-        $h = new Hotel();
-        $hotels = $h->getHotelsByCity($city, $dbcon);
-        echo $hotels;
-        echo $hotels->hotelname;
-    }
-*/
+    //get method
+    $h = new Hotel();   
+    //=====hotel feature requirements=====//
 ?>
 
 <!--copied from content.php and modified-->
 <!-- Content -->
 <main>
-
     <!-- <div class="background"></div> -->
     <h2>Accommodations</h2>
     <!--FORM TO BE FIXED IN ORDER TO FUNCTION (names, paths, etc.)-->
-    <form method="post" action="">
+    <form method="post" action="hoteldetails.php">
         <div class="initialForm">
             <h2>Your Dream Vacation Awaits</h2>
         </div>
@@ -62,11 +37,15 @@
             </div>
                 <div class="tripFrom__input">
                 <label>Check In</label>
-            <input type=date />
+            <input type=date name="checkin"/>
             </div>
             <div class="tripFrom__input">
                 <label>Check Out</label>
-                <input type=date />
+                <input type=date name="checkout"/>
+            </div>
+            <div class="tripFrom__input">
+                <label>Number of Guests</label>
+                <input type=text name="guestnumber" />
             </div>
             <div class="tripFrom__input">
                 <input class="tripFrom__input_btn" type="submit" name="tripFrom__input_btn" value="Search" />
@@ -74,46 +53,32 @@
         </div>
     </form>
     <?php
-    //test is function is working: work in progress
-    
-    $city = "";
-    $c = $h->getHotelsByCity($city, $dbcon);
-    //var_dump($c);
-    
-
-    if(isset($_POST['tripFrom__input_btn'])){
-        $city = $_POST['city'];
-        //var_dump($city);
-        $c = $h->getHotelsByCity($city, $dbcon);
-        //var_dump($c);
-        /*
-        foreach ($c as $hotel){
-            echo $hotel['hotelname'];
-        }*/
-    }
-        //$dbcon = Database::getDB();
-        //$h = new Hotel();
-        //$hotels = $h->getHotelsByCity($city, $dbcon);
-        /*echo $hotels;
-        echo $hotels->hotelname;*/
-        //$hotels = $h->getHotelById($dbcon);
-        //var_dump($dbcon);
+        $city = "";
+        $checkin = "";
+        $checkout = "";
+        $guestnumber = "";
+        if(isset($_POST['tripFrom__input_btn'])){
+            $city = $_POST['city'];
+            $checkin = $_POST['checkin'];
+            $checkout = $_POST['checkout'];
+            $guestnumber = $_POST['guestnumber'];
+        }        
     ?>
     <div class="searchResult">
         <h2><?= $city ?></h2>
     <?php
-    foreach ($c as $hotel){
-            //echo $hotel['hotelname'];
+        $c = $h->getHotelsandRoomsByCityandGuest($city, $guestnumber, $dbcon);
+        foreach ($c as $hotel){
             $hotelname = $hotel['hotelname'];//in arrays we retrieve properties with [] not =>
     ?>    
         <h3><?= $hotelname ?></h3>
         <div class="searchResult__container">
             <div class="searchResult__image">
-                <?/*show image*/ ?>
-                <img src="./images/accommodations/a<?=$hotel['id'] ?>.jpg" />
+                <img src="./images/accommodations/a<?= $hotel['hotel_id'] ?>.jpg" width="200px"/>
             </div>
             <div class="searchResult__desc">
-                <? /* */ ?>
+                <p class="searchResult__desc_guestNumber">Guest number: <?= $hotel['guestnumber']?></p>
+                <p class="searchResult__desc_roomDesc">Description: <?= $hotel['description']?></p>
             </div>
         </div>
     </div>
@@ -160,8 +125,6 @@
         </div>
     </div>
 </main>
-
-
 <?php
     require_once 'views/footer.php';
 ?>

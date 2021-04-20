@@ -7,5 +7,8 @@
 !.vscode/extensions.json
 *.code-workplace
 
-# Local Hisotry for Visual Studio
+# Local History for Visual Studio
 .history/
+
+# Nai-Hsien's test file
+test-nai.php
