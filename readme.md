@@ -10,7 +10,7 @@
 
 ## Features
 
-#### Nai-Hsien: accommodations.php and models/Hotel.php
+#### Nai-Hsien: accommodations.php, hotelDetails.php, hotelBooking.php, models/Hotel.php
 
 - Search functionality for hotels by city name completed
 - Work in progress:
