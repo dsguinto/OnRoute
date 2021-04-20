@@ -207,6 +207,38 @@ input {
   z-index: -1;
 } */
 
+/* Search Result Section Styling by NHC */
+.searchResult {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#hotelname {/*h3 for hotel name results*/
+  text-align: center;  
+}
+
+.searchResult__container {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.searchResult__container>div {
+  margin: 1%;
+  width: 500px;
+}
+
+table {
+  width: 90vw;
+  border: 1px dotted #002248;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
 /* Deals Section Styling */
 .deals {
   padding: 2em 0;

@@ -34,8 +34,32 @@ class Hotel {
         return $hotels;
     }
 
+    public function getHotelsandRoomsByCityandGuest($city, $guestnumber, $dbcon){
+        $sql = "Select * FROM hotels INNER JOIN hotelrooms on hotels.id = hotelrooms.hotel_id WHERE hotels.city = :city and hotelrooms.guestnumber = :guestnumber";
+        $pdostm = $dbcon->prepare($sql);
+        $pdostm->bindParam(':city', $city);
+        $pdostm->bindParam(':guestnumber', $guestnumber);
+        $pdostm->execute();
+        $hotels = $pdostm->fetchAll(\PDO::FETCH_ASSOC);//WHY FETCH ASSOC, NOT OBJ?
+        return $hotels;
+    }
 
-    private $db;
+    public function bookHotel($city, $checkin, $checkout, $hotel_id, $hotelroom_id, $dbcon){
+        $sql = "INSERT INTO hotelbookings
+        VALUES (null, :checkintime, :checkouttime, :hotel_id, null, :hotelroom_id)";
+                
+        $pdostm = $dbcon->prepare($sql);
+        $pdostm->bindParam(':checkintime', $checkin);
+        $pdostm->bindParam(':checkouttime', $checkout);
+        $pdostm->bindParam(':hotel_id', $hotel_id);
+        $pdostm->bindParam(':hotelroom_id', $hotelroom_id);
+        $count = $pdostm->execute();
+        return $count;
+
+    }
+
+    //comment it out temporarily by Nai-hsien//
+    /*private $db;
 
     public function __construct($db)
     {
@@ -59,11 +83,5 @@ class Hotel {
 
         //return object
         return $result;
-    }
-    
-/* connection string
-    private static $user ="root";
-    private static $pass = "root";
-    private static $dsn = "mysql:host=localhost;dbname=onroute";
-*/
+    }  */
 }
