@@ -12,12 +12,12 @@
 
 
     $dbcon = Database::getDB();
-    $user = new User();
+    $user = new User($dbcon);
 
     $invalid = "";
 
-     //Checks to see if a user is logged in
-     if (isset($_SESSION['userID'])) {
+    //Checks to see if a user is logged in
+    if (isset($_SESSION['userID'])) {
         Header('Location: index.php');
     }
 
@@ -27,7 +27,7 @@
         $email = $_POST['email'];
 
         //Checks to see if posted email is unique
-        $emailExists = $user->checkIfEmailIsUnique($dbcon, $email);
+        $emailExists = $user->checkIfEmailIsUnique($email);
 
         if ($emailExists) {
             //Change this to something useful
@@ -39,9 +39,9 @@
             $pnumber = $_POST['pnumber'];
             $subject = "Registration successful";
             $body = "You are now registered bla bla bla yeah have fun";
-            $u = $user->addUser($dbcon, $email, $hashedPass, $fname, $lname, $pnumber);
+            $u = $user->addUser($email, $hashedPass, $fname, $lname, $pnumber);
             send_email($email, $fname.' '.$lname, $subject, $body);
-            $newID = $user->getUserIdByEmail($dbcon, $email);
+            $newID = $user->getUserIdByEmail($email);
             $_SESSION['userID'] = $newID->id;
             $_SESSION['userEmail'] = $email;
             $_SESSION['userFirstName'] = $fname;
@@ -56,7 +56,7 @@
         $email = $_POST['in_email'];
         $hashedPass = md5($_POST['in_pass']);
 
-        $u = $user->getUser($dbcon, $email, $hashedPass);
+        $u = $user->getUser($email, $hashedPass);
 
         if (!$u == null) {
             $_SESSION['userID'] = $u->id;
@@ -85,6 +85,7 @@
                     <label for="in_pass">Password: </label>
                     <input type="password" name="in_pass" required/>
                 </div>
+                <a href="forgotPassword.php">Forgot your password?</a>
                 <?= $invalid ?>
                 <input class="loginBtn" type="submit" value="Login" name="login">
             </div>
