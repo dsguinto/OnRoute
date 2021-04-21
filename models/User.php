@@ -10,7 +10,7 @@ class User{
     }
 
     public function getUser($email, $pass){
-        $sql = "select * from Users where email = :email AND password = :pass";
+        $sql = "select * from users where email = :email AND password = :pass";
 
         $pdostm = $this->db->prepare($sql);
 

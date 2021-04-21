@@ -1,5 +1,4 @@
 <?php
-
 use ONROUTE\models\{Database, Vehicle};
 require_once 'vendor/autoload.php';
 require_once 'library/functions.php';

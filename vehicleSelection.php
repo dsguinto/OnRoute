@@ -1,5 +1,4 @@
 <?php
-
 use ONROUTE\models\{Database, Vehicle};
 require_once 'vendor/autoload.php';
 require_once 'library/functions.php';
@@ -51,7 +50,7 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
             header("Location: vehicles.php");
         }
     }
-} else /*if sessions are not set...Select the values*/ {
+} else if (!isset($_SESSION['pDate']) && !isset($_SESSION['rDate'])) /*if sessions are not set...Select the values*/ {
     if (isset($_POST['submitDate'])){
         //collect all form input elements and validate.
         $pickupDate = $_POST['puDate'];
@@ -79,23 +78,23 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
                 $interval = $origin->diff($target);
                 $timed = $interval->format('%a');
                 //On susbmit insert into vehiclerentals table
-                if (isset($_POST['vehicle-confirm'])){
+                if (!isset($_POST['vehicle-confirm'])){
                     foreach($rcompanies as $rcompany){
+
                         $vehicleLocation = $rcompany->rentalcompanyaddress;
                         $userId = $_SESSION['userID'];
+
                         $dbcon = Database::getDb();
-                        $addv = new Vehicle();
-                        $addedVehicles = $addv->addVehiclesToRent($vehicleLocation, $pickupDate, $returnDate, $id, $userId, $dbcon);
+                        $viewDate = new Vehicle();
+                        $selectedDate = $viewDate->addVehiclesToRent($vehicleLocation, $pickupDate, $returnDate, $id, $userId, $dbcon);
                         $notAccepted = "Approved";
+                        header("Location: vehicles.php");
                     }
-                } else {
-                    $notAccepted = "Somthing is wrong";
                 }
             }
         }
     }
-} 
-
+}
 ?>
 
 <main class="infield">
@@ -135,7 +134,7 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
                 </form>
             </div>
         </div>
-    <?php } if(isset($pickupDate) && isset($returnDate) || isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){ ?>
+    <?php } if(isset($pickupDate) && isset($returnDate) && $selectedDate == false || isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){ ?>
     <form method="POST" action="#">
         <div class="submit__input">
             <input type="submit" class="confirmOrder" name="vehicle-confirm" value="Confirm Rental"/>

@@ -58,7 +58,6 @@ $dbcon = Database::getDb();
 $vh = new Vehicle();
 $vehicles = $vh->getAllVehicles($dbcon);
 //var_dump($vehicles);
-
 ?>
 
 <main class="infield">
