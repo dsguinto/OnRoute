@@ -57,9 +57,9 @@ class Hotel {
         return $count;
 
     }
-
+    /*
     //comment it out temporarily by Nai-hsien//
-    /*private $db;
+    private $db;
 
     public function __construct($db)
     {
