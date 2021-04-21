@@ -50,7 +50,7 @@ $rentalsById = $vri->getVehicleRentalByUser($id, $dbcon);
                         </td>
                         <td>
                             <!--Delete-->
-                            <form action="./vehicleDelete.php" method="post">
+                            <form action="./deleteVehicleRental.php" method="post">
                                 <input type="hidden" name="id" value="<?= $vehicle->id; ?>"/>
                                 <input type="submit" class="button-delete" name="deleteData" value="Delete">
                             </form>

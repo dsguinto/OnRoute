@@ -105,7 +105,13 @@ $vehicles = $vh->getAllVehicles($dbcon);
                 </div>
             <?php }/*xforeach*/echo '</div></div>'?>
             <?php echo '<div '.$disappear.'"><div class="products__popular"><h3>Vehicles Searched</h3>'; 
-                foreach($displayVehicles as $vehicle){ ?>
+                foreach($displayVehicles as $vehicle){
+                    $id = $vehicle->id;
+                    $dbcon = Database::getDb();
+                    $viewDate = new Vehicle();
+                    $selectedDate = $viewDate->GetSelectedDate($pickupDate, $returnDate, $id, $dbcon);
+                    if($selectedDate == false){
+                ?>
                 <div class="products__sytem_opt">
                     <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
                         <p class="short"><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p class="short"><?= $vehicle->vehiclecity; ?></p>
@@ -114,7 +120,7 @@ $vehicles = $vh->getAllVehicles($dbcon);
                         <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
-            <?php }/*xforeach*/echo '</div></div>'?>
+            <?php }}/*xforeach*/echo '</div></div>'?>
         </div>
     </div>
 </main>
