@@ -1,5 +1,4 @@
 <?php
-
 use ONROUTE\models\{Database, Vehicle};
 require_once 'vendor/autoload.php';
 require_once 'library/functions.php';
@@ -51,7 +50,7 @@ $rentalsById = $vri->getVehicleRentalByUser($id, $dbcon);
                         <td>
                             <!--Delete-->
                             <form action="./deleteVehicleRental.php" method="post">
-                                <input type="hidden" name="id" value="<?= $vehicle->id; ?>"/>
+                                <input type="hidden" name="vehicleRentalId" value="<?= $vehicle->id; ?>"/>
                                 <input type="submit" class="button-delete" name="deleteData" value="Delete">
                             </form>
                         </td>
