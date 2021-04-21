@@ -1,5 +1,6 @@
 
 <!-- A user can see the seats available and select the seat they want -->
+<!-- FOR future, database would be better designed without the flightsxflightseats bridging table. instead use flightbookings to bridge flights and flight seats. Get all the seats for a plane in a list of onbjects. Then check flightbookings join seats on seat id where flightId is the current flight id. If this entry exists, the seat is taken. You could also make a function in sql to show the view -->
 <?php 
     use OnRoute\models\{Database,Flight, Meal, Plane};
     require_once 'vendor/autoload.php';
