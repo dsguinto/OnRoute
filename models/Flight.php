@@ -15,7 +15,10 @@ class Flight{
     //get specific flight by flight number
     public function getFlightById($flightId)
     {
-        $query = "SELECT * FROM Flights WHERE flights.id = :flightId";
+        $query = "SELECT * FROM Flights 
+                    LEFT JOIN planes ON flights.plane_id = planes.id
+                    LEFT JOIN airlines ON planes.airline_id = airlines.id
+                    WHERE flights.id = :flightId";
 
         $request = $this->db->prepare($query);
 
@@ -58,7 +61,10 @@ class Flight{
     public function searchFlight($input){
         $input = "%" . $input . "%";
 
-        $query = "SELECT * FROM Flights WHERE ((departureairport LIKE :input) OR (arrivalairport LIKE :input)OR (departuredate LIKE :input)OR (arrivaldate LIKE :input)OR (airline LIKE :input) OR (plane_id LIKE :input))";
+        $query = "SELECT * FROM flights 
+                    LEFT JOIN planes ON flights.plane_id = planes.id
+                    LEFT JOIN airlines ON planes.airline_id = airlines.id
+                    WHERE ((departureairport LIKE :input) OR (arrivalairport LIKE :input)OR (departuredate LIKE :input)OR (arrivaldate LIKE :input)OR (airlinename LIKE :input) OR (plane_id LIKE :input))";
 
         $request = $this->db->prepare($query);
 
@@ -99,7 +105,7 @@ class Flight{
     public function getFlightBookingByUser($userId)
     {
 
-        $query = "SELECT flights.id AS flightid, departureairport, arrivalairport, departuredate, arrivaldate, airline,planes.model, flightbookings.id, flightmeals.meal, flightseats.seat, flightclasses.class
+        $query = "SELECT flights.id AS flightid, departureairport, arrivalairport, departuredate, arrivaldate, planes.model, flightbookings.id, flightmeals.meal, flightseats.seat, flightclasses.class
                 FROM flights 
                 LEFT JOIN planes ON planes.id = flights.plane_id
                 LEFT JOIN flightbookings ON flights.id = flightbookings.flight_id 
@@ -126,9 +132,11 @@ class Flight{
     public function getFlightDetailsByBookingId($flightBookingId)
     {
 
-        $query = "SELECT flights.id AS flightId, plane_id, flightbookings.id, departureairport, arrivalairport, departuredate, arrivaldate, airline
+        $query = "SELECT flights.id AS flightId, plane_id, flightbookings.id, departureairport, arrivalairport, departuredate, arrivaldate, airlinename
                     FROM flightbookings 
                     LEFT JOIN flights ON flights.id = flightbookings.flight_id
+                    LEFT JOIN planes ON flights.plane_id = planes.id
+                    LEFT JOIN airlines ON planes.airline_id = airlines.id
                     WHERE flightbookings.id = :flightBookingId";
 
         $request = $this->db->prepare($query);

@@ -86,7 +86,7 @@
         <div class="tripDetails">
             <h3>Your Flights</h3>
             <?php if (empty($flights)){
-                echo '<h3> You have no flights booked. </h3>';
+                echo '<h4> You have no flights booked. </h4>';
             } else{ ?>
             <div class="tableWrapper">
                 <table>

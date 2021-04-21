@@ -65,7 +65,7 @@
                 <li><span class="listTitle">Arrival Airport: </span><?=  $response->arrivalairport; ?></li>
                 <li><span class="listTitle">Depature Date: </span><?=  $response->departuredate; ?></li>
                 <li><span class="listTitle">Depature Date: </span><?=  $response->arrivaldate; ?></li>
-                <li><span class="listTitle">Airlines:</span> <?=  $response->airline; ?></li>
+                <li><span class="listTitle">Airlines:</span> <?=  $response->airlinename; ?></li>
         </ul>
         <?= $messageStatus ?>
         <div class="flightSelected__details_btns" <?= $hideBtn ?>>
