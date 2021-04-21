@@ -86,3 +86,12 @@ td{
     background: blue;
     color:white;
 }
+
+.currentSeat{
+    background: blue;
+    color:white;
+}
+
+tr:first-child{
+    background:gray;
+}

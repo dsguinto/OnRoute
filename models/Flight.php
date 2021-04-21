@@ -232,5 +232,20 @@ class Flight{
         //return object
         return $result;
     }
+
+    public function unbookSeatForFlight($flightId, $seatId){
+        $query = "UPDATE flightsxflightseats SET bookingstatus = 'Available' WHERE flightsxflightseats.flight_id = :flightId AND flightsxflightseats.seat_id = :seatId";
+    
+        $request = $this->db->prepare($query);
+        //sanitize
+        $request->bindParam(':flightId', $flightId);
+        $request->bindParam(':seatId', $seatId);
+        //execute
+        $request->execute();
+        //fetch result
+        $result = $request->fetch(\PDO::FETCH_OBJ);
+        //return object
+        return $result;
+    }
 }
 ?>

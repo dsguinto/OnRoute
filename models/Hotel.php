@@ -57,6 +57,13 @@ class Hotel {
         return $count;
 
     }
+    /* (Note to self: Look into db model)
+    private $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }*/
     
     public function getHotelBookingByUser($userId, $dbcon){
         $query = "SELECT * FROM hotels LEFT JOIN hotelbookings ON hotels.id = hotelbookings.hotel_id Where user_id = :userId";

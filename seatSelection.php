@@ -34,15 +34,19 @@
              $seatId = $_POST['seatSelected'];
              $flightBookingId = $_POST['postFlightBookingID'];
              $flightId = $_POST['flightId'];
-
+             $currentSeatId = $_POST['currentSeat'];
             //connect to database
             $db = Database::getDB();
-
-            /*Update the seat on the flight booking*/
+            
+            /*Update the flight booking with the new seat*/
             $flightController = new Flight($db);
             $flightController->updateSeatForFlightBooking($flightBookingId, $seatId);
 
-            /*Change the status of the seat to "unavaliable" for this flight*/
+            //Update the status of the user's currentSeat to "Available" if they have a current selection
+            if($currentSeatId != null){
+                $flightController->unbookSeatForFlight($flightId, $currentSeatId);
+            }
+            /*Change the status of the user's new seat to "Unavaliable" for this flight*/
             $flightController->bookSeatForFlight($flightId, $seatId);
 
             //Change the display of the page to show confirmation
@@ -55,10 +59,17 @@
     /* Step 1 -- get flight details for the flight booking id and extract the flight Id */
 
     $flightBookingId = $_POST['postFlightBookingID'];
-
-    /*  Connect to database and use getFlightDetailsByBookingId($flightBookingId)*/
+    
+    /*  Connect to database and use*/
     $db = Database::getDB();
     $flightController = new Flight($db);
+
+    //if bookingId is currently associated with a seatId, store it as "currentSeatId"
+    $currentSeatId = $flightController->getFlightBookingsById($flightBookingId)->seat_id;
+    if($currentSeatId != null){
+        $userMsg = "You previously booked seat ".$currentSeatId.". If you would like to update your seat, please make a selection below.";
+    }
+    /* getFlightDetailsByBookingId($flightBookingId)*/
     $flightDetails = $flightController->getFlightDetailsByBookingId($flightBookingId);
     /* Extract the flight id  */
    /*  print_r ($flightDetails); */
@@ -114,6 +125,10 @@
             if($seats[$i-1]->bookingstatus == "Available"){
                 $tableBody .= "<td class = 'available'><input class = 'radioButton' type='radio' name='seatSelected' value='".$seats[$i-1]->seat_id."'/>".$seats[$i-1]->seat_id."</td></tr><tr>";
             }
+            elseif($seats[$i-1]->seat_id == $currentSeatId){
+                $tableBody .= "<td class = 'currentSeat'>".$seats[$i-1]->seat_id."</td></tr><tr>";
+            }
+
             else{
                 $tableBody .= "<td class = 'unavailable'>".$seats[$i-1]->seat_id."</td></tr><tr>";
             }
@@ -122,6 +137,9 @@
         else{
             if($seats[$i-1]->bookingstatus == "Available"){
                 $tableBody .= "<td class = 'available'><input class = 'radioButton' type='radio' name='seatSelected' value='".$seats[$i-1]->seat_id."'/>".$seats[$i-1]->seat_id."</td>";
+            }
+            elseif($seats[$i-1]->seat_id == $currentSeatId){
+                $tableBody .= "<td class = 'currentSeat'>".$seats[$i-1]->seat_id."</td>";
             }
             else{
                 $tableBody .= "<td class = 'unavailable'>".$seats[$i-1]->seat_id."</td>";
@@ -140,13 +158,14 @@
 <main>
     <!-- Flight track form appears on page load -->
     <div class = "seatSelection" <?=$hide2?>>
-        <h2>Please Select a Seat Below</h2>
+        <h2><?=isset($userMsg)? $userMsg : "Please Select a Seat Below"; ?></h2>
         <form action="" method="POST" name = "seatSelection__form">
             <input type="hidden" name="postFlightBookingID" value="<?=$flightBookingId;?>"/>
             <input type="hidden" name="flightId" value="<?=$flightId?>"/>
+            <input type="hidden" name="currentSeat" value="<?=$currentSeatId?>"/>
             
             <div class = "seatSelection_flex">
-                <p><?=isset($errMsg)? $errMsg : ""?></p>;
+                <p><?=isset($errMsg)? $errMsg : ""?></p>
                 <table>
                     <?=$tableHeader?>
                     <?=$tableBody?>
