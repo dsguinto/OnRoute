@@ -57,8 +57,8 @@ class Vehicle{
     //Add Vehicle Information into vehiclerentals table
     public function addVehiclesToRent($vehicleLoc, $puDate, $rDate, $vehicleid, $userid, $dbcon){
 
-        $sql = "INSERT INTO vehiclerentals (pickupdate, returndate, vehicle_id, user_id)
-        VALUES (:puDate, :rDate, :vehicleid, :userid)";
+        $sql = "INSERT INTO vehiclerentals (pickuplocation, pickupdate, returndate, vehicle_id, user_id)
+        VALUES (:vehicleloc, :puDate, :rDate, :vehicleid, :userid)";
 
         $pdo = $dbcon->prepare($sql);
         $pdo->bindParam(':vehicleloc', $vehicleLoc);
@@ -97,7 +97,7 @@ class Vehicle{
     }
 
     public function getVehicleRentalByUser($userId, $dbcon){
-        $query = "SELECT vehiclemodel, vehiclemake, vehicleimage, vehicleprice, user_id, pickupdate, pickupdate, returndate, rentalcompanyname, rentalcompanyaddress, vehiclerentals.id 
+        $query = "SELECT vehiclemodel, vehiclemake, vehicleimage, vehicleprice, user_id, pickuplocation, pickupdate, pickupdate, returndate, rentalcompanyname, rentalcompanyaddress, vehiclerentals.id 
         FROM vehicles
         LEFT JOIN vehiclerentals ON vehicles.id = vehiclerentals.vehicle_id 
         LEFT JOIN rentalcompanies ON rentalcompanies.id = vehicles.rentalcompany_id 

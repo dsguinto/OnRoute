@@ -147,7 +147,7 @@ input{
     border-radius: 30px;
     position: absolute;
     right: 50px;
-    top: 20px;
+    top: 40px;
 }
 #return-button:hover, #list-button:hover{
     background: var(--persimmon);
@@ -197,4 +197,28 @@ input{
     text-align: center;
     border-radius: 0;
     border-radius: 13px;
+}.table{
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto;
+}.table td, .table th {
+    border: 1px solid black;
+    padding: 40px;
+}.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--navyBlue);
+    color: white;
+}.table tr:hover {background-color: #ddd;}
+.button-delete{
+    background: var(--darkRed);
+    padding: 10px 15px 10px 15px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}.button-delete:hover{
+    background: var(--mustardYellow);
+    cursor: pointer;
 }

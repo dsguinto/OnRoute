@@ -12,51 +12,47 @@ $id = $_SESSION['userID'];
 $dbcon = Database::getDb();
 $vri = new Vehicle();
 $rentalsById = $vri->getVehicleRentalByUser($id, $dbcon);
-
 ?>
 
-<main>
+<main class="infield">
 <?php if(isset($_SESSION['userID'])){?>
-    <h2>Vehicle List</h2>
+    <a href="vehicles.php" id="list-button">Go Back</a>
+    <h2>Rented Vehicle(s)</h2>
     <table class="table">
         <thead>
             <tr>
-                <th>Pick Up Location</th>
-                <th>Pick Up Date</th>
-                <th>Return Date</th>
-                <th>Vehicle Make</th>
-                <th>Vehicle Model</th>
-                <th>Vehicle Image</th>
-                <th>Vehicle Price</th>
-                <th>Rental Company</th>
-                <th>Rental Address</th>
+                <th>Rental Information</th>
+                <th>Option</th>
             </tr>
         </thead>
         <tbody>
             <?php if(isset($rentalsById)){ 
                 foreach($rentalsById as $vehicle){ ?>
                     <tr>
-                        <td><?= $vehicle->pickuplocation ?></td>
-                        <td><?= $vehicle->pickupdate ?></td>
-                        <td><?= $vehicle->returndate ?></td>
-                        <td><?= $vehicle->vehiclemake ?></td>
-                        <td><?= $vehicle->vehiclemodel ?></td>
-                        <td><img src="images/vehicles/<?= $vehicle->vehicleimage ?>" height="100"></td>
-                        <td>CAD $<?= $vehicle->vehicleprice ?></td>
-                        <td><?= $vehicle->rentalcompanyname ?></td>
-                        <td><?= $vehicle->rentalcompanyaddress ?></td>
-                        <!-- <td>
-                            <!--Update--
-                            <form action="#" method="post">
-                                <input type="hidden" name="id" value="<?= $vehicle->id; ?>"/>
-                                <input type="submit" class="button btn btn-primary" name="updateVehicle" value="Update">
-                            </form>
-                        </td>-->
+                        <td>
+                            <p><img src="images/vehicles/<?= $vehicle->vehicleimage ?>" height="100"></p>
+                            <p><strong>Pick Up Location: </strong><?= $vehicle->pickuplocation ?><p>
+                            <p><strong>Pick Up Date: </strong><?= $vehicle->pickupdate ?></p>
+                            <p><strong>returnDate Date: </strong><?= $vehicle->returndate ?></p>
+                            <p><strong>Vehicle Make & Model: </strong><?= $vehicle->vehiclemake ?> <?= $vehicle->vehiclemodel ?></p>
+                            <p><strong>Price/Day: </strong>CAD $<?= $vehicle->vehicleprice ?></p>
+                            <p><strong>Total Price: </strong>
+                            CAD $<?php
+                                    $origin = new DateTime($vehicle->pickupdate);
+                                    $target = new DateTime($vehicle->returndate);
+                                    $interval = $origin->diff($target);
+                                    $timed = $interval->format('%a');
+                                    echo addPrice($vehicle->vehicleprice, $timed); 
+                                ?>
+                            </p>
+                            <p><strong>Retnal Company: </strong><?= $vehicle->rentalcompanyname ?></p>
+                            <p><strong>Rental Company Address: </strong><?= $vehicle->rentalcompanyaddress ?></p>
+                        </td>
                         <td>
                             <!--Delete-->
-                            <form action="#" method="post">
-                                <input type="hidden" name="id" value="<?= $car["id"]; ?>"/>
-                                <input type="submit" class="button btn btn-danger" name="deleteCars" value="Delete">
+                            <form action="./vehicleDelete.php" method="post">
+                                <input type="hidden" name="id" value="<?= $vehicle->id; ?>"/>
+                                <input type="submit" class="button-delete" name="deleteData" value="Delete">
                             </form>
                         </td>
                     </tr>

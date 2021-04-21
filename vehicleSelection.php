@@ -79,17 +79,18 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
                 $interval = $origin->diff($target);
                 $timed = $interval->format('%a');
                 //On susbmit insert into vehiclerentals table
-                if (isset($pickupDate) && isset($returnDate) && isset($_POST['vehicle-confirm'])){
+                if (isset($_POST['vehicle-confirm'])){
                     foreach($rcompanies as $rcompany){
-                        $vehicleLoc = $rcompany->rentalcompanyaddress;
+                        $vehicleLocation = $rcompany->rentalcompanyaddress;
                         $userId = $_SESSION['userID'];
                         $dbcon = Database::getDb();
                         $addv = new Vehicle();
-                        $addedVehicles = $addv->addVehiclesToRent($vehicleLoc, $pickupDate, $returnDate, $id, $userId, $dbcon);
+                        $addedVehicles = $addv->addVehiclesToRent($vehicleLocation, $pickupDate, $returnDate, $id, $userId, $dbcon);
                         $notAccepted = "Approved";
                     }
+                } else {
+                    $notAccepted = "Somthing is wrong";
                 }
-                var_dump(isset($_POST['vehicle-confirm']));
             }
         }
     }
