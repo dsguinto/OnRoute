@@ -105,6 +105,17 @@ form {
   border-left: 2px solid grey;
   padding: 1em 3em 5em 3em;
 }
+/* hotelDetails.php */
+.searchResult__form {
+  width: 5%;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #d9a21b;
+  border-bottom: 2px solid grey;
+  border-left: 2px solid grey;
+  padding: 1em;
+}
 
 .initialForm h2 {
   font-family: "Montserrat", sans-serif;

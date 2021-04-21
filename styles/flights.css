@@ -263,3 +263,19 @@ td {
 .otherOptions__msg a:hover {
   color: #d39a09;
 }
+
+.viewBtn {
+  background-color: #002248;
+  text-decoration: none;
+  color: white;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  padding: 0.25em 0.5em;
+  border-radius: 15px;
+  transition: 200ms;
+}
+
+.viewBtn:hover {
+  background-color: #2a67ac;
+  cursor: pointer;
+}

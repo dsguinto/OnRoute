@@ -6,7 +6,6 @@ require_once 'library/vehicles.php';
 //Styling and Header View
 $css = array('styles/vehicles.css');
 require_once 'views/header.php';
-//var_dump($_POST);
 //variables. 
 $displayVehicles;
 $appear = 'style="display: block;';
@@ -38,7 +37,7 @@ if(isset($_POST['vehicleSubmit'])){
         //invert the display when user searches for vehicles.
         $appear = 'style="display: none';
         $disappear = 'style="display: block;"';
-        if(isset($pickupDate) && isset($returnDate)){
+        if(isset($pickupDate) && $pickupDate !== "" && isset($returnDate) && $returnDate !== ''){
             $_SESSION['pDate'] = $pickupDate;
             $_SESSION['rDate'] = $returnDate;
 
@@ -46,19 +45,19 @@ if(isset($_POST['vehicleSubmit'])){
             $target = new DateTime($pickupDate);
             $interval = $origin->diff($target);
             $timed = $interval->format('%a');
-        } else {
-            unset($_SESSION['pDate']);
-            unset($_SESSION['rDate']);
         }
     }
+}
+
+if(empty($pickupDate) || empty($returnDate)){
+    unset($_SESSION['pDate']);
+    unset($_SESSION['rDate']);
 }
 //getting all vehicles from the database.
 $dbcon = Database::getDb();
 $vh = new Vehicle();
 $vehicles = $vh->getAllVehicles($dbcon);
 //var_dump($vehicles);
-var_dump($_SESSION['pDate']);
-var_dump($_SESSION['rDate']);
 
 ?>
 
@@ -67,7 +66,7 @@ var_dump($_SESSION['rDate']);
     <h2>Rent A Vehicle</h2>
     <!-- FORM -->
     <img src="images/vehicles/13-pexels-photo-4090350.jpeg" height="600" id="vehicle__image">
-    <form action="vehicles.php" method="POST" name="form" id="form">
+    <form action="#form" method="POST" name="form" id="form">
         <div class="form__input">
           <label>Pick Up Location</label>
           <input type="text" name="puLocation" id="puLocation" placeholder="City, Airport or Address" value="<?= isset($pickupLoc)? $pickupLoc: '';?>">
@@ -85,79 +84,45 @@ var_dump($_SESSION['rDate']);
         </div>
         <span id="error-msg"><?= isset($ErrorMsg)? $ErrorMsg: '';?></span>
     </form>
-    <?php if(isset($_SESSION['userID'])){?>
-        <!--Set for users (logged in)-->
-        <!-- Vehicle Rental Products-->
-        <div class="products">
-            <h2>Choose Your Vehicle</h2>
-                <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Top Car Deals</h3>'; 
-                    foreach($vehicles as $vehicle){ if($vehicle->vehicleprice <= '65.00'){ ?>
-                    <div class="products__popular_opt">
-                        <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><span class="deallabel">DEAL</span>
-                            <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CAD $<?= $vehicle->vehicleprice; ?>/Day</p>
-                            <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
-                        </a>
-                    </div>
-                <?php }/*xif price deal statement*/}/*xforeach*/echo '</div></div>'?>
-                <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Vehicles Listed</h3>'; 
-                    foreach($vehicles as $vehicle){ ?>
-                    <div class="products__sytem_opt">
-                        <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
-                            <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CAD $<?= $vehicle->vehicleprice; ?>/Day</p>
-                            <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
-                        </a>
-                    </div>
-                <?php }/*xforeach*/echo '</div></div>'?>
-                <?php echo '<div '.$disappear.'"><div class="products__popular"><h3>Vehicles Searched</h3>'; 
-                    foreach($displayVehicles as $vehicle){ ?>
-                    <div class="products__sytem_opt">
-                        <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
-                            <p class="short"><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p class="short"><?= $vehicle->vehiclecity; ?></p>
-                            <p class="short">From: <?= date("M.d, Y", strtotime($pickupDate)); ?></p><p class="short">To: <?= date("M.d, Y", strtotime($returnDate)) ?></p>
-                            <p class="short">Total: CAD $<?= addPrice($vehicle->vehicleprice, $timed); ?></p>
-                            <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
-                        </a>
-                    </div>
-                <?php }/*xforeach*/echo '</div></div>'?>
-            </div>
+    <div class="products">
+        <h2>Choose Your Vehicle</h2>
+            <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Top Car Deals</h3>'; 
+                foreach($vehicles as $vehicle){ if($vehicle->vehicleprice <= '65.00'){ ?>
+                <div class="products__popular_opt">
+                    <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><span class="deallabel">DEAL</span>
+                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CAD $<?= $vehicle->vehicleprice; ?>/Day</p>
+                        <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
+                    </a>
+                </div>
+            <?php }/*xif price deal statement*/}/*xforeach*/echo '</div></div>'?>
+            <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Vehicles Listed</h3>'; 
+                foreach($vehicles as $vehicle){ ?>
+                <div class="products__sytem_opt">
+                    <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
+                        <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CAD $<?= $vehicle->vehicleprice; ?>/Day</p>
+                        <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
+                    </a>
+                </div>
+            <?php }/*xforeach*/echo '</div></div>'?>
+            <?php echo '<div '.$disappear.'"><div class="products__popular"><h3>Vehicles Searched</h3>'; 
+                foreach($displayVehicles as $vehicle){
+                    $id = $vehicle->id;
+                    $dbcon = Database::getDb();
+                    $viewDate = new Vehicle();
+                    $selectedDate = $viewDate->GetSelectedDate($pickupDate, $returnDate, $id, $dbcon);
+                    if($selectedDate == false){
+                ?>
+                <div class="products__sytem_opt">
+                    <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
+                        <p class="short"><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p class="short"><?= $vehicle->vehiclecity; ?></p>
+                        <p class="short">From: <?= date("M.d, Y", strtotime($pickupDate)); ?></p><p class="short">To: <?= date("M.d, Y", strtotime($returnDate)) ?></p>
+                        <p class="short">Total: CAD $<?= addPrice($vehicle->vehicleprice, $timed); ?></p>
+                        <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
+                    </a>
+                </div>
+            <?php }}/*xforeach*/echo '</div></div>'?>
         </div>
-    <?php }else{ ?>
-        <!--Set for users (not logged in)-->
-        <!-- Vehicle Rental Products-->
-        <div class="products">
-            <h2>Log-In to Choose Your Vehicle</h2>
-                <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Top Car Deals</h3>'; 
-                    foreach($vehicles as $vehicle){ if($vehicle->vehicleprice <= '65.00'){ ?>
-                    <div class="products__popular_opt">
-                        <a href="./login.php" name="send-vehicle"><span class="deallabel">DEAL</span>
-                            <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
-                            <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
-                        </a>
-                    </div>
-                <?php }/*xif price deal statement*/}/*xforeach*/echo '</div></div>'?>
-                <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Vehicles Listed</h3>'; 
-                    foreach($vehicles as $vehicle){ ?>
-                    <div class="products__sytem_opt">
-                        <a href="./login.php" name="send-vehicle">
-                            <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CA $<?= $vehicle->vehicleprice; ?>/Day</p>
-                            <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
-                        </a>
-                    </div>
-                <?php }/*xforeach*/echo '</div></div>'?>
-                <?php echo '<div '.$disappear.'"><div class="products__popular"><h3>Vehicles Searched</h3>'; 
-                    foreach($displayVehicles as $vehicle){ ?>
-                    <div class="products__sytem_opt">
-                        <a href="./login.php" name="send-vehicle">
-                            <p class="short"><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p class="short"><?= $vehicle->vehiclecity; ?></p>
-                            <p class="short">From: <?= date("M.d, Y", strtotime($pickupDate)); ?></p><p class="short">To: <?= date("M.d, Y", strtotime($returnDate)) ?></p>
-                            <p class="short">Total: CA $<?= addPrice($vehicle->vehicleprice, $timed); ?></p>
-                            <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
-                        </a>
-                    </div>
-                <?php }/*xforeach*/echo '</div></div>'?>
-            </div>
-        </div>
-    <?php } ?>
+    </div>
 </main>
 
 <?php

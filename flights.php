@@ -1,5 +1,5 @@
 <?php
-    use ONROUTE\models\{Database,Flight, Trips};
+    use ONROUTE\models\{Database,Flight};
     require_once 'vendor/autoload.php';
     require_once 'library/functions.php';
     $css = array('styles/flights.css'); //Add unqiue css files here
@@ -80,7 +80,6 @@
                     <th>Arrival Airport</th>
                     <th>Depature Date</th>
                     <th>Depature Date</th>
-                    <th>Airlines</th>
                     <th></th>
                 </tr>
             </thead>
@@ -94,11 +93,10 @@
                     <td><?=  $flight->arrivalairport; ?></td>
                     <td><?=  $flight->departuredate; ?></td>
                     <td><?=  $flight->arrivaldate; ?></td>
-                    <td><?=  $flight->airline; ?></td>
                     <td>
                         <form action="
                         <?php if (isset($_SESSION['userID'])){ echo "./flightBooking.php"; } else {echo "./login.php";} ?>" method="POST">
-                            <input type="hidden" name="flightId" value="<?= $flight->id; ?>"/>
+                            <input type="hidden" name="flightId" value="<?= $flight->flightid; ?>"/>
                             <button type="submit" class="bookBtn" name="bookFlight" <?php if ($flight->departuredate < $date){echo "style='display:none'";} else{echo "style='display:block'";} ?>>Book</button>
                         </form>
                         <p class="hiddenMsg" <?php if ($flight->departuredate < $date){echo "style='display:block'";} else{echo "style='display:none'";} ?> >Book Unavailable</p>
@@ -142,7 +140,7 @@
                     echo '<td>'.$f->arrivaldate.'</td>';
                     echo '<td><form action="./flightOptions.php" method="post">';
                     echo '<input type="hidden" name="flightBookingID" value="'. $f->id .'" />';
-                    echo '<input type="submit" name="postFlightBookingID" value="View flight"/>';
+                    echo '<input type="submit" class="viewBtn" name="postFlightBookingID" value="View Flight Options"/>';
                     echo '</form></td>';
                     echo '</tr>';
                 }

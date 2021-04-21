@@ -39,57 +39,67 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
     //On susbmit insert into vehiclerentals table
     if(isset($_POST['vehicle-confirm'])){
         foreach($rcompanies as $rcompany){
-        $vehicleLoc = $rcompany->rentalcompanyaddress;
-        $pickUp = $_SESSION['pDate'];
-        $return = $_SESSION['rDate'];
-        $userId = $_SESSION['userID'];
-        $dbcon = Database::getDb();
-        $av = new Vehicle();
-        $addVehicle = $av->addVehiclesToRent($vehicleLoc, $pickUp, $return, $id, $userId, $dbcon);
 
-        header('Location: vehicleConfirm.php');
+            $vehicleLoc = $rcompany->rentalcompanyaddress;
+            $pickUp = $_SESSION['pDate'];
+            $return = $_SESSION['rDate'];
+            $userId = $_SESSION['userID'];
+
+            $dbcon = Database::getDb();
+            $av = new Vehicle();
+            $addVehicle = $av->addVehiclesToRent($vehicleLoc, $pickUp, $return, $id, $userId, $dbcon);
+            header("Location: vehicles.php");
         }
     }
 } else /*if sessions are not set...Select the values*/ {
-    if(isset($_POST['submitDate'])){
+    if (isset($_POST['submitDate'])){
         //collect all form input elements and validate.
         $pickupDate = $_POST['puDate'];
         $returnDate = $_POST['rDate'];
-        //If statements
-        if(empty($pickupDate)){
+        //If statements to check the inputs
+        if (empty($pickupDate)){
             $ErrorMsg = 'Pick up date must be filled';
         }
-        else if(empty($returnDate)){
+        else if (empty($returnDate)){
             $ErrorMsg = 'Return date must be filled';
         } 
-        else {
-            //div styling uppon submision
-            $appear = 'style="display: none"';
-            $disappear = 'style="display: block;"';
-            //date formatting.
-            $origin = new DateTime($returnDate);
-            $target = new DateTime($pickupDate);
-            $interval = $origin->diff($target);
-            $timed = $interval->format('%a');
-            //On susbmit insert into vehiclerentals table
-            if(isset($_POST['vehicle-confirm'])){
-                foreach($rcompanies as $rcompany){
-                $vehicleLoc = $rcompany->rentalcompanyaddress;
-                $userId = $_SESSION['userID'];
-                $dbcon = Database::getDb();
-                $av = new Vehicle();
-                $av = $addVehicle->addVehiclesToRent($vehicleLoc, $pickupDate, $returnDate, $id, $userId, $dbcon);
-                
-                header('Location: vehicleConfirm.php');
+        elseif (isset($pickupDate) && isset($returnDate)) {
+            $dbcon = Database::getDb();
+            $viewDate = new Vehicle();
+            $selectedDate = $viewDate->GetSelectedDate($pickupDate, $returnDate, $id, $dbcon);
+            if($selectedDate == true){
+                $ErrorMsg = "Vehicle has already been chosen, pick another date";
+            } else {
+                //div styling uppon submision
+                $appear = 'style="display: none"';
+                $disappear = 'style="display: block;"';
+                //date formatting.
+                $origin = new DateTime($returnDate);
+                $target = new DateTime($pickupDate);
+                $interval = $origin->diff($target);
+                $timed = $interval->format('%a');
+                //On susbmit insert into vehiclerentals table
+                if (isset($_POST['vehicle-confirm'])){
+                    foreach($rcompanies as $rcompany){
+                        $vehicleLocation = $rcompany->rentalcompanyaddress;
+                        $userId = $_SESSION['userID'];
+                        $dbcon = Database::getDb();
+                        $addv = new Vehicle();
+                        $addedVehicles = $addv->addVehiclesToRent($vehicleLocation, $pickupDate, $returnDate, $id, $userId, $dbcon);
+                        $notAccepted = "Approved";
+                    }
+                } else {
+                    $notAccepted = "Somthing is wrong";
                 }
             }
         }
     }
-}
+} 
 
 ?>
 
 <main class="infield">
+<?php if(isset($_SESSION['userID'])){?>
     <a href="vehicles.php" id="return-button">Go Back</a>
     <?php foreach($vehicles as $vehicle){ ?>
         <h2><?= $vehicle->vehiclemake. ' ' .$vehicle->vehiclemodel ?></h2>
@@ -109,7 +119,7 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
         <div <?= $appear; ?> >
             <h2>Select a pick up date & return date.</h2>
             <div id="form-display">
-                <form action="#" method="POST" name="form" id="form-date">
+                <form action="#form-date" method="POST" name="form" id="form-date">
                     <div class="form__input">
                         <label>Pick Up Date</label>
                         <input type="date" name="puDate" id="puDate" value="<?= isset($pickupDate)? $pickupDate: '';?>"/>
@@ -125,13 +135,14 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
                 </form>
             </div>
         </div>
-    <?php } ?>
-    <form method="POST" action="">
+    <?php } if(isset($pickupDate) && isset($returnDate) || isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){ ?>
+    <form method="POST" action="#">
         <div class="submit__input">
             <input type="submit" class="confirmOrder" name="vehicle-confirm" value="Confirm Rental"/>
         </div>
         <span id="error-msg"><?= isset($notAccepted)? $notAccepted: '';?></span>
     </form>
+<?php }} else { header('Location: ./login.php'); } ?>
 </main>
 
 <?php

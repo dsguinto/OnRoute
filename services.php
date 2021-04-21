@@ -1,6 +1,6 @@
 <?php
 require_once 'library/functions.php';
-require_once './Models/Mailer.php';
+require_once 'models/Mailer.php';
 //Add unqiue css files here
 $css = array('styles/services.css');
 require_once 'views/header.php';
@@ -21,15 +21,32 @@ if (isset($_POST['contact'])) {
     <div class="columns">
         <div class="covid">
             <h3>Covid-19 Policies</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores inventore pariatur labore quos numquam dicta tempora, molestias sed nam est.
-            </p>
+            <ul>
+                <li> Fully vaccinated travelers are less likely to get and spread COVID-19. </li>
+                <li> People who are fully vaccinated with an FDA-authorized vaccine can travel safely within the United States: </li>
+                <ul>
+                    <li>Fully vaccinated travelers do not need to get tested before or after travel unless their destination requires it</li>
+                    <li>Fully vaccinated travelers do not need to self-quarantine</li>
+                </ul>
+                <li>Fully vaccinated travelers should still follow CDC’s recommendations for traveling safely including:</li>
+                <ul>
+                    <li>Wear a mask over your nose and mouth</li>
+                    <li>Stay 6 feet from others and avoid crowds</li>
+                    <li>Wash your hands often or use hand sanitizer</li>
+                </ul>
+            </ul>
+            <p class="source"><a target="_blank" href="https://www.cdc.gov/coronavirus/2019-ncov/travelers/travel-during-covid19.html">Source</a></p>
         </div>
         <div class="faq">
             <h3>FAQ</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores inventore pariatur labore quos numquam dicta tempora, molestias sed nam est.
-            </p>
+            <h4>Can people who have recently recovered from COVID-19 travel?</h4>
+            <p> If you had COVID-19 in the past 3 months, follow all requirements and recommendations for fully vaccinated travelers except:</p>
+            <ul>
+                <li>You can show documentation of recovery from COVID-19 instead of a negative test result before boarding an international flight.</li>
+                <li>You do NOT need to tested 3-5 days after traveling unless you have symptoms of COVID-19.</li>
+            </ul>
+            <p>We know that people can continue to test positive for up to 3 months after they had COVID-19 and not be infectious to others.</p>
+            <p class="source"><a target="_blank" href="https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html">Source</a></p>
         </div>
     </div>
     <div class="contact columns">

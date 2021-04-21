@@ -60,7 +60,7 @@
                 <li><span class="listTitle">Arrival Airport: </span><?=  $flightDetails->arrivalairport; ?></li>
                 <li><span class="listTitle">Depature Date: </span><?=  $flightDetails->departuredate; ?></li>
                 <li><span class="listTitle">Depature Date: </span><?=  $flightDetails->arrivaldate; ?></li>
-                <li><span class="listTitle">Airlines:</span> <?=  $flightDetails->airline; ?></li>
+                <li><span class="listTitle">Airlines:</span> <?=  $flightDetails->airlinename; ?></li>
         </ul>
         <h3>Are you sure you want to cancel this flight booking? <br> <span class='warning'>WARNING: This action cannot be undone.</span></h3>
         <div class="flightSelected__details_btns">

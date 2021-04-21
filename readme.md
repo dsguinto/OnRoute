@@ -1,4 +1,4 @@
-# HTTP 5202 PHP Project: OnRoute
+# HTTP 5202 PHP Project: onRoute
 
 ## By: The < WebDevs >
 
@@ -12,10 +12,24 @@
 
 #### Nai-Hsien: accommodations.php, hotelDetails.php, hotelBooking.php, models/Hotel.php
 
-- Search functionality for hotels by city name completed
-- Work in progress:
-  - book a hotel with a user id (logged in)
-  - Better CSS
+##### Feature description (Project phase 1c)
+- [X] 1. Accommodation Booking: Search</br>
+   Search database for accommodations based off of **_location, check in/out dates, and number of guests_**.
+- [X] 2. Accommodation Booking: Book after Search</br>
+   Based on search results, users can select an accommodation and book it.
+- [X] 3. Accommodation Booking: Confirmation/Details</br>
+   After a booking is complete, the page will display accommodation details ~~**_and  confirmation will be sent to the user’s email_**~~
+##### Improvement in progress:
+  - [ ] Book a hotel with a user id (logged in)
+  - [ ] Better CSS
+  - [ ] Connecting to other features
+  - [ ] composer, namespace, and class
+##### Deployment URL
+https://nhcto.ca/onRoute/accommodations.php
+##### Test credentials
+There are only limiting data in the database now. To test the functionality, please select a city from the following list, with only 2 or 4 guests.
+###### List of cities in the database:
+Beijing, Buenos Aires, Cairo, Calcutta, Chongqing, Delhi, Dhaka, Guangzhou, Istanbul, Karachi, Kinshasa, Lagos, Lahore, Los Angeles, Manila, Mexico City
 
 ---
 

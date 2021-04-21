@@ -86,7 +86,7 @@
         <div class="tripDetails">
             <h3>Your Flights</h3>
             <?php if (empty($flights)){
-                echo '<h3> You have no flights booked. </h3>';
+                echo '<h4> You have no flights booked. </h4>';
             } else{ ?>
             <div class="tableWrapper">
                 <table>
@@ -139,7 +139,7 @@
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
                                     echo "<form action='./seatSelection.php' method='POST'>
-                                            <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
+                                            <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
                                             <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Seat' />
                                         </form>";
                                     }
@@ -155,7 +155,7 @@
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
                                     echo "<form action='./classSelection.php' method='POST'>
-                                            <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
+                                            <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
                                             <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Class' />
                                         </form>";
                                     }
@@ -191,7 +191,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Hotel Name</th>
                             <th>Address</th>
                             <th>Check-In Date</th>
                             <th>Check-Out Date</th>
@@ -202,7 +202,10 @@
                     <?php if (isset($hotels)){ 
                     foreach($hotels as $h) { ?>
                         <tr>
-                            <td></td>
+                            <td><?=  $h->hotelname; ?></td>
+                            <td><?=  $h->hoteladdress; ?><br><?=  $h->city; ?>, <?=  $h->country; ?></td>
+                            <td><?=  $h->checkintime; ?></td>
+                            <td><?=  $h->checkouttime; ?></td>
                             <td>
                             <?php   
                                 if ($h->checkintime < $date){
