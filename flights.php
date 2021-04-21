@@ -80,7 +80,6 @@
                     <th>Arrival Airport</th>
                     <th>Depature Date</th>
                     <th>Depature Date</th>
-                    <th>Airlines</th>
                     <th></th>
                 </tr>
             </thead>
@@ -94,7 +93,6 @@
                     <td><?=  $flight->arrivalairport; ?></td>
                     <td><?=  $flight->departuredate; ?></td>
                     <td><?=  $flight->arrivaldate; ?></td>
-                    <td><?=  $flight->airline; ?></td>
                     <td>
                         <form action="
                         <?php if (isset($_SESSION['userID'])){ echo "./flightBooking.php"; } else {echo "./login.php";} ?>" method="POST">
@@ -142,7 +140,7 @@
                     echo '<td>'.$f->arrivaldate.'</td>';
                     echo '<td><form action="./flightOptions.php" method="post">';
                     echo '<input type="hidden" name="flightBookingID" value="'. $f->id .'" />';
-                    echo '<input type="submit" name="postFlightBookingID" value="View flight"/>';
+                    echo '<input type="submit" class="viewBtn" name="postFlightBookingID" value="View Flight Options"/>';
                     echo '</form></td>';
                     echo '</tr>';
                 }
