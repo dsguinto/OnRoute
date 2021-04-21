@@ -33,7 +33,7 @@ $rentalsById = $vri->getVehicleRentalByUser($id, $dbcon);
                             <p><img src="images/vehicles/<?= $vehicle->vehicleimage ?>" height="100"></p>
                             <p><strong>Pick Up Location: </strong><?= $vehicle->pickuplocation ?><p>
                             <p><strong>Pick Up Date: </strong><?= $vehicle->pickupdate ?></p>
-                            <p><strong>returnDate Date: </strong><?= $vehicle->returndate ?></p>
+                            <p><strong>Return Date: </strong><?= $vehicle->returndate ?></p>
                             <p><strong>Vehicle Make & Model: </strong><?= $vehicle->vehiclemake ?> <?= $vehicle->vehiclemodel ?></p>
                             <p><strong>Price/Day: </strong>CAD $<?= $vehicle->vehicleprice ?></p>
                             <p><strong>Total Price: </strong>
@@ -51,7 +51,7 @@ $rentalsById = $vri->getVehicleRentalByUser($id, $dbcon);
                         <td>
                             <!--Delete-->
                             <form action="./deleteVehicleRental.php" method="post">
-                                <input type="hidden" name="id" value="<?= $vehicle->id; ?>"/>
+                                <input type="hidden" name="vehicleRentalId" value="<?= $vehicle->id; ?>"/>
                                 <input type="submit" class="button-delete" name="deleteData" value="Delete">
                             </form>
                         </td>

@@ -124,7 +124,7 @@
                                     } else{
                                         echo "<form action='./mealSelection.php' method='POST'>
                                                 <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
-                                                <input class='addBtn' type='submit' name='postFlightBookingID' value='Add Meal' />
+                                                <input class='addBtn' type='submit' name='sendFlightBookingID' value='Add Meal' />
                                             </form>";
                                     }
                                 } else{
@@ -134,17 +134,17 @@
                             </td>
                             <td>
                                 <?php   
-                                if (empty($f->seat)){
+                                if (empty($f->seat_id)){
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
                                     echo "<form action='./seatSelection.php' method='POST'>
                                             <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
-                                            <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Seat' />
+                                            <input class='addBtn' type='submit' name='sendFlightBookingID' value='Select Seat' />
                                         </form>";
                                     }
                                 } else{
-                                    echo $f->seat;
+                                    echo $f->seat_id;
                                 }
                                 ?>
                             </td>
@@ -156,7 +156,7 @@
                                     } else{
                                     echo "<form action='./classSelection.php' method='POST'>
                                             <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
-                                            <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Class' />
+                                            <input class='addBtn' type='submit' name='sendFlightBookingID' value='Select Class' />
                                         </form>";
                                     }
                                 } else{

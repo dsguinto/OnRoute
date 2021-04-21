@@ -105,14 +105,13 @@ class Flight{
     public function getFlightBookingByUser($userId)
     {
 
-        $query = "SELECT flights.id AS flightid, departureairport, arrivalairport, departuredate, arrivaldate, planes.model, flightbookings.id, flightmeals.meal, flightseats.seat, flightclasses.class
-                FROM flights 
-                LEFT JOIN planes ON planes.id = flights.plane_id
-                LEFT JOIN flightbookings ON flights.id = flightbookings.flight_id 
-                LEFT JOIN flightmeals ON flightmeals.id = flightbookings.meal_id 
-                LEFT JOIN flightseats ON flightseats.id = flightbookings.seat_id 
-                LEFT JOIN flightclasses ON flightclasses.id = flightbookings.class_id 
-                WHERE user_id = :userId";
+        $query = "SELECT flights.id AS flightid, seat_id, departureairport, arrivalairport, departuredate, arrivaldate, planes.model, flightbookings.id, flightmeals.meal, flightclasses.class
+                    FROM flights 
+                    LEFT JOIN planes ON planes.id = flights.plane_id
+                    LEFT JOIN flightbookings ON flights.id = flightbookings.flight_id 
+                    LEFT JOIN flightmeals ON flightmeals.id = flightbookings.meal_id 
+                    LEFT JOIN flightclasses ON flightclasses.id = flightbookings.class_id 
+                    WHERE user_id = :userId";
 
         $request = $this->db->prepare($query);
 

@@ -120,34 +120,114 @@
     </div>
     <p <?= $userHide ?> class="otherOptions__msg"><a href="login.php">Log in</a> to view these options for your flights!</p>
 
-    <!-- Mohamed Sakr's Section-->
     <div class="otherOptions" <?= $userDisplay ?>>
         <h2>Your Flights</h2>
-        <?= isset($_SESSION['userID']) ? '' : '<a href="login.php">Login</a>'; ?>
-        <?php
-        if (isset($_SESSION['userID'])) {
-            $flightController = new Flight($db);
-            $flights = $flightController->getFlightBookingByUser($_SESSION['userID']);
-            if (empty($flights)){
-                echo '<h3> You have no flights booked. </h3>';
-            } else{
-                echo '<div class="tableWrapper"><table><thead><tr><td>Departure</td><td>Arrival</td><td>Departure Date</td><td>Arrival Date</td><td></td></tr></thead><tbody>';
-                foreach ($flights as $f) {
-                    echo '<tr>';
-                    echo '<td>'.$f->departureairport.'</td>';
-                    echo '<td>'.$f->arrivalairport.'</td>';
-                    echo '<td>'.$f->departuredate.'</td>';
-                    echo '<td>'.$f->arrivaldate.'</td>';
-                    echo '<td><form action="./flightOptions.php" method="post">';
-                    echo '<input type="hidden" name="flightBookingID" value="'. $f->id .'" />';
-                    echo '<input type="submit" class="viewBtn" name="postFlightBookingID" value="View Flight Options"/>';
-                    echo '</form></td>';
-                    echo '</tr>';
-                }
-                echo '</tbody></table></div>';
-            }
-        }
-        ?>
+        <?php 
+        $flightController = new Flight($db);
+        $flights = $flightController->getFlightBookingByUser($_SESSION['userID']);
+
+        if (empty($flights)){
+                echo '<h4> You have no flights booked. </h4>';
+            } 
+        else{ ?>
+        <div class="tableWrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Depature Airport</th>
+                        <th>Arrival Airport</th>
+                        <th>Depature Date</th>
+                        <th>Arrival Date</th>
+                        <th>Meal</th>
+                        <th>Seat</th>
+                        <th>Class</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (isset($flights)){ 
+                    foreach($flights as $f) { ?>
+                        <tr>
+                            <td><?=  $f->departureairport; ?>
+                                <br>
+                                <form action='' method='POST'>
+                                    <input type='hidden' name='flightId' value='<?= $f->flightid?>'/>
+                                    <button type='submit' class='linkBtn' name='flightSubmit'>View Details</button>
+                                </form>
+                            </td>
+                            <td><?=  $f->arrivalairport; ?></td>
+                            <td><?=  $f->departuredate; ?></td>
+                            <td><?=  $f->arrivaldate; ?></td>
+                            <td>
+                                <?php   
+                                if (empty($f->meal)){
+                                    if ($f->departuredate < $date){
+                                        echo "<p class='unavailable'>Unavailable</p>";
+                                    } else{
+                                        echo "<form action='./mealSelection.php' method='POST'>
+                                                <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
+                                                <input class='addBtn' type='submit' name='sendFlightBookingID' value='Add Meal' />
+                                            </form>";
+                                    }
+                                } else{
+                                    echo $f->meal;
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php   
+                                if (empty($f->seat_id)){
+                                    if ($f->departuredate < $date){
+                                        echo "<p class='unavailable'>Unavailable</p>";
+                                    } else{
+                                    echo "<form action='./seatSelection.php' method='POST'>
+                                            <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
+                                            <input class='addBtn' type='submit' name='sendFlightBookingID' value='Select Seat' />
+                                        </form>";
+                                    }
+                                } else{
+                                    echo $f->seat_id;
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php   
+                                if (empty($f->class)){
+                                    if ($f->departuredate < $date){
+                                        echo "<p class='unavailable'>Unavailable</p>";
+                                    } else{
+                                    echo "<form action='./classSelection.php' method='POST'>
+                                            <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
+                                            <input class='addBtn' type='submit' name='sendFlightBookingID' value='Select Class' />
+                                        </form>";
+                                    }
+                                } else{
+                                    echo $f->class;
+                                }
+                                ?>
+                            </td>
+                            <td>
+                            <?php   
+                                if ($f->departuredate < $date){
+                                    echo "<p class='unavailable'>Completed</p>";
+                                } else{
+                                echo "<form action='./deleteFlightBooking.php' method='POST'>
+                                            <input type='hidden' name='flightBookingId' value='$f->id'/>
+                                            <input type='submit' class='deleteBtn' name='cancelFlightBooking' value='Cancel'/>
+                                    </form>";
+                                }
+                                ?>
+                            </td>
+                    <?php }
+                    }
+                }?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="banner">
+        <h2><a href="flightNumberSearch.php">Track a Flight</a></h2>
     </div>
 </main>
 

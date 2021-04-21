@@ -48,33 +48,35 @@
 
 ?>
 
-<div class = "flightSelected">
-    <h2 class="emptyMsg" <?= $redirect ?>> Looking to cancel a flight? </br> Click <a href="./myaccount.php">Here</a></h3> 
-    <h2 <?= $hide ?>>Flight Details </h2>
-    <div class="flightSelected__details">
-        <ul>
+<main>
+    <div class = "flightSelected">
+        <h2 class="emptyMsg" <?= $redirect ?>> Looking to cancel a flight? </br> Click <a href="./myaccount.php">Here</a></h3> 
+        <h2 <?= $hide ?>>Flight Details </h2>
+        <div class="flightSelected__details">
+            <ul>
+                <?php 
+                    if (isset($flightDetails)){
+                ?>
+                    <li><span class="listTitle">Depature Airport: </span> <?=  $flightDetails->departureairport; ?></li>
+                    <li><span class="listTitle">Arrival Airport: </span><?=  $flightDetails->arrivalairport; ?></li>
+                    <li><span class="listTitle">Depature Date: </span><?=  $flightDetails->departuredate; ?></li>
+                    <li><span class="listTitle">Depature Date: </span><?=  $flightDetails->arrivaldate; ?></li>
+                    <li><span class="listTitle">Airlines:</span> <?=  $flightDetails->airlinename; ?></li>
+            </ul>
+            <h3>Are you sure you want to cancel this flight booking? <br> <span class='warning'>WARNING: This action cannot be undone.</span></h3>
+            <div class="flightSelected__details_btns">
+                <a href="./myaccount.php" class="bookBtn">Cancel<a>
+                <form action="" method="POST">
+                        <input type="hidden" name="flightBookingId" value=" <?= $flightDetails->id; ?>"/>
+                        <button type="submit" class="deleteBtn" name="deleteFlightBooking">Delete Booking</button>
+                </form>
+            </div>
             <?php 
-                if (isset($flightDetails)){
-            ?>
-                <li><span class="listTitle">Depature Airport: </span> <?=  $flightDetails->departureairport; ?></li>
-                <li><span class="listTitle">Arrival Airport: </span><?=  $flightDetails->arrivalairport; ?></li>
-                <li><span class="listTitle">Depature Date: </span><?=  $flightDetails->departuredate; ?></li>
-                <li><span class="listTitle">Depature Date: </span><?=  $flightDetails->arrivaldate; ?></li>
-                <li><span class="listTitle">Airlines:</span> <?=  $flightDetails->airlinename; ?></li>
-        </ul>
-        <h3>Are you sure you want to cancel this flight booking? <br> <span class='warning'>WARNING: This action cannot be undone.</span></h3>
-        <div class="flightSelected__details_btns">
-            <a href="./myaccount.php" class="bookBtn">Cancel<a>
-            <form action="" method="POST">
-                    <input type="hidden" name="flightBookingId" value=" <?= $flightDetails->id; ?>"/>
-                    <button type="submit" class="deleteBtn" name="deleteFlightBooking">Delete Booking</button>
-            </form>
+                } 
+                ?>
         </div>
-        <?php 
-            } 
-            ?>
     </div>
-</div>
+</main>
 
 <?php
 require_once 'views/footer.php';
