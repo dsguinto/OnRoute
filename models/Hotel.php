@@ -46,7 +46,7 @@ class Hotel {
 
     public function bookHotel($city, $checkin, $checkout, $hotel_id, $hotelroom_id, $dbcon){
         $sql = "INSERT INTO hotelbookings
-        VALUES (null, :checkintime, :checkouttime, :hotel_id, null, :hotelroom_id)";
+        VALUES (null, :checkintime, :checkouttime, :hotel_id, :hotelroom_id, 1)";//hard coded user_id for now.
                 
         $pdostm = $dbcon->prepare($sql);
         $pdostm->bindParam(':checkintime', $checkin);

@@ -7,10 +7,18 @@ class Database{
     // private static $pass = "rk,O#Nuwn]wJ";
     // private static $dsn = "mysql:host=198.50.215.64;dbname=moeasakr_onroute";
 
+    /*
+    //for mamp localhost log in - NHC
     private static $user ="root";
-    private static $pass = "";//for mamp log in - Nai
+    private static $pass = "root";
     private static $dsn = "mysql:host=localhost;dbname=onroute";
-
+    */
+    
+    
+    private static $user ="root";
+    private static $pass = "";
+    private static $dsn = "mysql:host=localhost;dbname=onroute";
+    
     private static $dbcon;
 
     private function __construct() {
