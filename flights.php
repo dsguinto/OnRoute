@@ -1,5 +1,5 @@
 <?php
-    use ONROUTE\models\{Database,Flight, Trips};
+    use ONROUTE\models\{Database,Flight};
     require_once 'vendor/autoload.php';
     require_once 'library/functions.php';
     $css = array('styles/flights.css'); //Add unqiue css files here
@@ -96,7 +96,7 @@
                     <td>
                         <form action="
                         <?php if (isset($_SESSION['userID'])){ echo "./flightBooking.php"; } else {echo "./login.php";} ?>" method="POST">
-                            <input type="hidden" name="flightId" value="<?= $flight->id; ?>"/>
+                            <input type="hidden" name="flightId" value="<?= $flight->flightid; ?>"/>
                             <button type="submit" class="bookBtn" name="bookFlight" <?php if ($flight->departuredate < $date){echo "style='display:none'";} else{echo "style='display:block'";} ?>>Book</button>
                         </form>
                         <p class="hiddenMsg" <?php if ($flight->departuredate < $date){echo "style='display:block'";} else{echo "style='display:none'";} ?> >Book Unavailable</p>

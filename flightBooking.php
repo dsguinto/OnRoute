@@ -46,10 +46,19 @@
         //Adds flight to flightbooking and associates it with logged in user
         $addBooking = $flightController->addFlightBooking($_SESSION['userID'], $finalFlightId);
         $hideBtn = "style='display:none;'";
-        $messageStatus = "<h3>Your flight has successfully been booked! Thank you for choosing OnRoute!</h3>";
-    }
+        $messageStatus = "<h3>Your flight has successfully been booked! Thank you for choosing OnRoute!<br><a href='./flights.php'>Back to Flights</a></h3>";
 
-    //Checks if page is refreshed to prevent continuous updates to database. Redirects user back to flights if page is refreshed to start search again.
+        //Checks if page is refreshed to prevent continuous updates to database. Redirects user back to flights if page is refreshed to start search again.
+//     if($_SESSION['submit'] == $_POST['confirmFlight'] && 
+//     isset($_SESSION['submit'])){
+//         header('Location: ./flights.php');
+//    // user double submitted 
+//    }
+//    else {
+//        // user submitted once
+//        $_SESSION['submit'] = $_POST['confirmFlight'];       
+//    } 
+    }
 
 ?>
 
@@ -71,7 +80,7 @@
         <div class="flightSelected__details_btns" <?= $hideBtn ?>>
             <a href="./flights.php" class="bookBtn">Cancel<a>
             <form action="" method="POST">
-                    <input type="hidden" name="flightId" value=" <?= $response->id; ?>"/>
+                    <input type="hidden" name="flightId" value=" <?= $response->flightid; ?>"/>
                     <button type="submit" class="bookBtn" name="confirmFlight">Book Flight</button>
             </form>
         </div>
@@ -80,7 +89,20 @@
             ?>
     </div>
 </div>
-
+<script>
+var a,b;
+window.onbeforeunload = function (e) {
+    if (b) return;
+    a = setTimeout(function () {
+        b = true;
+        window.location.href = "//flights.php";
+    }, 500);
+    return "Now you will be redirected to new page if choosing to stay there...";
+}
+window.onunload = function () {
+    clearTimeout(a);
+}
+</script>
 <?php
 require_once 'views/footer.php';
 ?>

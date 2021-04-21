@@ -15,7 +15,7 @@ class Flight{
     //get specific flight by flight number
     public function getFlightById($flightId)
     {
-        $query = "SELECT * FROM Flights 
+        $query = "SELECT *, flights.id AS flightid FROM Flights 
                     LEFT JOIN planes ON flights.plane_id = planes.id
                     LEFT JOIN airlines ON planes.airline_id = airlines.id
                     WHERE flights.id = :flightId";
@@ -61,7 +61,7 @@ class Flight{
     public function searchFlight($input){
         $input = "%" . $input . "%";
 
-        $query = "SELECT * FROM flights 
+        $query = "SELECT *, flights.id AS flightid FROM flights 
                     LEFT JOIN planes ON flights.plane_id = planes.id
                     LEFT JOIN airlines ON planes.airline_id = airlines.id
                     WHERE ((departureairport LIKE :input) OR (arrivalairport LIKE :input)OR (departuredate LIKE :input)OR (arrivaldate LIKE :input)OR (airlinename LIKE :input) OR (plane_id LIKE :input))";

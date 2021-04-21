@@ -22,6 +22,10 @@
   width: 40%;
 }
 
+.faq p {
+  margin-top: 0;
+}
+
 .contact {
   background-color: #f1f1e6;
 }
@@ -108,4 +112,17 @@
 #submit-button:active {
   cursor: pointer;
   background-color: #d9a21b;
+}
+
+h4 {
+  text-decoration: underline;
+  margin-bottom: 0;
+}
+
+.source a {
+  color: #002248;
+}
+
+.source a:hover {
+  color: #004797;
 }
