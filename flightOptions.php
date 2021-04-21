@@ -27,12 +27,13 @@
             <a href="flightNumberSearch.php"><img src="images/flights/difa-naufal-airplane-unsplash.jpg" alt="Image of Plane flying"/></a>
         </div>
         <form class="otherOptions__opt" action="mealSelection.php" method="POST">
-            <input type="hidden" name ="postFlightBookingID" value ="<?=$postFlightBookingId?>"/>
+            <input type="hidden" name ="postFlightBookingID" value ="<?=$postFlightBookingID?>"/>
             <button type="submit"><img src="images/flights/meal5.jpeg" alt="Image of on-flight meal from Air France" /></button>
         </form>
-        <div class="otherOptions__opt">
-            <a href="seatSelection.php"><img src="images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window"/></a>
-        </div>
+        <form class="otherOptions__opt" action="seatSelection.php" method="POST">
+            <input type="hidden" name ="postFlightBookingID" value ="1"/>
+            <button type="submit"><img src="images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window" /></button>
+        </form>
     </div>
 </main>
 
