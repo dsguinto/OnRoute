@@ -9,7 +9,7 @@
     require_once './models/Database.php';//if autoload is working, we don't seem to need this
 
     //Add unqiue css files here
-    $css = array('styles/accommodations.css');
+    $css = array('styles/hotelDetails.css');
     require_once('views/header.php');
     
     //test database conneciton
@@ -32,7 +32,6 @@
         $guestnumber = $_POST['guestnumber'];
     
         $c = $h->getHotelsandRoomsByCityandGuest($city, $guestnumber, $dbcon);
-        var_dump($c);
 ?>
 <main>
     <div class="searchResult">

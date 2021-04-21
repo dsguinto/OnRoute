@@ -26,7 +26,7 @@
     <!-- <div class="background"></div> -->
     <h2>Accommodations</h2>
     <!--FORM TO BE FIXED IN ORDER TO FUNCTION (names, paths, etc.)-->
-    <form method="post" action="hoteldetails.php">
+    <form method="post" action="hotelDetails.php">
         <div class="initialForm">
             <h2>Your Dream Vacation Awaits</h2>
         </div>
