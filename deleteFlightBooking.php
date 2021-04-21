@@ -18,7 +18,7 @@
     //Instantiate database connection
     $db = Database::getDb();
     
-    //Checks if $_POST value exist to see if user accessed page through flights.php search redirect
+    //Checks if $_POST value exist to see if user accessed page through myaccount.php redirect
     if (empty($_POST)) {
         $redirect = "style='display:block;'";
         $hide = "style='display:none'";
@@ -34,7 +34,6 @@
     $flightDetails = $flightController->getFlightDetailsByBookingId($flightBookingId);
     }
 
-    var_dump($flightBookingId);
     //Executes if "Delete Flight" button is clicked
     if (isset($_POST['deleteFlightBooking'])){
         $finalFlightBookingId = $_POST['flightBookingId'];//Saves flightBookingId as a POST data

@@ -25,11 +25,49 @@
 
     //Get hotel details
     $hotelController = new Hotel($dbcon);
-    $hotels = $hotelController->getHotelBookingByUser($_SESSION['userID']);
+    $hotels = $hotelController->getHotelBookingByUser($_SESSION['userID'],$dbcon);
 
     // //Get vehicle details
     $vehicleController = new Vehicle($dbcon);
     $vehicles = $vehicleController->getVehicleRentalByUser($_SESSION['userID'], $dbcon);
+
+
+    //Taken from Will's section to allow for "View Details" button to work (adjustments made to fix context of feature)
+    if(isset($_POST['flightSubmit'])){
+            //get the flight id submitted and store as variable
+            $flightId = $_POST['flightId'];
+
+            //instantiate database connection
+            $db = Database::getDb();
+    
+            //When flight number submitted, instantiate db connection, utilize getFlightById
+            $flightController = new Flight($db);
+    
+            //send flightId to controller 
+            $response = $flightController->getFlightById($flightId);
+            
+            if($response == false){
+                $errMsg = "We couldn't find that flight. Did you double check your flight number?";
+            } 
+            else{
+                switch($response->airline){
+                    case 'aircanada':
+                        $airlineLogoLink = 'images/logos/airCanada.jpg';
+                        break;
+                    case 'deltaAirlines';
+                        $airlineLogoLink = 'images/logos/deltaAirlines.jpg';
+                        break;
+                    case 'americanAirlines';
+                        $airlineLogoLink = 'images/logos/americanAirlines.jpg';
+                        break;
+                } 
+                //store the $response as a session var
+                $_SESSION['flightInfo'] = $response;
+                $_SESSION['airlineLogoLink'] = $airlineLogoLink;
+                //redirect user to the flightInfo pages
+                header ('Location:flightInfo.php');   
+            }
+        }
 
 ?>
 
@@ -38,7 +76,7 @@
     <div class="page">
         <h2>Welcome <?= $_SESSION['userFirstName'] . " " . $_SESSION['userLastName'] . "!"?></h2>
         <div class="userDetails">
-            <h3>Account Information</h3>
+            <h3>Account Information <a href="accountManagement.php" class="accountBtn" >Manage Account Info</a></h3>
             <ul>
                 <li>Name: <?= $_SESSION['userFirstName'] . " " . $_SESSION['userLastName'] ?></li>
                 <li>Email: <?= $_SESSION['userEmail'] ?></li>
@@ -58,8 +96,6 @@
                             <th>Arrival Airport</th>
                             <th>Depature Date</th>
                             <th>Arrival Date</th>
-                            <th>Airlines</th>
-                            <th>Plane</th>
                             <th>Meal</th>
                             <th>Seat</th>
                             <th>Class</th>
@@ -70,19 +106,23 @@
                     <?php if (isset($flights)){ 
                     foreach($flights as $f) { ?>
                         <tr>
-                            <td><?=  $f->departureairport; ?></td>
+                            <td><?=  $f->departureairport; ?>
+                                <br>
+                                <form action='' method='POST'>
+                                    <input type='hidden' name='flightId' value='<?= $f->flightid?>'/>
+                                    <button type='submit' class='linkBtn' name='flightSubmit'>View Details</button>
+                                </form>
+                            </td>
                             <td><?=  $f->arrivalairport; ?></td>
                             <td><?=  $f->departuredate; ?></td>
                             <td><?=  $f->arrivaldate; ?></td>
-                            <td><?=  $f->airline; ?></td>
-                            <td><?=  $f->model; ?></td>
                             <td>
                                 <?php   
                                 if (empty($f->meal)){
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
-                                        echo "<form action='./mealSelection.php' method='post'>
+                                        echo "<form action='./mealSelection.php' method='POST'>
                                                 <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
                                                 <input class='addBtn' type='submit' name='postFlightBookingID' value='Add Meal' />
                                             </form>";
@@ -98,7 +138,7 @@
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
-                                    echo "<form action='./seatSelection.php' method='post'>
+                                    echo "<form action='./seatSelection.php' method='POST'>
                                             <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
                                             <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Seat' />
                                         </form>";
@@ -114,7 +154,7 @@
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
-                                    echo "<form action='./classSelection.php' method='post'>
+                                    echo "<form action='./classSelection.php' method='POST'>
                                             <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
                                             <input class='addBtn' type='submit' name='postFlightBookingID' value='Select Class' />
                                         </form>";
@@ -168,9 +208,9 @@
                                 if ($h->checkintime < $date){
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
-                                echo "<form action='./deleteHotelBooking.php' method='post'>
-                                            <input type='hidden' name='id' value='$h->id'/>
-                                            <input type='submit' class='deleteBtn' name='cancelHotel' value='Cancel'/>
+                                echo "<form action='./deleteHotelBooking.php' method='POST'>
+                                            <input type='hidden' name='hotelBookingId' value='$h->id'/>
+                                            <input type='submit' class='deleteBtn' name='cancelHotelBooking' value='Cancel'/>
                                     </form>";
                                 }
                                 ?>
@@ -203,7 +243,7 @@
                     <?php if (isset($vehicles)){ 
                     foreach($vehicles as $v) { ?>
                         <tr>
-                            <td><?=  $v->vehiclemake; ?> <?=  $v->vehiclemodel; ?><br><a class="imageBtn" target="_blank" href="./images/vehicles/<?= $v->vehicleimage?>">View Image</a></td>
+                            <td><?=  $v->vehiclemake; ?> <?=  $v->vehiclemodel; ?><br><a class="linkBtn" target="_blank" href="./images/vehicles/<?= $v->vehicleimage?>">View Image</a></td>
                             <td>$<?=  $v->vehicleprice; ?></td>
                             <td><?=  $v->rentalcompanyname; ?><br>
                                 <?=  $v->rentalcompanyaddress; ?></td>
@@ -214,8 +254,8 @@
                                 if ($v->pickupdate < $date){
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
-                                echo "<form action='./deleteVechileRental.php' method='post'>
-                                            <input type='hidden' name='id' value='$v->id'/>
+                                echo "<form action='./deleteVehicleRental.php' method='POST'>
+                                            <input type='hidden' name='vehicleRentalId' value='$v->id'/>
                                             <input type='submit' class='deleteBtn' name='cancelVehicleRental' value='Cancel'/>
                                     </form>";
                                 }

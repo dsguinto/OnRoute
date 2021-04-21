@@ -128,30 +128,26 @@
         <?= isset($_SESSION['userID']) ? '' : '<a href="login.php">Login</a>'; ?>
         <?php
         if (isset($_SESSION['userID'])) {
-            $trip = new Trips($db);
-            $t = $trip->getFlightBookings($_SESSION['userID']);
-            if (empty($t)){
+            $flightController = new Flight($db);
+            $flights = $flightController->getFlightBookingByUser($_SESSION['userID']);
+            if (empty($flights)){
                 echo '<h3> You have no flights booked. </h3>';
+            } else{
+                echo '<div class="tableWrapper"><table><thead><tr><td>Departure</td><td>Arrival</td><td>Departure Date</td><td>Arrival Date</td><td></td></tr></thead><tbody>';
+                foreach ($flights as $f) {
+                    echo '<tr>';
+                    echo '<td>'.$f->departureairport.'</td>';
+                    echo '<td>'.$f->arrivalairport.'</td>';
+                    echo '<td>'.$f->departuredate.'</td>';
+                    echo '<td>'.$f->arrivaldate.'</td>';
+                    echo '<td><form action="./flightOptions.php" method="post">';
+                    echo '<input type="hidden" name="flightBookingID" value="'. $f->id .'" />';
+                    echo '<input type="submit" name="postFlightBookingID" value="View flight"/>';
+                    echo '</form></td>';
+                    echo '</tr>';
+                }
+                echo '</tbody></table></div>';
             }
-            else{
-            echo '<div class="tableWrapper"><table><thead><tr><td>Departure</td><td>Arrival</td><td>Departure Date</td><td>Arrival Date</td><td></td></tr></thead><tbody>';
-            $flight = new Flight($db);
-            foreach ($t as $value) {
-                $f = $flight->getFlightBookingsById($value->flightbooking_id);
-                $fInfo = $flight->getFlightById($f->flight_id);
-                echo '<tr>';
-                echo '<td>'.$fInfo->departureairport.'</td>';
-                echo '<td>'.$fInfo->arrivalairport.'</td>';
-                echo '<td>'.$fInfo->departuredate.'</td>';
-                echo '<td>'.$fInfo->arrivaldate.'</td>';
-                echo '<td><form action="./flightOptions.php" method="post">';
-                echo '<input type="hidden" name="flightBookingID" value="'.$value->flightbooking_id.'" />';
-                echo '<input type="submit" name="postFlightBookingID" value="View flight"/>';
-                echo '</form></td>';
-                echo '</tr>';
-            }
-            echo '</tbody></table></div>';
-        }
         }
         ?>
     </div>

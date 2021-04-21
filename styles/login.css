@@ -54,6 +54,7 @@ input {
 
 .loginBtn {
   height: inherit;
+  width: 65%;
   border-radius: 25px;
   padding: 0.5em 1em;
   transition: 100ms;
@@ -67,4 +68,15 @@ input {
 .tripFrom p {
   margin-top: 0;
   color: #d01100;
+}
+
+.forgotPassBtn {
+  color: #044186;
+  text-decoration: none;
+  transition: 100ms;
+}
+
+.forgotPassBtn:hover {
+  text-decoration: underline;
+  color: #f3f3f3;
 }
