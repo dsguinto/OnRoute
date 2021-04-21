@@ -140,7 +140,7 @@
                     echo '<td>'.$f->arrivaldate.'</td>';
                     echo '<td><form action="./flightOptions.php" method="post">';
                     echo '<input type="hidden" name="flightBookingID" value="'. $f->id .'" />';
-                    echo '<input type="submit" name="postFlightBookingID" value="View flight"/>';
+                    echo '<input type="submit" class="viewBtn" name="postFlightBookingID" value="View Flight Options"/>';
                     echo '</form></td>';
                     echo '</tr>';
                 }
