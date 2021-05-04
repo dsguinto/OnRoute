@@ -50,16 +50,16 @@
         <div class="deals__popular">
             <h2>Popular Destinations</h2>
             <div class="deals__popular_opt">
-                <a href="flights.php"><img src="images/index/benjamin-bindewald-NewYork.jpg" alt="Image of the Statue of Liberty from unsplash.com"/></a>
+                <a href="//localhost/HTTP5202/OnRoute/flights/main.php"><img src="images/index/benjamin-bindewald-NewYork.jpg" alt="Image of the Statue of Liberty from unsplash.com"/></a>
             </div>
             <div class="deals__popular_opt">
-                <a href="flights.php"><img src="images/index/grillot-edouard-Paris.jpg" alt="Image of the Eiffel Tower from unsplash.com" /></a>
+                <a href="//localhost/HTTP5202/OnRoute/flights/main.php"><img src="images/index/grillot-edouard-Paris.jpg" alt="Image of the Eiffel Tower from unsplash.com" /></a>
             </div>
             <div class="deals__popular_opt">
-                <a href="flights.php"><img src="images/index/martijn-baudoin-Japan.jpg" alt="Image of red Japanese gates from unsplash.com"/></a>
+                <a href="//localhost/HTTP5202/OnRoute/flights/main.php"><img src="images/index/martijn-baudoin-Japan.jpg" alt="Image of red Japanese gates from unsplash.com"/></a>
             </div>
             <div class="deals__popular_opt">
-                <a href="flights.php"><img src="images/index/roman-lopez-Mexico.jpg" alt="Image of a city in Mexico from unsplash.com"/></a>
+                <a href="//localhost/HTTP5202/OnRoute/flights/main.php"><img src="images/index/roman-lopez-Mexico.jpg" alt="Image of a city in Mexico from unsplash.com"/></a>
             </div>
         </div>
     </div>

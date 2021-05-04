@@ -1,11 +1,11 @@
 <?php
 use ONROUTE\models\{Database, Vehicle};
-require_once 'vendor/autoload.php';
-require_once 'library/functions.php';
-require_once 'library/vehicles.php';
+require_once '../vendor/autoload.php';
+require_once '../library/functions.php';
+require_once '../library/vehicles.php';
 //Styling and Header View
-$css = array('styles/vehicles.css');
-require_once 'views/header.php';
+$css = array('../styles/vehicles.css');
+require_once '../views/header.php';
 
 $id = $_SESSION['userID'];
 $dbcon = Database::getDb();
@@ -15,7 +15,7 @@ $rentalsById = $vri->getVehicleRentalByUser($id, $dbcon);
 
 <main class="infield">
 <?php if(isset($_SESSION['userID'])){?>
-    <a href="vehicles.php" id="list-button">Go Back</a>
+    <a href="//localhost/HTTP5202/OnRoute/vehicles/main.php" id="list-button">Go Back</a>
     <h2>Rented Vehicle(s)</h2>
     <table class="table">
         <thead>
@@ -29,7 +29,7 @@ $rentalsById = $vri->getVehicleRentalByUser($id, $dbcon);
                 foreach($rentalsById as $vehicle){ ?>
                     <tr>
                         <td>
-                            <p><img src="images/vehicles/<?= $vehicle->vehicleimage ?>" height="100"></p>
+                            <p><img src="../images/vehicles/<?= $vehicle->vehicleimage ?>" height="100"></p>
                             <p><strong>Pick Up Location: </strong><?= $vehicle->pickuplocation ?><p>
                             <p><strong>Pick Up Date: </strong><?= $vehicle->pickupdate ?></p>
                             <p><strong>Return Date: </strong><?= $vehicle->returndate ?></p>
@@ -49,7 +49,7 @@ $rentalsById = $vri->getVehicleRentalByUser($id, $dbcon);
                         </td>
                         <td>
                             <!--Delete-->
-                            <form action="./deleteVehicleRental.php" method="post">
+                            <form action="//localhost/HTTP5202/OnRoute/vehicles/deleteVehicleRental.php" method="post">
                                 <input type="hidden" name="vehicleRentalId" value="<?= $vehicle->id; ?>"/>
                                 <input type="submit" class="button-delete" name="deleteData" value="Delete">
                             </form>
@@ -58,9 +58,9 @@ $rentalsById = $vri->getVehicleRentalByUser($id, $dbcon);
             <?php }} ?>
         </tbody>
     </table>
-<?php } else { header('Location: ./login.php'); } ?>
+<?php } else { header('Location: //localhost/HTTP5202/OnRoute/login.php'); } ?>
 </main>
 
 <?php
-require_once 'views/footer.php';
+require_once '../views/footer.php';
 ?>

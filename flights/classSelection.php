@@ -1,6 +1,6 @@
 <?php
-    require_once 'library/functions.php';
-    require_once 'views/header.php';
+    require_once '../library/functions.php';
+    require_once '../views/header.php';
 ?>
 
 <main>
@@ -9,5 +9,5 @@
 </main>
 
 <?php
-require_once 'views/footer.php';
+require_once '../views/footer.php';
 ?>

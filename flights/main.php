@@ -1,9 +1,9 @@
 <?php
     use ONROUTE\models\{Database,Flight};
-    require_once 'vendor/autoload.php';
-    require_once 'library/functions.php';
-    $css = array('styles/flights.css'); //Add unqiue css files here
-    require_once 'views/header.php';
+    require_once '../vendor/autoload.php';
+    require_once '../library/functions.php';
+    $css = array('../styles/flights.css'); //Add unqiue css files here
+    require_once '../views/header.php';
 
     //Initialize variables for toggling display information
     $errMsg = "";
@@ -14,7 +14,7 @@
     //Checks if user is logged in, displays respective interface
     if (isset($_SESSION['userID'])) {
         $userHide = "style='display:none;'";
-        $userDisplay = "style='display:block;'";
+        $userDisplay = "style='display:inherit;'";
     }
 
     //Gets current date to compare to flight dates, to avoid booking capabilities for past flights
@@ -54,7 +54,44 @@
     }
 
     //flight navigation 
-    $flightNav = array('Track Flight' => "flightNumberSearch.php", 'In Flight Meal' => "mealSelection.php", 'Seat Selection' => "seatSelection.php" );
+    $flightNav = array('Track Flight' => "//localhost/HTTP5202/OnRoute/flights/flightNumberSearch.php", 'In Flight Meal' => "//localhost/HTTP5202/OnRoute/flights/mealSelection.php", 'Seat Selection' => "//localhost/HTTP5202/OnRoute/flights/seatSelection.php" );
+
+    //Taken from Will's section to allow for "View Details" button to work (adjustments made to fix context of feature)
+    if(isset($_POST['flightSubmit'])){
+        //get the flight id submitted and store as variable
+        $flightId = $_POST['flightId'];
+
+        //instantiate database connection
+        $db = Database::getDb();
+
+        //When flight number submitted, instantiate db connection, utilize getFlightById
+        $flightController = new Flight($db);
+
+        //send flightId to controller 
+        $response = $flightController->getFlightById($flightId);
+        
+        if($response == false){
+            $errMsg = "We couldn't find that flight. Did you double check your flight number?";
+        } 
+        else{
+            switch($response->airline){
+                case 'aircanada':
+                    $airlineLogoLink = 'images/logos/airCanada.jpg';
+                    break;
+                case 'deltaAirlines';
+                    $airlineLogoLink = 'images/logos/deltaAirlines.jpg';
+                    break;
+                case 'americanAirlines';
+                    $airlineLogoLink = 'images/logos/americanAirlines.jpg';
+                    break;
+            } 
+            //store the $response as a session var
+            $_SESSION['flightInfo'] = $response;
+            $_SESSION['airlineLogoLink'] = $airlineLogoLink;
+            //redirect user to the flightInfo pages
+            header ('Location: //localhost/HTTP5202/OnRoute/flights/flightInfo.php');   
+        }
+    }
 
 ?>
 <main>
@@ -95,7 +132,7 @@
                     <td><?=  $flight->arrivaldate; ?></td>
                     <td>
                         <form action="
-                        <?php if (isset($_SESSION['userID'])){ echo "./flightBooking.php"; } else {echo "./login.php";} ?>" method="POST">
+                        <?php if (isset($_SESSION['userID'])){ echo "//localhost/HTTP5202/OnRoute/flights/flightBooking.php"; } else {echo "//localhost/HTTP5202/OnRoute/login.php";} ?>" method="POST">
                             <input type="hidden" name="flightId" value="<?= $flight->flightid; ?>"/>
                             <button type="submit" class="bookBtn" name="bookFlight" <?php if ($flight->departuredate < $date){echo "style='display:none'";} else{echo "style='display:block'";} ?>>Book</button>
                         </form>
@@ -109,16 +146,16 @@
     <div class="otherOptions" <?= $userHide ?>>
         <h2>See What We Have To Offer</h2>
         <div class="otherOptions__opt">
-            <a href="login.php"><img src="images/flights/difa-naufal-airplane-unsplash.jpg" alt="Image of Plane flying"/></a>
+            <a href="//localhost/HTTP5202/OnRoute/login.php"><img src="../images/flights/difa-naufal-airplane-unsplash.jpg" alt="Image of Plane flying"/></a>
         </div>
         <div class="otherOptions__opt">
-            <a href="login.php"><img src="images/flights/meal5.jpeg" alt="Image of on-flight meal from Air France" /></a>
+            <a href="//localhost/HTTP5202/OnRoute/login.php"><img src="../images/flights/meal5.jpeg" alt="Image of on-flight meal from Air France" /></a>
         </div>
         <div class="otherOptions__opt">
-            <a href="login.php"><img src="images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window"/></a>
+            <a href="//localhost/HTTP5202/OnRoute/login.php"><img src="../images/flights/jorge-rosal-planeseat-unsplash.jpg" alt="Image of man taking picture from plane window"/></a>
         </div> 
     </div>
-    <p <?= $userHide ?> class="otherOptions__msg"><a href="login.php">Log in</a> to view these options for your flights!</p>
+    <p <?= $userHide ?> class="otherOptions__msg"><a href="//localhost/HTTP5202/OnRoute/login.php">Log in</a> to view these options for your flights!</p>
 
     <div class="otherOptions" <?= $userDisplay ?>>
         <h2>Your Flights</h2>
@@ -164,8 +201,8 @@
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
-                                        echo "<form action='./mealSelection.php' method='POST'>
-                                                <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
+                                        echo "<form action='//localhost/HTTP5202/OnRoute/flights/mealSelection.php' method='POST'>
+                                                <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
                                                 <input class='addBtn' type='submit' name='sendFlightBookingID' value='Add Meal' />
                                             </form>";
                                     }
@@ -180,7 +217,7 @@
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
-                                    echo "<form action='./seatSelection.php' method='POST'>
+                                    echo "<form action='//localhost/HTTP5202/OnRoute/flights/seatSelection.php' method='POST'>
                                             <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
                                             <input class='addBtn' type='submit' name='sendFlightBookingID' value='Select Seat' />
                                         </form>";
@@ -196,7 +233,7 @@
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
-                                    echo "<form action='./classSelection.php' method='POST'>
+                                    echo "<form action='//localhost/HTTP5202/OnRoute/flights/classSelection.php' method='POST'>
                                             <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
                                             <input class='addBtn' type='submit' name='sendFlightBookingID' value='Select Class' />
                                         </form>";
@@ -211,7 +248,7 @@
                                 if ($f->departuredate < $date){
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
-                                echo "<form action='./deleteFlightBooking.php' method='POST'>
+                                echo "<form action='//localhost/HTTP5202/OnRoute/flights/deleteFlightBooking.php' method='POST'>
                                             <input type='hidden' name='flightBookingId' value='$f->id'/>
                                             <input type='submit' class='deleteBtn' name='cancelFlightBooking' value='Cancel'/>
                                     </form>";
@@ -226,11 +263,11 @@
         </div>
     </div>
 
-    <div class="banner">
-        <h2><a href="flightNumberSearch.php">Track a Flight</a></h2>
+    <div class="banner" <?= $userDisplay ?>>
+        <h2><a href="//localhost/HTTP5202/OnRoute/flights/flightNumberSearch.php">Track a Flight</a></h2>
     </div>
 </main>
 
 <?php
-require_once 'views/footer.php';
+require_once '../views/footer.php';
 ?>

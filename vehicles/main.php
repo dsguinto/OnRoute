@@ -1,11 +1,11 @@
 <?php
 use ONROUTE\models\{Database, Vehicle};
-require_once 'vendor/autoload.php';
-require_once 'library/functions.php';
-require_once 'library/vehicles.php';
+require_once '../vendor/autoload.php';
+require_once '../library/functions.php';
+require_once '../library/vehicles.php';
 //Styling and Header View
-$css = array('styles/vehicles.css');
-require_once 'views/header.php';
+$css = array('../styles/vehicles.css');
+require_once '../views/header.php';
 //variables. 
 $displayVehicles;
 $appear = 'style="display: block;';
@@ -61,10 +61,10 @@ $vehicles = $vh->getAllVehicles($dbcon);
 ?>
 
 <main class="infield">
-    <a href="vehicleInfo.php" id="list-button">Rental List</a>
+    <a href="//localhost/HTTP5202/OnRoute/vehicles/vehicleInfo.php" id="list-button">Rental List</a>
     <h2>Rent A Vehicle</h2>
     <!-- FORM -->
-    <img src="images/vehicles/13-pexels-photo-4090350.jpeg" height="600" id="vehicle__image">
+    <img src="../images/vehicles/13-pexels-photo-4090350.jpeg" height="600" id="vehicle__image">
     <form action="#form" method="POST" name="form" id="form">
         <div class="form__input">
           <label>Pick Up Location</label>
@@ -88,18 +88,18 @@ $vehicles = $vh->getAllVehicles($dbcon);
             <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Top Car Deals</h3>'; 
                 foreach($vehicles as $vehicle){ if($vehicle->vehicleprice <= '65.00'){ ?>
                 <div class="products__popular_opt">
-                    <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><span class="deallabel">DEAL</span>
+                    <a href="//localhost/HTTP5202/OnRoute/vehicles/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle"><span class="deallabel">DEAL</span>
                         <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CAD $<?= $vehicle->vehicleprice; ?>/Day</p>
-                        <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
+                        <img src="../images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
             <?php }/*xif price deal statement*/}/*xforeach*/echo '</div></div>'?>
             <?php echo '<div '.$appear.'"><div class="products__popular"><h3>Vehicles Listed</h3>'; 
                 foreach($vehicles as $vehicle){ ?>
                 <div class="products__sytem_opt">
-                    <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
+                    <a href="//localhost/HTTP5202/OnRoute/vehicles/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
                         <p><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p><?= $vehicle->vehiclecity; ?></p><p>CAD $<?= $vehicle->vehicleprice; ?>/Day</p>
-                        <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
+                        <img src="../images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
             <?php }/*xforeach*/echo '</div></div>'?>
@@ -112,11 +112,11 @@ $vehicles = $vh->getAllVehicles($dbcon);
                     if($selectedDate == false){
                 ?>
                 <div class="products__sytem_opt">
-                    <a href="./vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
+                    <a href="//localhost/HTTP5202/OnRoute/vehicles/vehicleSelection.php?id=<?= $vehicle->id ?>" name="send-vehicle">
                         <p class="short"><?= $vehicle->vehiclemake.' '.$vehicle->vehiclemodel; ?></p><p class="short"><?= $vehicle->vehiclecity; ?></p>
                         <p class="short">From: <?= date("M.d, Y", strtotime($pickupDate)); ?></p><p class="short">To: <?= date("M.d, Y", strtotime($returnDate)) ?></p>
                         <p class="short">Total: CAD $<?= addPrice($vehicle->vehicleprice, $timed); ?></p>
-                        <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
+                        <img src="../images/vehicles/<?= $vehicle->vehicleimage; ?>" height="200" alt="Image of a car model">
                     </a>
                 </div>
             <?php }}/*xforeach*/echo '</div></div>'?>
@@ -125,5 +125,5 @@ $vehicles = $vh->getAllVehicles($dbcon);
 </main>
 
 <?php
-require_once 'views/footer.php';
+require_once '../views/footer.php';
 ?>

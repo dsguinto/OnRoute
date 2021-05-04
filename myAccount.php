@@ -8,7 +8,7 @@
     //Checks if user is logged in
     if (empty($_SESSION['userID'])) {
         //Redirects to login page if user is not logged in
-        Header('Location: login.php');
+        Header('Location: //localhost/HTTP5202/OnRoute/login.php');
     }
 
     //Checks dates
@@ -65,7 +65,7 @@
                 $_SESSION['flightInfo'] = $response;
                 $_SESSION['airlineLogoLink'] = $airlineLogoLink;
                 //redirect user to the flightInfo pages
-                header ('Location:flightInfo.php');   
+                header ('Location: //localhost/HTTP5202/OnRoute/flights/flightInfo.php');   
             }
         }
 
@@ -76,7 +76,7 @@
     <div class="page">
         <h2>Welcome <?= $_SESSION['userFirstName'] . " " . $_SESSION['userLastName'] . "!"?></h2>
         <div class="userDetails">
-            <h3>Account Information <a href="accountManagement.php" class="accountBtn" >Manage Account Info</a></h3>
+            <h3>Account Information <a href="//localhost/HTTP5202/OnRoute/accountManagement.php" class="accountBtn" >Manage Account Info</a></h3>
             <ul>
                 <li>Name: <?= $_SESSION['userFirstName'] . " " . $_SESSION['userLastName'] ?></li>
                 <li>Email: <?= $_SESSION['userEmail'] ?></li>
@@ -122,8 +122,8 @@
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
-                                        echo "<form action='./mealSelection.php' method='POST'>
-                                                <input type='hidden' name='flightBookingID' value='" . $f->id . "' />
+                                        echo "<form action='//localhost/HTTP5202/OnRoute/flights/mealSelection.php' method='POST'>
+                                                <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
                                                 <input class='addBtn' type='submit' name='sendFlightBookingID' value='Add Meal' />
                                             </form>";
                                     }
@@ -138,7 +138,7 @@
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
-                                    echo "<form action='./seatSelection.php' method='POST'>
+                                    echo "<form action='//localhost/HTTP5202/OnRoute/flights/seatSelection.php' method='POST'>
                                             <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
                                             <input class='addBtn' type='submit' name='sendFlightBookingID' value='Select Seat' />
                                         </form>";
@@ -154,7 +154,7 @@
                                     if ($f->departuredate < $date){
                                         echo "<p class='unavailable'>Unavailable</p>";
                                     } else{
-                                    echo "<form action='./classSelection.php' method='POST'>
+                                    echo "<form action='//localhost/HTTP5202/OnRoute/flights/classSelection.php' method='POST'>
                                             <input type='hidden' name='postFlightBookingID' value='" . $f->id . "' />
                                             <input class='addBtn' type='submit' name='sendFlightBookingID' value='Select Class' />
                                         </form>";
@@ -169,7 +169,7 @@
                                 if ($f->departuredate < $date){
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
-                                echo "<form action='./deleteFlightBooking.php' method='POST'>
+                                echo "<form action='//localhost/HTTP5202/OnRoute/flights/deleteFlightBooking.php' method='POST'>
                                             <input type='hidden' name='flightBookingId' value='$f->id'/>
                                             <input type='submit' class='deleteBtn' name='cancelFlightBooking' value='Cancel'/>
                                     </form>";
@@ -211,7 +211,7 @@
                                 if ($h->checkintime < $date){
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
-                                echo "<form action='./deleteHotelBooking.php' method='POST'>
+                                echo "<form action='//localhost/HTTP5202/OnRoute/accommodations/deleteHotelBooking.php' method='POST'>
                                             <input type='hidden' name='hotelBookingId' value='$h->id'/>
                                             <input type='submit' class='deleteBtn' name='cancelHotelBooking' value='Cancel'/>
                                     </form>";
@@ -257,7 +257,7 @@
                                 if ($v->pickupdate < $date){
                                     echo "<p class='unavailable'>Completed</p>";
                                 } else{
-                                echo "<form action='./deleteVehicleRental.php' method='POST'>
+                                echo "<form action='//localhost/HTTP5202/OnRoute/vehicles/deleteVehicleRental.php' method='POST'>
                                             <input type='hidden' name='vehicleRentalId' value='$v->id'/>
                                             <input type='submit' class='deleteBtn' name='cancelVehicleRental' value='Cancel'/>
                                     </form>";

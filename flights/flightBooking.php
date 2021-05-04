@@ -1,14 +1,14 @@
 <?php
     use ONROUTE\models\{Database,Flight};
-    require_once 'vendor/autoload.php';
-    require_once 'library/functions.php';
-    $css = array("styles/flightBooking.css");//Add unqiue css files here
-    require_once 'views/header.php';
+    require_once '../vendor/autoload.php';
+    require_once '../library/functions.php';
+    $css = array("../styles/flightBooking.css");//Add unqiue css files here
+    require_once '../views/header.php';
 
     //Checks if user is logged in
     if (empty($_SESSION['userID'])) {
         //Redirects to login page if user is not logged in
-        Header('Location: login.php');
+        Header('Location: //localhost/HTTP5202/OnRoute/login.php');
     }
 
     //Initialize variables for toggling display information
@@ -46,7 +46,7 @@
         //Adds flight to flightbooking and associates it with logged in user
         $addBooking = $flightController->addFlightBooking($_SESSION['userID'], $finalFlightId);
         $hideBtn = "style='display:none;'";
-        $messageStatus = "<h3>Your flight has successfully been booked! Thank you for choosing OnRoute!<br><a href='./flights.php'>Back to Flights</a></h3>";
+        $messageStatus = "<h3>Your flight has successfully been booked! Thank you for choosing OnRoute!<br><a href='//localhost/HTTP5202/OnRoute/flights/main.php'>Back to Flights</a></h3>";
 
         //Checks if page is refreshed to prevent continuous updates to database. Redirects user back to flights if page is refreshed to start search again.
 //     if($_SESSION['submit'] == $_POST['confirmFlight'] && 
@@ -63,7 +63,7 @@
 ?>
 
 <div class = "flightSelected">
-    <h2 class="emptyMsg" <?= $redirect ?>> Looking to book a flight? </br> Click <a href="./flights.php">Here</a></h3> 
+    <h2 class="emptyMsg" <?= $redirect ?>> Looking to book a flight? </br> Click <a href="//localhost/HTTP5202/OnRoute/flights/main.php">Here</a></h3> 
     <h2 <?= $hideTable ?> >Flight Details </h2>
     <div class="flightSelected__details" <?= $hideTable ?> >
         <ul>
@@ -78,7 +78,7 @@
         </ul>
         <?= $messageStatus ?>
         <div class="flightSelected__details_btns" <?= $hideBtn ?>>
-            <a href="./flights.php" class="bookBtn">Cancel<a>
+            <a href="//localhost/HTTP5202/OnRoute/flights/main.php" class="bookBtn">Cancel<a>
             <form action="" method="POST">
                     <input type="hidden" name="flightId" value=" <?= $response->flightid; ?>"/>
                     <button type="submit" class="bookBtn" name="confirmFlight">Book Flight</button>
@@ -89,7 +89,7 @@
             ?>
     </div>
 </div>
-<script>
+<!-- <script>
 var a,b;
 window.onbeforeunload = function (e) {
     if (b) return;
@@ -102,7 +102,7 @@ window.onbeforeunload = function (e) {
 window.onunload = function () {
     clearTimeout(a);
 }
-</script>
+</script> -->
 <?php
-require_once 'views/footer.php';
+require_once '../views/footer.php';
 ?>

@@ -1,12 +1,12 @@
 <!-- Once a user has booked their flight, they can enter their flight number to see the flight details this does not require a login. It is a quicker way for customers to view their flight details, rather than logging in and checking their bookings-->
 <?php
     use OnRoute\models\{Database,Flight};
-    require_once 'vendor/autoload.php';
-    require_once 'library/functions.php';
-    require_once 'models/flight.php';
-    require_once 'models/database.php';
-    $css = array("styles/flightTracking.css");
-    require_once 'views/header.php';
+    require_once '../vendor/autoload.php';
+    require_once '../library/functions.php';
+    require_once '../models/flight.php';
+    require_once '../models/database.php';
+    $css = array("../styles/flightTracking.css");
+    require_once '../views/header.php';
 
     //WHEN FORM IS SUBMITTED
     if(isset($_POST['flightSubmit'])){
@@ -50,7 +50,7 @@
                 $_SESSION['flightInfo'] = $response;
                 $_SESSION['airlineLogoLink'] = $airlineLogoLink;
                 //redirect user to the flightInfo pages
-                header ('Location:flightInfo.php');   
+                header ('Location://localhost/HTTP5202/OnRoute/flights/flightInfo.php');   
             }
         }
     }
@@ -74,5 +74,5 @@
     </div>
 </main>
 <?php 
-    require_once 'views/footer.php';
+    require_once '../views/footer.php';
 ?>

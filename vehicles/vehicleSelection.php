@@ -1,11 +1,11 @@
 <?php
 use ONROUTE\models\{Database, Vehicle};
-require_once 'vendor/autoload.php';
-require_once 'library/functions.php';
-require_once 'library/vehicles.php';
+require_once '../vendor/autoload.php';
+require_once '../library/functions.php';
+require_once '../library/vehicles.php';
 //Styling and Header View
-$css = array('styles/vehicles.css');
-require_once 'views/header.php';
+$css = array('../styles/vehicles.css');
+require_once '../views/header.php';
 //variable. 
 $appear = 'style="display: block;';
 $disappear = 'style="display: none;"';
@@ -47,7 +47,7 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
             $dbcon = Database::getDb();
             $av = new Vehicle();
             $addVehicle = $av->addVehiclesToRent($vehicleLoc, $pickUp, $return, $id, $userId, $dbcon);
-            header("Location: vehicles.php");
+            header("Location: //localhost/HTTP5202/OnRoute/vehicles/main.php");
         }
     }
 } else if (!isset($_SESSION['pDate']) && !isset($_SESSION['rDate'])) /*if sessions are not set...Select the values*/ {
@@ -88,7 +88,7 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
                         $viewDate = new Vehicle();
                         $selectedDate = $viewDate->addVehiclesToRent($vehicleLocation, $pickupDate, $returnDate, $id, $userId, $dbcon);
                         $notAccepted = "Approved";
-                        header("Location: vehicles.php");
+                        header("Location: //localhost/HTTP5202/OnRoute/vehicles/main.php");
                     }
                 }
             }
@@ -99,12 +99,12 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
 
 <main class="infield">
 <?php if(isset($_SESSION['userID'])){?>
-    <a href="vehicles.php" id="return-button">Go Back</a>
+    <a href="//localhost/HTTP5202/OnRoute/vehicles/main.php" id="return-button">Go Back</a>
     <?php foreach($vehicles as $vehicle){ ?>
         <h2><?= $vehicle->vehiclemake. ' ' .$vehicle->vehiclemodel ?></h2>
         <!-- SELECTED -->
         <div class="selected">
-            <img src="images/vehicles/<?= $vehicle->vehicleimage; ?>" height="250" alt="Image of a car model"/>
+            <img src="../images/vehicles/<?= $vehicle->vehicleimage; ?>" height="250" alt="Image of a car model"/>
             <div>
                 <?php foreach($rcompanies as $rcompany){ ?>
                     <p>Company Name: <span class="text-span"><?= $rcompany->rentalcompanyname ?></span></p>
@@ -141,9 +141,9 @@ if(isset($_SESSION['pDate']) && isset($_SESSION['rDate'])){
         </div>
         <span id="error-msg"><?= isset($notAccepted)? $notAccepted: '';?></span>
     </form>
-<?php }} else { header('Location: ./login.php'); } ?>
+<?php }} else { header('Location: //localhost/HTTP5202/OnRoute/login.php'); } ?>
 </main>
 
 <?php
-require_once 'views/footer.php';
+require_once '../views/footer.php';
 ?>

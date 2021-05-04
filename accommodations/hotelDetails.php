@@ -3,14 +3,14 @@
     use OnRoute\models\Database;
     use OnRoute\models\Hotel;
     
-    require_once './vendor/autoload.php';//doesen't work
-    require_once 'library/functions.php';
-    require_once './models/Hotel.php';
-    require_once './models/Database.php';//if autoload is working, we don't seem to need this
+    require_once '../vendor/autoload.php';//doesen't work
+    require_once '../library/functions.php';
+    require_once '../models/Hotel.php';
+    require_once '../models/Database.php';//if autoload is working, we don't seem to need this
 
     //Add unqiue css files here
-    $css = array('styles/hotelDetails.css');
-    require_once('views/header.php');
+    $css = array('../styles/hotelDetails.css');
+    require_once('../views/header.php');
     
     //test database conneciton
     $dbcon = Database::getDB();
@@ -43,14 +43,14 @@
     <h3 id="hotelname"><?= $hotelname ?></h3>
     <div class="searchResult__container">
         <div class="searchResult__image">
-            <img src="./images/accommodations/a<?=$hotel['hotel_id'] ?>.jpg" width="500px"/>
+            <img src="../images/accommodations/a<?=$hotel['hotel_id'] ?>.jpg" width="500px"/>
         </div>
         <div class="searchResult__desc">
             <p class="searchResult__desc_guestNumber">Guest number: <?= $hotel['guestnumber']?></p>
             <p class="searchResult__desc_roomDesc">Description: <?= $hotel['description']?></p>
         </div>
         <div class="searchResult__form">
-            <form id="searchResult__form_hiddenform" method="post" action="hotelBooking.php">
+            <form id="searchResult__form_hiddenform" method="post" action="//localhost/HTTP5202/OnRoute/accommodationshotelBooking.php">
                 <input type="hidden" name="city" value="<?= $city ?>" />
                 <input type="hidden" name="hoteladdress" value="<?= $hotel['hoteladdress'] ?>" />
                 <input type="hidden" name="country" value="<?= $hotel['country'] ?>" />
@@ -68,5 +68,5 @@
 <?php
         }
     }
-    require_once 'views/footer.php';
+    require_once '../views/footer.php';
 ?>

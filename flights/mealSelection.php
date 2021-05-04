@@ -2,14 +2,14 @@
 <!-- A user can see the meals available and select the meal they want-->
 <?php 
      use OnRoute\models\{Database,Flight, Meal};
-     require_once 'vendor/autoload.php';
-     require_once 'library/functions.php';
-     require_once 'models/flight.php';
-     require_once 'models/meal.php';
-     require_once 'models/database.php';
+     require_once '../vendor/autoload.php';
+     require_once '../library/functions.php';
+     require_once '../models/flight.php';
+     require_once '../models/meal.php';
+     require_once '../models/database.php';
      
-    $css = array("styles/mealSelection.css");
-    require_once 'views/header.php';
+    $css = array("../styles/mealSelection.css");
+    require_once '../views/header.php';
 
     
 
@@ -62,7 +62,7 @@
                         <p class = mealDescription>
                             <strong>$meal->meal</strong></br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel risus commodo viverra maecenas accumsan lacus vel. Eget mi proin sed libero enim sed.
                         </p>
-                        <div class = 'mealImage' style = 'background-image: url(images/flights/meal".$meal->id.".jpg)'>
+                        <div class = 'mealImage' style = 'background-image: url(../images/flights/meal".$meal->id.".jpg)'>
                             <input class = radioButton type=radio value=$meal->id name='mealId'/>
                         </div>
                     </div>";
@@ -96,12 +96,12 @@
     <div class="mealSelected" <?=$hide1?>>
         <h2>You will be served <?=isset($mealName)? $mealName : "";?> on your flight. Thank you for your selection!</h2>
          <!-- Import meal image -->
-        <img alt="photo of your meal" src="images/flights/meal<?=isset($mealId)? $mealId : "";?>.jpg"/>
+        <img alt="photo of your meal" src="../images/flights/meal<?=isset($mealId)? $mealId : "";?>.jpg"/>
         </br>
-        <a class = "secondaryLink" href="flights.php">Back To Flights</a>
+        <a class = "secondaryLink" href="//localhost/HTTP5202/OnRoute/flights/main.php">Back To Flights</a>
     </div>
 </main>
-<script type="text/javascript" src="library/mealSelection.js"></script>
+<script type="text/javascript" src="../library/mealSelection.js"></script>
 <?php 
-    require_once 'views/footer.php';
+    require_once '../views/footer.php';
 ?>

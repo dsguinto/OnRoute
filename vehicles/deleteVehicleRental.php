@@ -1,14 +1,14 @@
 <?php
     use ONROUTE\models\{Database,Vehicle};
-    require_once 'vendor/autoload.php';
-    require_once 'library/functions.php';
-    $css = array("styles/flightBooking.css");//Add unqiue css files here
-    require_once 'views/header.php';
+    require_once '../vendor/autoload.php';
+    require_once '../library/functions.php';
+    $css = array("../styles/flightBooking.css");//Add unqiue css files here
+    require_once '../views/header.php';
 
     //Checks if user is logged in
     if (empty($_SESSION['userID'])) {
         //Redirects to login page if user is not logged in
-        Header('Location: login.php');
+        Header('Location: //localhost/HTTP5202/OnRoute/login.php');
     }
 
     //Initialize variables for toggling display information
@@ -43,13 +43,13 @@
         //Delete vehicle rental from vehiclerentals table given the specific rentalid
         $deleteRental = $vehicleController->deleteVehiclesToRent($finalVehicleRentalId, $db);
         
-        header("Location: myaccount.php");
+        header("Location: //localhost/HTTP5202/OnRoute/myaccount.php");
     }
 
 ?>
 
 <div class = "flightSelected">
-    <h2 class="emptyMsg" <?= $redirect ?>> Looking to cancel a vehicle rental? </br> Click <a href="./myaccount.php">Here</a></h3> 
+    <h2 class="emptyMsg" <?= $redirect ?>> Looking to cancel a vehicle rental? </br> Click <a href="//localhost/HTTP5202/OnRoute/myaccount.php">Here</a></h3> 
     <h2 <?= $hide ?>>Vehicle Details </h2>
     <div class="flightSelected__details">
         <ul>
@@ -66,7 +66,7 @@
         </ul>
         <h3>Are you sure you want to cancel this vehicle rental? <br> <span class='warning'>WARNING: This action cannot be undone.</span></h3>
         <div class="flightSelected__details_btns">
-            <a href="./myaccount.php" class="bookBtn">Cancel<a>
+            <a href="//localhost/HTTP5202/OnRoute/myaccount.php" class="bookBtn">Cancel<a>
             <form action="" method="POST">
                     <input type="hidden" name="vehicleRentalId" value=" <?= $vehicleDetails[0]->id; ?>"/>
                     <button type="submit" class="deleteBtn" name="deleteVehicleRental">Delete Rental</button>
@@ -79,5 +79,5 @@
 </div>
 
 <?php
-require_once 'views/footer.php';
+require_once '../views/footer.php';
 ?>

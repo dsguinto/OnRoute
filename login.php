@@ -18,7 +18,7 @@
 
     //Checks to see if a user is logged in
     if (isset($_SESSION['userID'])) {
-        Header('Location: index.php');
+        Header('Location: //localhost/HTTP5202/OnRoute/index.php');
     }
 
     //Registration
@@ -46,7 +46,7 @@
             $_SESSION['userEmail'] = $email;
             $_SESSION['userFirstName'] = $fname;
             $_SESSION['userLastName'] = $lname;
-            header('Location: index.php');
+            header('Location: //localhost/HTTP5202/OnRoute/index.php');
         }
     }
     
@@ -64,17 +64,17 @@
             $_SESSION['userFirstName'] = $u->firstname;
             $_SESSION['userLastName'] = $u->lastname;
             $_SESSION['userPhone'] = $u->phonenumber;
-            header('Location: Flights.php');
+            header('Location: //localhost/HTTP5202/OnRoute/index.php');
         } else {
             //Change this to something useful
             $invalid = "<p>Invalid username and/or password</p>";
         }
     }
 ?>
-<script type="text/javascript" src="library/userValidation.js"></script>
+<script type="text/javascript" src="../library/userValidation.js"></script>
 <main>
     <div class="formContainer">
-        <form action="login.php" method="post" id="loginForm">
+        <form action="//localhost/HTTP5202/OnRoute/login.php" method="post" id="loginForm">
             <h2>Login</h2>
             <div class="formContainer__form">
                 <div class="formContainer__form_input">
@@ -87,14 +87,14 @@
                     <?= $invalid ?>
                 </div>
                 <div class="formContainer__form_input">
-                <a href="forgotPassword.php" class="forgotPassBtn">Forgot your password?</a>
+                <a href="//localhost/HTTP5202/OnRoute/forgotPassword.php" class="forgotPassBtn">Forgot your password?</a>
                 </div>
                 <input class="loginBtn" type="submit" value="Login" name="login">
             </div>
         </form>
     </div>
     <div class="formContainer">
-        <form action="login.php" method="post" id="registerForm">
+        <form action="//localhost/HTTP5202/OnRoute/login.php" method="post" id="registerForm">
             <h2>Don't Have An Account?<br>Register Here</h2>
             <div class="formContainer__form">
                 <div class="formContainer__form_input">

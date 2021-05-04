@@ -3,21 +3,21 @@
 <!-- FOR future, database would be better designed without the flightsxflightseats bridging table. instead use flightbookings to bridge flights and flight seats. Get all the seats for a plane in a list of onbjects. Then check flightbookings join seats on seat id where flightId is the current flight id. If this entry exists, the seat is taken. You could also make a function in sql to show the view -->
 <?php 
     use OnRoute\models\{Database,Flight, Meal, Plane};
-    require_once 'vendor/autoload.php';
-    require_once 'library/functions.php';
-    require_once 'models/flight.php';
-    require_once 'models/plane.php';
-    require_once 'models/meal.php';
-    require_once 'models/database.php';
+    require_once '../vendor/autoload.php';
+    require_once '../library/functions.php';
+    require_once '../models/flight.php';
+    require_once '../models/plane.php';
+    require_once '../models/meal.php';
+    require_once '../models/database.php';
 
-    $css = array("styles/seatSelection.css");
-    require_once 'views/header.php';
+    $css = array("../styles/seatSelection.css");
+    require_once '../views/header.php';
 
 
 
     //IF USER IS NOT LOGGED IN SEND THEM BACK TO FLIGHTS PAGE 
     if(/* !isset($_SESSION['userID']) || */ !isset($_POST['postFlightBookingID'])|| $_POST['postFlightBookingID'] === ""){
-    header('location:flights.php');
+    header('location: //localhost/HTTP5202/OnRoute/flights/main.php');
     }
 
     $hide1 = "style = 'display:none'";
@@ -182,7 +182,7 @@
         <h2>Your seat for this flight is <?=$seatId?>. Thank you for your selection!</h2>
     </div>
 </main>
-<script src="library/seatSelection.js"></script>
+<script src="../library/seatSelection.js"></script>
 <?php 
-    require_once 'views/footer.php';
+    require_once '../views/footer.php';
 ?>

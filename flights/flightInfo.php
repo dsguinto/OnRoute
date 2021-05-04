@@ -1,7 +1,7 @@
 <?php
-    require_once 'library/functions.php';
-    $css = array("styles/flightTracking.css");
-    require_once 'views/header.php';
+    require_once '../library/functions.php';
+    $css = array("../styles/flightTracking.css");
+    require_once '../views/header.php';
     //access session var 
     $flightInfo = $_SESSION['flightInfo'];
     $airlineLogoLink = $_SESSION['airlineLogoLink'];
@@ -35,5 +35,5 @@
     </div>
 </main>
 <?php 
-    require_once 'views/footer.php';
+    require_once '../views/footer.php';
 ?>
